@@ -9,12 +9,13 @@ namespace data_access.Entities
 {
     public class Olympiad
     {
+        public int Id { get; set; }
+
         public int Year { get; set; }
 
         public int CityId { get; set; }
         public City City { get; set; }
-
-        public ICollection<Award> Awards { get; set; } = new HashSet<Award>();
-        public ICollection<SportsmanOlympiad> SportsmanOlympiads { get; set; } = new HashSet<SportsmanOlympiad>();
+       
+        public ICollection<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
     }
 }

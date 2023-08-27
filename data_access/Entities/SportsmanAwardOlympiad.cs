@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace data_access.Entities
 {
-    public class SportsmanOlympiad
+    public class SportsmanAwardOlympiad
     {
         public int SportsmanId { get; set; }
         public Sportsman Sportsman { get; set; }
@@ -15,5 +15,9 @@ namespace data_access.Entities
         public int OlympiadId { get; set; }
         public Olympiad Olympiad { get; set; }
 
+        public int? AwardId { get; set; }
+        public Award? Award { get; set; }
+
+       
     }
 }

@@ -15,7 +15,6 @@ namespace data_access.Entities.Configs
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(56);
             builder.HasIndex(x => x.Name).IsUnique();
-            builder.HasOne(x => x.Olympiad).WithMany(x => x.Awards).HasForeignKey(x => x.OlympiadId);
             builder.ToTable(t => t.HasCheckConstraint("Name_check", "[Name] <> ''"));
         }
     }

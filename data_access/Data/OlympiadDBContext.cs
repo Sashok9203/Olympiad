@@ -18,6 +18,7 @@ namespace data_access.Data
         {
             Database.EnsureDeleted();
             Database.EnsureCreated();
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,24 +34,22 @@ namespace data_access.Data
             modelBuilder.ApplyConfiguration<Country>(new CountryConfig());
             modelBuilder.ApplyConfiguration<Genre>(new GenreConfig());
             modelBuilder.ApplyConfiguration<Olympiad>(new OlympiadConfig());
-            modelBuilder.ApplyConfiguration<Photo>(new PhotoConfig());
             modelBuilder.ApplyConfiguration<Season>(new SeasonConfig());
             modelBuilder.ApplyConfiguration<Sport>(new SportConfig());
             modelBuilder.ApplyConfiguration<Sportsman>(new SportsmanConfig());
-            modelBuilder.ApplyConfiguration<SportsmanOlympiad>(new SportsmanOlympiadConfig());
+            modelBuilder.ApplyConfiguration<SportsmanAwardOlympiad>(new SportsmanAwardOlympiadConfig());
             DefaultData.Initialize(modelBuilder);
         }
 
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<Photo> Photos { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Sport> Sports { get; set; }
         public DbSet<Olympiad> Olympiads { get; set; }
         public DbSet<Award> Awards { get; set; }
         public DbSet<Sportsman> Sportsmans { get; set; }
-        public DbSet<SportsmanOlympiad> OlympiadsSportsmans { get; set; }
+        public DbSet<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; }
 
     }
 }

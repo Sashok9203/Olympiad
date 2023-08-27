@@ -25,14 +25,14 @@ namespace data_access.Entities
         public int SportId { get; set; }
         public Sport Sport { get; set; }
 
-        public int? PhotoId { get; set; }
-        public Photo? Photo { get; set; }
+        public string? PhotoPath { get; set; }
 
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
 
-        public ICollection<Award> Awards { get; set; } = new HashSet<Award>();
-        public ICollection<SportsmanOlympiad> SportsmanOlympiads { get; set; } = new HashSet<SportsmanOlympiad>();
+   
+
+        public ICollection<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
 
     }
 }
