@@ -24,7 +24,7 @@ namespace Olympiad
         public MainWindow()
         {
             InitializeComponent();
-            OlympiadDBContext db = new();
+           
         }
     }
 }

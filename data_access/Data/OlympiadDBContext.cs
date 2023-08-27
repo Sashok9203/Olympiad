@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace data_access.Data
 {
-    public class OlympiadDBContext :DbContext
+    internal class OlympiadDBContext :DbContext
     {
         public OlympiadDBContext()
         {
