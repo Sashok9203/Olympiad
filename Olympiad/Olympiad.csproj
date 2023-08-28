@@ -8,7 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\all.png" />
+    <None Remove="Images\bronze.png" />
+    <None Remove="Images\gold.png" />
+    <None Remove="Images\silver.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\data_access\data_access.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\all.png" />
+    <Resource Include="Images\bronze.png" />
+    <Resource Include="Images\gold.png" />
+    <Resource Include="Images\silver.png" />
   </ItemGroup>
 
 </Project>

@@ -6,20 +6,76 @@
         xmlns:local="clr-namespace:Olympiad"
         xmlns:vms="clr-namespace:Olympiad.Models"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="OlympiadBD" Height="450" Width="800" MinWidth="500" MinHeight="450">
     <Window.DataContext>
         <vms:OlympiadDBModel/>
     </Window.DataContext>
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <DataGrid  ItemsSource="{Binding Sportsmans}">
 
-        </DataGrid>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Sports}">
+    <Window.Resources>
 
-        </DataGrid>
-    </Grid>
+    </Window.Resources>
+
+
+    <TabControl >
+        <TabItem Header="Medal table">
+            <Grid Background="#FF7D84DE">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <DockPanel  Margin="20,0,0,0" Grid.ColumnSpan="5" LastChildFill="True">
+                    <TextBlock Text="Qlympiad" DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0" Foreground="White"/>
+                    <ComboBox Width="160" DockPanel.Dock="Left" BorderBrush="{x:Null}" Foreground="White" Height="25" Background="#FF7D84DE"/>
+                    <TextBlock Margin="30,0,0,0" Text="Medal table" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                </DockPanel>
+                <Border Margin="5,0,5,0" Grid.Row="1" Grid.ColumnSpan="5" Background="#FF5177C3" CornerRadius="3" />
+                <TextBlock  Margin="20,0,0,0" Text="Country" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="18" FontWeight="DemiBold" Foreground="White" />
+                <Image Source="/Images/gold.png"   Width="40"  Grid.Column="1" Grid.Row="1"/>
+                <Image Source="/Images/silver.png" Width="40" Grid.Column="2" Grid.Row="1"/>
+                <Image Source="/Images/bronze.png" Width="40" Grid.Column="3" Grid.Row="1"/>
+                <Image Source="/Images/all.png"    Height="40" Grid.Column="4" Grid.Row="1"/>
+
+                <ListView Margin="0,10,0,10" ItemsSource="{Binding MedalTable}" Grid.Row="2" Grid.ColumnSpan="5" HorizontalContentAlignment="Stretch"  BorderBrush="{x:Null}" Foreground="White">
+                    <ListView.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF494B67" Offset="0.514"/>
+                            <GradientStop Color="#FF7D84DE" Offset="1"/>
+                            <GradientStop Color="#FF7D84DE" Offset="0"/>
+                        </LinearGradientBrush>
+                    </ListView.Background>
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text ="{Binding country}" FontSize="18" Margin="15,5,5,5" />
+                                <TextBlock Grid.Column="1" Text ="{Binding gold}"    FontSize="18"  HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text ="{Binding silver}"  FontSize="18"  HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text ="{Binding bronze}"  FontSize="18" HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="4" Text ="{Binding total}"   FontSize="18"  HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Medals">
+       </TabItem>
+    </TabControl>
+
+
 </Window>

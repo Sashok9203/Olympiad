@@ -13,12 +13,17 @@ namespace data_access.Repositories
         private OlympiadDBContext context = new ();
         private Repository<Sportsman>? sportsman;
         private Repository<Sport>? sports;
+        private Repository<Award>? awards;
+        private Repository<SportsmanAwardOlympiad>? sAOlympiad;
         private bool disposed = false;
 
         public IRepository<Sportsman> Sportsmans => sportsman ??= new Repository<Sportsman>(context);
       
         public IRepository<Sport> Sports => sports ??= new Repository<Sport>(context);
-       
+
+        public IRepository<Award> Awards => awards ??= new Repository<Award>(context);
+
+        public IRepository<SportsmanAwardOlympiad> SAOlympiad => sAOlympiad ??= new Repository<SportsmanAwardOlympiad>(context);
 
         public void Save()
         {
