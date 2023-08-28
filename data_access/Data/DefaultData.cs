@@ -45,7 +45,7 @@ namespace data_access.Data
                 {
                     list.Add(new()
                     {
-                        AwardId = new Random().Next(1, 101) < 80 ? null : new Random().Next(1, 4),
+                        AwardId = new Random().Next(1, 101) < 60 ? null : new Random().Next(1, 4),
                         OlympiadId = i,
                         SportsmanId = SumemrSportsmans[s].Id
                     });
@@ -58,7 +58,7 @@ namespace data_access.Data
                 {
                     list.Add(new()
                     {
-                        AwardId = new Random().Next(1, 101) < 80 ? null : new Random().Next(1, 4),
+                        AwardId = new Random().Next(1, 101) < 60 ? null : new Random().Next(1, 4),
                         OlympiadId = i,
                         SportsmanId = WinterSportsmans[s].Id
                     });
@@ -225,21 +225,21 @@ namespace data_access.Data
 
         public static readonly Olympiad[] Olympiads =
        {
-           new(){Id = 1,Year=2008,CityId=5},
-           new(){Id = 2,Year=1992,CityId=29},//Summer
-           new(){Id = 3,Year=1996,CityId=84},
-           new(){Id = 4,Year=2000,CityId=85},
-           new(){Id = 5,Year=2004,CityId=22},
-           new(){Id = 6,Year=2012,CityId=79},
-           new(){Id = 7,Year=2020,CityId=7},
+           new(){Id = 1,Year=2008,CityId=5, SeasonId = 2},
+           new(){Id = 2,Year=1992,CityId=29, SeasonId = 2},//Summer
+           new(){Id = 3,Year=1996,CityId=84, SeasonId = 2},
+           new(){Id = 4,Year=2000,CityId=85, SeasonId = 2},
+           new(){Id = 5,Year=2004,CityId=22, SeasonId = 2},
+           new(){Id = 6,Year=2012,CityId=79, SeasonId = 2},
+           new(){Id = 7,Year=2020,CityId=7, SeasonId = 2},
 
-           new(){Id = 8,Year=1992,CityId=12},//Winter
-           new(){Id = 9,Year=1994,CityId=72},
-           new(){Id = 10,Year=1998,CityId=8},
-           new(){Id = 11,Year=2002,CityId=83},
-           new(){Id = 12,Year=2006,CityId=27},
-           new(){Id = 13,Year=2010,CityId=89},
-           new(){Id = 14,Year=2022,CityId=5},
+           new(){Id = 8,Year=1992,CityId=12, SeasonId = 1},//Winter
+           new(){Id = 9,Year=1994,CityId=72, SeasonId = 1},
+           new(){Id = 10,Year=1998,CityId=8, SeasonId = 1},
+           new(){Id = 11,Year=2002,CityId=83, SeasonId = 1},
+           new(){Id = 12,Year=2006,CityId=27, SeasonId = 1},
+           new(){Id = 13,Year=2010,CityId=89, SeasonId = 1},
+           new(){Id = 14,Year=2022,CityId=5, SeasonId = 1},
         };
 
         public static readonly City[] Cities =

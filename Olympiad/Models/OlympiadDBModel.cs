@@ -1,49 +1,87 @@
-﻿using data_access.Entities;
-using data_access.Entityes;
-using data_access.Repositories;
+﻿using data_access.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Metrics;
-using System.IO.Pipes;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
 
 namespace Olympiad.Models
 {
-    internal class MTable
+    internal  class MedalTableInfo
     {
-        public string country { get; set; }
-        public int gold { get; set; }
-        public int silver { get; set; }
-        public int bronze { get; set; }
-        public int total  => gold + silver + bronze;
+        public string Country { get; set; }
+        public int Gold { get; set; }
+        public int Silver { get; set; }
+        public int Bronze { get; set; }
+        public int Total  => Gold + Silver + Bronze;
     }
-    internal class OlympiadDBModel : INotifyPropertyChanged, IDisposable
-    {
-        private readonly IUnitOW unitOW = new UnitOfWork();
 
+    internal class ComboBoxOlympiadInfo
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+    }
+
+    internal partial class OlympiadDBModel : INotifyPropertyChanged, IDisposable
+    {
         private bool disposedValue;
 
-        public IEnumerable<Sportsman> Sportsmans => unitOW.Sportsmans.Get(includeProperties: "Sport,Genre", orderBy: x => x.OrderBy(c => c.SportId));
-        public IEnumerable<Sport> Sports => unitOW.Sports.Get(includeProperties: "Season");
-        public IEnumerable<MTable> MedalTable => unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award").GroupBy(x=>x.Sportsman.Country).Select(y => new MTable
-                                                                                                                     {
-                                                                                                                         country = y.Key.Name,
-                                                                                                                         gold =  y.Where( x =>  x.Award?.Name == "Gold" ).Count(),
-                                                                                                                         silver = y.Where(x =>  x.Award?.Name == "Silver").Count(),
-                                                                                                                         bronze = y.Where(x =>  x.Award?.Name == "Bronze").Count(),
-                                                                                                                     });
+        private readonly IUnitOW unitOW = new UnitOfWork();
+
+        private bool olympiadFilter(int index)
+        {
+            if (SelectedOlympiad.Id == -1) return true;
+            else return index == SelectedOlympiad.Id;
+        }
+
+        private List<ComboBoxOlympiadInfo> oStr;
+        
+        private List<ComboBoxOlympiadInfo> olympStr
+        {
+            get 
+            {
+                oStr = new() { new() { Name = "All" ,Id = -1} };
+                var temp = unitOW.Olympiads.Get(includeProperties: "City,Season")
+                                                                      .OrderBy(x => x.Year)
+                                                                      .Select(x => new ComboBoxOlympiadInfo() 
+                                                                      {
+                                                                          Name =$"{x.City.Country.Name} - \"{x.City.Name} {x.Year} {x.Season.Name}\"",
+                                                                          Id = x.Id 
+                                                                      });
+                oStr.AddRange(temp);
+                return oStr;
+            }
+        }
+
+        public ComboBoxOlympiadInfo selectedOlympiad;
+        public ComboBoxOlympiadInfo SelectedOlympiad 
+        {
+            get=> selectedOlympiad;
+            set
+            {
+                selectedOlympiad = value;
+                OnPropertyChanged("MedalTable");
+            }
+        }  
+
+        public IEnumerable<ComboBoxOlympiadInfo> ComboBoxOlympiad => olympStr;
+
+        public IEnumerable<MedalTableInfo> MedalTable => unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad")
+                                                                          .Where(x=> olympiadFilter(x.OlympiadId))
+                                                                          .GroupBy(x=>x.Sportsman.Country)
+                                                                          .Select(y => 
+                                                                          new MedalTableInfo()
+                                                                            {
+                                                                                Country = y.Key.Name,
+                                                                                Gold =  y.Where(x => x.Award?.Name == "Gold").Count(),
+                                                                                Silver = y.Where(x => x.Award?.Name == "Silver").Count(),
+                                                                                Bronze = y.Where(x => x.Award?.Name == "Bronze").Count()
+                                                                            }).OrderByDescending(x=>x.Total);
 
         public OlympiadDBModel() 
         {
             unitOW.Awards.Get();
-            unitOW.Sportsmans.Get(includeProperties: "Country");
+            unitOW.Sportsmans.Get(includeProperties: "Country,Sport,");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -14,6 +14,7 @@ namespace data_access.Repositories
         private Repository<Sportsman>? sportsman;
         private Repository<Sport>? sports;
         private Repository<Award>? awards;
+        private Repository<Olympiad>? olympiad;
         private Repository<SportsmanAwardOlympiad>? sAOlympiad;
         private bool disposed = false;
 
@@ -24,6 +25,8 @@ namespace data_access.Repositories
         public IRepository<Award> Awards => awards ??= new Repository<Award>(context);
 
         public IRepository<SportsmanAwardOlympiad> SAOlympiad => sAOlympiad ??= new Repository<SportsmanAwardOlympiad>(context);
+
+        public IRepository<Olympiad> Olympiads => olympiad ??= new Repository<Olympiad>(context);
 
         public void Save()
         {

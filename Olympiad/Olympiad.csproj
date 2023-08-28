@@ -25,4 +25,8 @@
     <Resource Include="Images\silver.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\CommonClasses\" />
+  </ItemGroup>
+
 </Project>
