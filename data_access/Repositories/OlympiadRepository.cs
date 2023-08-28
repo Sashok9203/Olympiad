@@ -1,23 +1,20 @@
 ﻿using data_access.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using static data_access.Repositories.IRepository;
+
 
 namespace data_access.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class OlympiadRepository<TEntity> : IRepository<TEntity>  where TEntity : class
     {
-        internal static OlympiadDBContext? context;
-        internal DbSet<TEntity> dbSet;
+        private static OlympiadDBContext? context;
+        private DbSet<TEntity> dbSet;
+        private bool disposedValue;
+        private static int instanceCoutn = 0;
 
-        public Repository()
+        public OlympiadRepository()
         {
+            instanceCoutn++;
             context ??= new OlympiadDBContext();
             this.dbSet = context.Set<TEntity>();
         }
@@ -84,6 +81,25 @@ namespace data_access.Repositories
         public void SaveChanges(TEntity entityToUpdate)
         {
             context?.SaveChanges();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    instanceCoutn--;
+                    if (instanceCoutn == 0) context?.Dispose();
+                }
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

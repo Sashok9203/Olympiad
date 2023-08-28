@@ -8,26 +8,25 @@ using System.Threading.Tasks;
 
 namespace data_access.Repositories
 {
-    public interface IRepository
+    
+    public interface IRepository<TEntity> :IDisposable where TEntity : class
     {
-        public interface IRepository<TEntity> where TEntity : class
-        {
-            IEnumerable<TEntity> Get(
-                Expression<Func<TEntity, bool>> filter = null,
-                Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                string includeProperties = "");
+        IEnumerable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "");
 
-            TEntity? GetByID(object id);
+        TEntity? GetByID(object id);
 
-            void Insert(TEntity entity);
+        void Insert(TEntity entity);
 
-            void Delete(object id);
+        void Delete(object id);
 
-            void Delete(TEntity entityToDelete);
+        void Delete(TEntity entityToDelete);
 
-            void Update(TEntity entityToUpdate);
+        void Update(TEntity entityToUpdate);
 
-            void SaveChanges(TEntity entityToUpdate);
-        }
+        void SaveChanges(TEntity entityToUpdate);
     }
+    
 }
