@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace data_access.Repositories
 {
     
-    public interface IRepository<TEntity> :IDisposable where TEntity : class
+    public interface IRepository<TEntity>  where TEntity : class
     {
         IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
@@ -26,7 +26,6 @@ namespace data_access.Repositories
 
         void Update(TEntity entityToUpdate);
 
-        void SaveChanges(TEntity entityToUpdate);
     }
     
 }

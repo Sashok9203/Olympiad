@@ -16,6 +16,6 @@ namespace data_access.Entities
         public int CityId { get; set; }
         public City City { get; set; }
        
-        public ICollection<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
+        public ICollection<SportsmanAwardOlympiad> SportsmanAward { get; set; } = new HashSet<SportsmanAwardOlympiad>();
     }
 }

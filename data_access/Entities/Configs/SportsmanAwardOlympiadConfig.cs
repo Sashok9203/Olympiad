@@ -13,11 +13,11 @@ namespace data_access.Entities.Configs
         public void Configure(EntityTypeBuilder<SportsmanAwardOlympiad> builder)
         {
             builder.HasKey(x => new {x.OlympiadId,x.SportsmanId });
-            builder.HasOne(x => x.Sportsman).WithMany(x => x.SportsmanAwardOlympiads)
+            builder.HasOne(x => x.Sportsman).WithMany(x => x.AwardOlympiads)
                     .HasForeignKey(x => x.SportsmanId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Olympiad).WithMany(x => x.SportsmanAwardOlympiads)
+            builder.HasOne(x => x.Olympiad).WithMany(x => x.SportsmanAward)
                     .HasForeignKey(x => x.OlympiadId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Award).WithMany(x => x.SportsmanAwardOlympiads)
+            builder.HasOne(x => x.Award).WithMany(x => x.SportsmanOlympiads)
                    .HasForeignKey(x => x.AwardId).OnDelete(DeleteBehavior.ClientSetNull);
         }
     }

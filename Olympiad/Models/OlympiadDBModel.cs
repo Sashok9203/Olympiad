@@ -12,18 +12,16 @@ namespace Olympiad.Models
 {
     internal class OlympiadDBModel : INotifyPropertyChanged,IDisposable
     {
-        private IRepository<Sportsman>? sportsmans;
-        private IRepository<Sport>? sports;
+        private readonly IUnitOW unitOW = new UnitOfWork(); 
+       
         private bool disposedValue;
 
         public IEnumerable<Sportsman> Sportsmans { get; set; }
         public IEnumerable<Sport> Sports { get; set; }
         public OlympiadDBModel() 
         {
-            sportsmans = new OlympiadRepository<Sportsman>();
-            sports = new OlympiadRepository<Sport>();
-            Sportsmans = sportsmans.Get(includeProperties:"Country,Sport,Genre",orderBy: x=>x.OrderBy(c=>c.SportId));
-            Sports = sports.Get(includeProperties: "Season");
+            Sportsmans = unitOW.Sportsmans.Get(includeProperties:"Country,Sport,Genre",orderBy: x=>x.OrderBy(c=>c.SportId));
+            Sports = unitOW.Sports.Get(includeProperties: "Season");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -36,8 +34,7 @@ namespace Olympiad.Models
             {
                 if (disposing)
                 {
-                    sportsmans?.Dispose();
-                    sports?.Dispose();
+                    unitOW.Dispose();
                 }
                 disposedValue = true;
             }

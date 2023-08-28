@@ -5,16 +5,15 @@ using System.Linq.Expressions;
 
 namespace data_access.Repositories
 {
-    public class OlympiadRepository<TEntity> : IRepository<TEntity>  where TEntity : class
+    internal class Repository<TEntity> : IRepository<TEntity>  where TEntity : class
     {
-        private static OlympiadDBContext? context;
-        private DbSet<TEntity> dbSet;
-        private bool disposedValue;
-        private static int instanceCoutn = 0;
+        internal  OlympiadDBContext? context = null;
 
-        public OlympiadRepository()
+        internal DbSet<TEntity> dbSet;
+       
+        public Repository(OlympiadDBContext? context)
         {
-            instanceCoutn++;
+          
             context ??= new OlympiadDBContext();
             this.dbSet = context.Set<TEntity>();
         }
@@ -76,30 +75,6 @@ namespace data_access.Repositories
         {
             dbSet.Attach(entityToUpdate);
             if(context!= null) context.Entry(entityToUpdate).State = EntityState.Modified;
-        }
-
-        public void SaveChanges(TEntity entityToUpdate)
-        {
-            context?.SaveChanges();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    instanceCoutn--;
-                    if (instanceCoutn == 0) context?.Dispose();
-                }
-                disposedValue = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace data_access.Entities
         public Genre Genre { get; set; }
    
 
-        public ICollection<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
+        public ICollection<SportsmanAwardOlympiad> AwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
 
     }
 }

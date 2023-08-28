@@ -12,6 +12,6 @@ namespace data_access.Entities
         
         public string Name { get; set; }
 
-        public ICollection<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
+        public ICollection<SportsmanAwardOlympiad> SportsmanOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
     }
 }
