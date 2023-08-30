@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace OlympiadWPF.Models
 {
@@ -97,7 +98,36 @@ namespace OlympiadWPF.Models
                 unitOW.Countries.Get();
                 return  spAwOl ??= unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad").ToList();
             }
-        }   
+        }
+
+        private void addSportsman(object o)
+        {
+            //Window addSportsmanWindow = new();
+            //if (addSportsmanWindow.ShowDialog() == true)
+            //{
+            //    Sportsman newSportsman = (addSportsmanWindow.DataContext as AddSprortsmanWindowModel).Sportsman;
+            //    unitOW.Sportsmans.Insert(newSportsman);
+            //    unitOW.Save();
+            //    //sportsmans.Add(newSportsman);
+            //    sptms = null;
+            //    OnPropertyChanged("Sportsmans");
+            //}
+        }
+
+        private void editSportsman(object o)
+        {
+
+        }
+
+        private void addOlympiad(object o)
+        {
+
+        }
+
+        private void editOlympiad(object o)
+        {
+
+        }
 
         public bool WithMedals 
         {
@@ -207,7 +237,16 @@ namespace OlympiadWPF.Models
         public OlympiadDBModel() 
         {
             unitOW = new UnitOfWork();
+            AddSportsman = new((o) => addSportsman(o));
+            EditSportsman = new((o) => editSportsman(o));
+            AddOlympiad = new((o) => addOlympiad(o));
+            EditOlympiad = new((o) => editOlympiad(o));
         }
+
+        public RelayCommand AddSportsman;
+        public RelayCommand EditSportsman;
+        public RelayCommand AddOlympiad;
+        public RelayCommand EditOlympiad;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

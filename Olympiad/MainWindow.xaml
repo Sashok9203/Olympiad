@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OlympiadWPF"
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         mc:Ignorable="d"
-        Title="OlympiadBD" Height="450" Width="800" MinWidth="500" MinHeight="450" Background="#FF7D84DE">
+        Title="OlympiadBD" Height="700" Width="900" MinWidth="700" MinHeight="450" Background="#FF7D84DE">
 
     <Window.DataContext>
         <vms:OlympiadDBModel/>
@@ -26,17 +26,64 @@
             <GradientStop Color="#FF484C80" Offset="0.135"/>
         </LinearGradientBrush>
         
+        <LinearGradientBrush x:Key ="buttonMouseOverGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF484C80"/>
+            <GradientStop Color="#FF484C80" Offset="1"/>
+            <GradientStop Color="#FF979EF7" Offset="0.537"/>
+        </LinearGradientBrush>
+
         <Style x:Key="medalImage" TargetType="Image">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="Margin" Value ="0,0,5,10"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Background" Value="{StaticResource  headerGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource  buttonMouseOverGradient}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource listViewGradient }" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="headerStyle" TargetType="Border">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Grid.Row" Value="2"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="Background" Value="{StaticResource headerGradient}"/>
+        </Style>
+         
+        <Style x:Key="headerText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
         
     </Window.Resources>
 
-
-    <TabControl Background="#FF7D84DE" >
+    <TabControl Background="{StaticResource   headerGradient}" >
         <TabControl.Resources>
             <Style TargetType="TabItem">
                 <Setter Property="Template">
@@ -60,9 +107,12 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontWeight" Value="DemiBold"/>
             </Style>
         </TabControl.Resources>
-        <TabItem Header="Medal table" FontSize="17" FontWeight="DemiBold"  >
+        <TabItem Header="Medal table" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -87,7 +137,7 @@
                 <Image Source="/Images/silver.png" Width="40" Grid.Column="2" Grid.Row="1" Margin="47,0,47,0"/>
                 <Image Source="/Images/bronze.png" Width="40" Grid.Column="3" Grid.Row="1" Margin="47,0,47,0"/>
                 <Image Source="/Images/all.png"    Height="40" Grid.Column="4" Grid.Row="1" Margin="0,2,0,3"/>
-                <ListView Margin="0,10,0,10" ItemsSource="{Binding MedalTable}" Grid.Row="2" Grid.ColumnSpan="5" HorizontalContentAlignment="Stretch"  BorderBrush="{x:Null}" Foreground="White" Background="{StaticResource listViewGradient}">
+                <ListView Margin="10" ItemsSource="{Binding MedalTable}" Grid.Row="2" Grid.ColumnSpan="5" HorizontalContentAlignment="Stretch"  BorderBrush="{x:Null}" Foreground="White" Background="{StaticResource listViewGradient}">
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <Grid>
@@ -112,8 +162,8 @@
                 </ListView>
             </Grid>
         </TabItem>
-        <TabItem Header="Sportsmans" FontSize="17" FontWeight="DemiBold">
-            <Grid Background="#FF7D84DE">
+        <TabItem Header="Sportsmans">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
@@ -141,9 +191,11 @@
                         <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedCountry,Mode=TwoWay}" ItemsSource="{Binding Countries}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <CheckBox Grid.Column="1" Grid.Row="1"  Content="With medals" VerticalContentAlignment="Center" IsChecked="{Binding WithMedals,Mode =TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
-                    <TextBlock  Grid.Row="2" Grid.ColumnSpan="2" DockPanel.Dock="Bottom"    Text="Sportsmans" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                    <Border  Style="{StaticResource headerStyle}">
+                        <TextBlock  Text="Sportsmans" Style="{StaticResource headerText}"/>
+                    </Border>
                 </Grid>
-                <ListView ItemsSource="{Binding Sportsmans}" Grid.Row="1" Margin="0,5,0,5" Background="{StaticResource listViewGradient}">
+                <ListView  ItemsSource="{Binding Sportsmans}" Grid.Row="1" Margin="10" Background="{StaticResource listViewGradient}">
                      <ListView.ItemTemplate>
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
@@ -189,8 +241,8 @@
             </Grid>
         </TabItem>
 
-        <TabItem Header="Country result" FontSize="17" FontWeight="DemiBold">
-            <Grid Background="#FF7D84DE">
+        <TabItem Header="Countries results" >
+            <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
@@ -212,9 +264,11 @@
                         <TextBlock Text="Counry"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
                         <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedCountryCR,Mode=TwoWay}" ItemsSource="{Binding Countries}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
-                    <TextBlock  Grid.Row="1" Grid.ColumnSpan="2" DockPanel.Dock="Bottom"    Text="Country result" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                    <Border Style="{StaticResource headerStyle}">
+                        <TextBlock   Text="Country results"  Style="{StaticResource headerText}"/>
+                    </Border>
                 </Grid>
-                <ListView ItemsSource="{Binding CountryResult}" Grid.Row="1" Margin="0,5,0,5" Background="{StaticResource listViewGradient}">
+                <ListView Margin="10" ItemsSource="{Binding CountryResult}" Grid.Row="1"  Background="{StaticResource listViewGradient}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -238,6 +292,18 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
+        </TabItem>
+        <TabItem Header="Edit Data Base">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Add Olympiad" Style="{StaticResource buttonStyle}" Command="{Binding AddOlympiad,Mode=OneTime}"/>
+                    <Button Content="Edit Olympiad" Style="{StaticResource buttonStyle}" Command="{Binding EditOlympiad,Mode=OneTime}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Add Spotrsman" Style="{StaticResource buttonStyle}" Command="{Binding AddSportsman,Mode=OneTime}"/>
+                    <Button Content="Edit Spotrsman" Style="{StaticResource buttonStyle}" Command="{Binding EditSportsman,Mode=OneTime}"/>
+                </StackPanel>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>
