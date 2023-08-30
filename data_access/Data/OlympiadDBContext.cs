@@ -1,6 +1,6 @@
 ﻿using data_access.Entities;
 using data_access.Entities.Configs;
-using data_access.Entityes;
+using data_access.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols;
 using System;

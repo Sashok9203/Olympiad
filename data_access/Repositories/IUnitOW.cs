@@ -1,5 +1,5 @@
 ﻿using data_access.Entities;
-using data_access.Entityes;
+using data_access.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

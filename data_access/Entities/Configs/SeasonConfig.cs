@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using data_access.Entityes;
+using data_access.Entities;
 
 namespace data_access.Entities.Configs
 {

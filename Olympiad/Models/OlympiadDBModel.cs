@@ -1,6 +1,6 @@
 ﻿using data_access.Entities;
-using data_access.Entityes;
 using data_access.Repositories;
+using OlympiadWPF.Models.CommonClasses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,61 +9,57 @@ using System.Runtime.CompilerServices;
 
 namespace OlympiadWPF.Models
 {
-    internal  class MedalTableInfo
-    {
-        public string Country { get; set; }
-        public int Gold { get; set; }
-        public int Silver { get; set; }
-        public int Bronze { get; set; }
-        public int Total  => Gold + Silver + Bronze;
-        public string? Flag  { get; set; }
-    }
-
-    internal class SpotrsmenInfo
-    {
-        public Sportsman Sportsman { get; set; }
-        public int Gold { get; set; }
-        public int Silver { get; set; }
-        public int Bronze { get; set; }
-    }
-
-    internal class CountryResultInfo
-    {
-        public Sport Sport { get; set; }
-        public int Gold { get; set; }
-        public int Silver { get; set; }
-        public int Bronze { get; set; }
-    }
-
-
 
     internal partial class OlympiadDBModel : INotifyPropertyChanged, IDisposable
     {
         private bool disposedValue;
 
-        private readonly IUnitOW unitOW = new UnitOfWork();
+        private readonly IUnitOW unitOW;
 
         private bool idFilter(int id, int? selId)
         {
-            if (selId == null ||selId == -1) return true;
+            if (selId == null || selId == -1) return true;
             else return id == selId;
         }
 
         private List<Country>? countr = null;
+
+        private List<Sport>? sprt = null;
+
+        private List<Olympiad>? olmp;
+
+        private List<Sportsman>? sptms = null;
+
+        private List<SportsmanAwardOlympiad>? spAwOl = null;
+
+        private bool withMedals = true;
+
+        private Sport? selectedSport;
+
+        private Olympiad? selectedOlympiadMT;
+
+        private Olympiad? selectedOlympiadM;
+
+        private Olympiad? selectedOlympiadCR;
+
+        private Country? selectedCountry;
+
+        private Country? selectedCountryCR;
+
+
         private List<Country>? countries
         {
-            get 
+            get
             {
                 if (countr == null)
                 {
-                    countr = new() { new() { Name = "All",Id = -1} };
+                    countr = new() { new() { Name = "All", Id = -1 } };
                     countr.AddRange(unitOW.Countries.Get());
                 }
                 return countr;
             }
         }
 
-        private List<Sport>? sprt = null;
         private List<Sport>? sports
         {
             get
@@ -71,25 +67,38 @@ namespace OlympiadWPF.Models
                 if (sprt == null)
                 {
                     sprt = new() { new() { Name = "All", Id = -1 } };
-                    sprt.AddRange(unitOW.Sports.Get(includeProperties:"Season"));
+                    sprt.AddRange(unitOW.Sports.Get(includeProperties: "Season"));
                 }
                 return sprt;
             }
         }
 
-
-        private List<Olympiad> olympStr
+        private List<Olympiad> olympiads
         {
-            get 
+
+            get
             {
-                List<Olympiad> oStr = new() { new() {Id = -1} };
-                var temp = unitOW.Olympiads.Get(includeProperties: "City,Season").OrderBy(x => x.Year);
-                oStr.AddRange(temp);
-                return oStr;
+                if (olmp == null)
+                {
+                    olmp = new() { new() { Id = -1 } };
+                    var temp = unitOW.Olympiads.Get(includeProperties: "City,Season").OrderBy(x => x.Year);
+                    olmp.AddRange(temp);
+                }
+                return olmp;
             }
         }
 
-        private bool withMedals = true;
+        private List<Sportsman> sportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Genre").ToList();
+
+        private List<SportsmanAwardOlympiad> SpAwOlympiads
+        {
+            get
+            {
+                unitOW.Countries.Get();
+                return  spAwOl ??= unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad").ToList();
+            }
+        }   
+
         public bool WithMedals 
         {
             get => withMedals;
@@ -99,11 +108,7 @@ namespace OlympiadWPF.Models
                 OnPropertyChanged("Sportsmans");
             }
         }
-
-        private List<Sportsman> sportsmans;
-        private List<SportsmanAwardOlympiad> medalTable;
-
-        private Sport? selectedSport;
+      
         public  Sport? SelectedSport
         {
             get => selectedSport;
@@ -113,8 +118,7 @@ namespace OlympiadWPF.Models
                 OnPropertyChanged("Sportsmans");
             }
         }
-
-        private Olympiad? selectedOlympiadMT;
+       
         public Olympiad? SelectedOlympiadMT 
         {
             get=> selectedOlympiadMT;
@@ -124,8 +128,7 @@ namespace OlympiadWPF.Models
                 OnPropertyChanged("MedalTable");
             }
         }
-
-        private Olympiad? selectedOlympiadM;
+       
         public Olympiad? SelectedOlympiadM
         {
             get => selectedOlympiadM;
@@ -135,8 +138,7 @@ namespace OlympiadWPF.Models
                 OnPropertyChanged("Sportsmans");
             }
         }
-
-        private Olympiad? selectedOlympiadCR;
+        
         public Olympiad? SelectedOlympiadCR
         {
             get => selectedOlympiadCR;
@@ -147,7 +149,6 @@ namespace OlympiadWPF.Models
             }
         }
 
-        private Country? selectedCountry;
         public Country? SelectedCountry
         {
             get => selectedCountry;
@@ -157,8 +158,7 @@ namespace OlympiadWPF.Models
                 OnPropertyChanged("Sportsmans");
             }
         }
-
-        private Country? selectedCountryCR;
+        
         public Country? SelectedCountryCR
         {
             get => selectedCountryCR;
@@ -173,7 +173,7 @@ namespace OlympiadWPF.Models
 
         public IEnumerable<Sport>? Sports => sports;
 
-        public IEnumerable<Olympiad> ComboBoxOlympiad => olympStr;
+        public IEnumerable<Olympiad> ComboBoxOlympiad => olympiads;
 
         public IEnumerable<CountryResultInfo>? CountryResult => sports?.Where(x => x.Id != -1 )
                                                                       .Select(x => new CountryResultInfo()
@@ -184,8 +184,6 @@ namespace OlympiadWPF.Models
                                                                           Bronze = x.Sportsmans.Where(q => idFilter(q.CountryId, SelectedCountryCR?.Id)).SelectMany(y => y.AwardOlympiads.Where(z => z.Award?.Name == "Bronze" && idFilter(z.OlympiadId, SelectedOlympiadCR?.Id))).Count()
                                                                       });
 
-       
-
         public IEnumerable<SpotrsmenInfo> Sportsmans => sportsmans.Where(x => idFilter(x.SportId ,SelectedSport?.Id) && x.AwardOlympiads.Any(y=>((y.Award != null) || !WithMedals) && idFilter(y.Sportsman.CountryId ,SelectedCountry?.Id) && idFilter(y.OlympiadId,SelectedOlympiadM?.Id)))
                                                                   .Select(x=> new SpotrsmenInfo()
                                                                   {
@@ -195,7 +193,7 @@ namespace OlympiadWPF.Models
                                                                       Bronze = x.AwardOlympiads.Where(y => y.Award?.Name == "Bronze" && idFilter(y.OlympiadId, SelectedOlympiadM?.Id)).Count(),
                                                                   }).OrderByDescending(x=>x.Gold);
 
-        public IEnumerable<MedalTableInfo> MedalTable =>  medalTable.Where(x=> idFilter(x.OlympiadId, SelectedOlympiadMT?.Id))
+        public IEnumerable<MedalTableInfo> MedalTable => SpAwOlympiads.Where(x=> idFilter(x.OlympiadId, SelectedOlympiadMT?.Id))
                                                                     .GroupBy(x=>x.Sportsman.Country)
                                                                     .Select(y => 
                                                                     new MedalTableInfo()
@@ -209,9 +207,7 @@ namespace OlympiadWPF.Models
 
         public OlympiadDBModel() 
         {
-            unitOW.Awards.Get();
-            medalTable =  unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad").ToList();
-            sportsmans =  unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Genre").ToList();
+            unitOW = new UnitOfWork();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

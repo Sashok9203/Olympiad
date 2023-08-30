@@ -1,4 +1,4 @@
-﻿using data_access.Entityes;
+﻿using data_access.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;

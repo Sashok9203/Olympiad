@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace data_access.Entityes
+namespace data_access.Entities
 {
     public class Country
     {

@@ -88,10 +88,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\CommonClasses\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFrameworkProfiler.Appender" Version="6.0.6040" />
   </ItemGroup>
 
