@@ -1,4 +1,5 @@
 ﻿using data_access.Entities;
+using data_access.Entityes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace data_access.Repositories
         IRepository<Sport> Sports { get; }
         IRepository<Award> Awards { get; }
         IRepository<Olympiad> Olympiads { get; }
-        public IRepository<SportsmanAwardOlympiad> SAOlympiad { get; }
+        IRepository<SportsmanAwardOlympiad> SAOlympiad { get; }
+        IRepository<Country> Countries { get; }
         void Save();
     }
 }

@@ -10,8 +10,45 @@
   <ItemGroup>
     <None Remove="Images\all.png" />
     <None Remove="Images\bronze.png" />
+    <None Remove="Images\Flags\Flag_of_Australia.png" />
+    <None Remove="Images\Flags\Flag_of_Australia.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Canada.png" />
+    <None Remove="Images\Flags\Flag_of_Canada.svg.png" />
+    <None Remove="Images\Flags\Flag_of_China.png" />
+    <None Remove="Images\Flags\Flag_of_Denmark.png" />
+    <None Remove="Images\Flags\Flag_of_Denmark.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Finland.png" />
+    <None Remove="Images\Flags\Flag_of_Finland.svg.png" />
+    <None Remove="Images\Flags\Flag_of_France.png" />
+    <None Remove="Images\Flags\Flag_of_France.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Germany.png" />
+    <None Remove="Images\Flags\Flag_of_Germany.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Greece.png" />
+    <None Remove="Images\Flags\Flag_of_India.png" />
+    <None Remove="Images\Flags\Flag_of_India.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Ireland.png" />
+    <None Remove="Images\Flags\Flag_of_Italy.png" />
+    <None Remove="Images\Flags\Flag_of_Japan.png" />
+    <None Remove="Images\Flags\Flag_of_Malaysia.png" />
+    <None Remove="Images\Flags\Flag_of_Malaysia.svg.png" />
+    <None Remove="Images\Flags\Flag_of_New_Zealand.png" />
+    <None Remove="Images\Flags\Flag_of_New_Zealand.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Norway.png" />
+    <None Remove="Images\Flags\Flag_of_Norway.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Poland.png" />
+    <None Remove="Images\Flags\Flag_of_Poland.svg.png" />
+    <None Remove="Images\Flags\Flag_of_Singapore.png" />
+    <None Remove="Images\Flags\Flag_of_South_Africa.png" />
+    <None Remove="Images\Flags\Flag_of_Spain.png" />
+    <None Remove="Images\Flags\Flag_of_Sweden.png" />
+    <None Remove="Images\Flags\Flag_of_Swedenn.png" />
+    <None Remove="Images\Flags\Flag_of_the_Netherlands.png" />
+    <None Remove="Images\Flags\Flag_of_the_United_Kingdom.png" />
+    <None Remove="Images\Flags\Flag_of_the_United_States.png" />
+    <None Remove="Images\Flags\Flag_of_Ukraine.png" />
     <None Remove="Images\gold.png" />
     <None Remove="Images\silver.png" />
+    <None Remove="Images\Sportsmans\box.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,12 +58,41 @@
   <ItemGroup>
     <Resource Include="Images\all.png" />
     <Resource Include="Images\bronze.png" />
+    <Resource Include="Images\Flags\Flag_of_Australia.png" />
+    <Resource Include="Images\Flags\Flag_of_Canada.png" />
+    <Resource Include="Images\Flags\Flag_of_China.png" />
+    <Resource Include="Images\Flags\Flag_of_Denmark.png" />
+    <Resource Include="Images\Flags\Flag_of_Finland.png" />
+    <Resource Include="Images\Flags\Flag_of_France.png" />
+    <Resource Include="Images\Flags\Flag_of_Germany.png" />
+    <Resource Include="Images\Flags\Flag_of_Greece.png" />
+    <Resource Include="Images\Flags\Flag_of_India.png" />
+    <Resource Include="Images\Flags\Flag_of_Ireland.png" />
+    <Resource Include="Images\Flags\Flag_of_Italy.png" />
+    <Resource Include="Images\Flags\Flag_of_Japan.png" />
+    <Resource Include="Images\Flags\Flag_of_Malaysia.png" />
+    <Resource Include="Images\Flags\Flag_of_New_Zealand.png" />
+    <Resource Include="Images\Flags\Flag_of_Norway.png" />
+    <Resource Include="Images\Flags\Flag_of_Poland.png" />
+    <Resource Include="Images\Flags\Flag_of_Singapore.png" />
+    <Resource Include="Images\Flags\Flag_of_South_Africa.png" />
+    <Resource Include="Images\Flags\Flag_of_Spain.png" />
+    <Resource Include="Images\Flags\Flag_of_Swedenn.png" />
+    <Resource Include="Images\Flags\Flag_of_the_Netherlands.png" />
+    <Resource Include="Images\Flags\Flag_of_the_United_Kingdom.png" />
+    <Resource Include="Images\Flags\Flag_of_the_United_States.png" />
+    <Resource Include="Images\Flags\Flag_of_Ukraine.png" />
     <Resource Include="Images\gold.png" />
     <Resource Include="Images\silver.png" />
+    <Resource Include="Images\Sportsmans\box.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\CommonClasses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFrameworkProfiler.Appender" Version="6.0.6040" />
   </ItemGroup>
 
 </Project>

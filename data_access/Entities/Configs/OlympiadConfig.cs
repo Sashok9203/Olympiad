@@ -16,7 +16,7 @@ namespace data_access.Entities.Configs
             builder.ToTable(t => t.HasCheckConstraint("Year", "Year >= 1896"));
             builder.HasOne(x => x.City).WithMany(x => x.Olympiads).HasForeignKey(x => x.CityId);
             builder.HasOne(x => x.Season).WithMany(x => x.Olympiads).HasForeignKey(x => x.SeasonId);
-
+            builder.Ignore(x=>x.Description);
 
         }
     }

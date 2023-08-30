@@ -13,6 +13,8 @@ namespace data_access.Entityes
 
         public string Name { get; set; }
 
+        public string? FlagPath { get; set; }
+
         public ICollection<City> Cities { get; set; } = new HashSet<City>();
 
         public ICollection<Sportsman> Sportsmens { get; set; } = new HashSet<Sportsman>();

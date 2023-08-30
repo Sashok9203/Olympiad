@@ -1,5 +1,6 @@
 ﻿using data_access.Data;
 using data_access.Entities;
+using data_access.Entityes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace data_access.Repositories
         private Repository<Award>? awards;
         private Repository<Olympiad>? olympiad;
         private Repository<SportsmanAwardOlympiad>? sAOlympiad;
+        private Repository<Country>? countries;
         private bool disposed = false;
 
         public IRepository<Sportsman> Sportsmans => sportsman ??= new Repository<Sportsman>(context);
@@ -27,6 +29,8 @@ namespace data_access.Repositories
         public IRepository<SportsmanAwardOlympiad> SAOlympiad => sAOlympiad ??= new Repository<SportsmanAwardOlympiad>(context);
 
         public IRepository<Olympiad> Olympiads => olympiad ??= new Repository<Olympiad>(context);
+
+        public IRepository<Country> Countries => countries ??= new Repository<Country>(context);
 
         public void Save()
         {
