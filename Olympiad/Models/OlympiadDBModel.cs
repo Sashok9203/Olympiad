@@ -198,8 +198,7 @@ namespace OlympiadWPF.Models
                                                                     .Select(y => 
                                                                     new MedalTableInfo()
                                                                     {
-                                                                        Country = y.Key.Name,
-                                                                        Flag = y.Key.FlagPath,
+                                                                        Country = y.Key,
                                                                         Gold =  y.Where(x => x.Award?.Name == "Gold").Count(),
                                                                         Silver = y.Where(x => x.Award?.Name == "Silver").Count(),
                                                                         Bronze = y.Where(x => x.Award?.Name == "Bronze").Count(),

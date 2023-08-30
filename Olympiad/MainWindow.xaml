@@ -7,7 +7,7 @@
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         mc:Ignorable="d"
         Title="OlympiadBD" Height="450" Width="800" MinWidth="500" MinHeight="450" Background="#FF7D84DE">
-    
+
     <Window.DataContext>
         <vms:OlympiadDBModel/>
     </Window.DataContext>
@@ -21,9 +21,9 @@
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key ="listViewGradient" EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF989CD2" Offset="0.514"/>
-            <GradientStop Color="#FF494B67" Offset="0.86"/>
-            <GradientStop Color="#FF494B67" Offset="0.135"/>
+            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
+            <GradientStop Color="#FF484C80" Offset="0.86"/>
+            <GradientStop Color="#FF484C80" Offset="0.135"/>
         </LinearGradientBrush>
         
         <Style x:Key="medalImage" TargetType="Image">
@@ -77,7 +77,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                                     <Image Source="{Binding Flag}"   Height="40" Width="60" Margin="15,5,0,0" Stretch="Fill"/>
-                                    <TextBlock  Text ="{Binding Country}" FontSize="19" Margin="15,5,5,5" />
+                                    <TextBlock  Text ="{Binding Country.Name}" FontSize="19" Margin="15,5,5,5" />
                                 </StackPanel>
                                 <TextBlock Grid.Column="1" Text ="{Binding Gold}"    FontSize="18"  HorizontalAlignment="Center"/>
                                 <TextBlock Grid.Column="2" Text ="{Binding Silver}"  FontSize="18"  HorizontalAlignment="Center"/>
@@ -127,7 +127,7 @@
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
                                 <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Left" Width="550">
-                                    <Image Source="{Binding Sportsman.PhotoPath}" Height="80" Width="60" Stretch="Fill"/>
+                                    <Image Source="{Binding PhotoPath}" Height="80" Width="60" Stretch="Fill"/>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
                                             <Image Margin="5,0,5,0" Source="{Binding Sportsman.Country.FlagPath}" Width="30" Height="20" Stretch="Fill"/>
