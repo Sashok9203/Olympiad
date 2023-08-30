@@ -21,7 +21,7 @@ namespace data_access.Entities.Configs
             builder.Ignore(x=>x.FullName);
             builder.HasOne(x => x.Sport).WithMany(x => x.Sportsmans).HasForeignKey(x=>x.SportId);
             builder.HasOne(x => x.Country).WithMany(x => x.Sportsmens).HasForeignKey(x => x.CountryId);
-            builder.HasOne(x => x.Genre).WithMany(x => x.Sportsmens).HasForeignKey(x => x.GenreId);
+            builder.HasOne(x => x.Gender).WithMany(x => x.Sportsmens).HasForeignKey(x => x.GenderId);
           
         }
     }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace data_access.Entities.Configs
 {
-    internal class OlympiadConfig : IEntityTypeConfiguration<Olympiad>
+    internal class OlympiadConfig : IEntityTypeConfiguration<Olympiad_>
     {
-        public void Configure(EntityTypeBuilder<Olympiad> builder)
+        public void Configure(EntityTypeBuilder<Olympiad_> builder)
         {
             builder.HasKey(x => x.Id);
             builder.ToTable(t => t.HasCheckConstraint("Year", "Year >= 1896"));

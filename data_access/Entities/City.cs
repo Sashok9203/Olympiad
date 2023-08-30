@@ -16,6 +16,6 @@ namespace data_access.Entities
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
-        public ICollection<Olympiad> Olympiads { get; set; } = new HashSet<Olympiad>();
+        public ICollection<Olympiad_> Olympiads { get; set; } = new HashSet<Olympiad_>();
     }
 }

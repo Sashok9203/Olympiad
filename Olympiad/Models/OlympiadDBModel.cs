@@ -1,5 +1,6 @@
 ﻿using data_access.Entities;
 using data_access.Repositories;
+using Olympiad;
 using OlympiadWPF.Models.CommonClasses;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace OlympiadWPF.Models
 
         private List<Sport>? sprt = null;
 
-        private List<Olympiad>? olmp;
+        private List<Olympiad_>? olmp;
 
         private List<Sportsman>? sptms = null;
 
@@ -37,11 +38,11 @@ namespace OlympiadWPF.Models
 
         private Sport? selectedSport;
 
-        private Olympiad? selectedOlympiadMT;
+        private Olympiad_? selectedOlympiadMT;
 
-        private Olympiad? selectedOlympiadM;
+        private Olympiad_? selectedOlympiadM;
 
-        private Olympiad? selectedOlympiadCR;
+        private Olympiad_? selectedOlympiadCR;
 
         private Country? selectedCountry;
 
@@ -74,7 +75,7 @@ namespace OlympiadWPF.Models
             }
         }
 
-        private List<Olympiad> olympiads
+        private List<Olympiad_> olympiads
         {
 
             get
@@ -89,7 +90,7 @@ namespace OlympiadWPF.Models
             }
         }
 
-        private List<Sportsman> sportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Genre").ToList();
+        private List<Sportsman> sportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Gender").ToList();
 
         private List<SportsmanAwardOlympiad> SpAwOlympiads
         {
@@ -100,20 +101,7 @@ namespace OlympiadWPF.Models
             }
         }
 
-        private void addSportsman(object o)
-        {
-            //Window addSportsmanWindow = new();
-            //if (addSportsmanWindow.ShowDialog() == true)
-            //{
-            //    Sportsman newSportsman = (addSportsmanWindow.DataContext as AddSprortsmanWindowModel).Sportsman;
-            //    unitOW.Sportsmans.Insert(newSportsman);
-            //    unitOW.Save();
-            //    //sportsmans.Add(newSportsman);
-            //    sptms = null;
-            //    OnPropertyChanged("Sportsmans");
-            //}
-        }
-
+       
         private void editSportsman(object o)
         {
 
@@ -149,7 +137,7 @@ namespace OlympiadWPF.Models
             }
         }
        
-        public Olympiad? SelectedOlympiadMT 
+        public Olympiad_? SelectedOlympiadMT 
         {
             get=> selectedOlympiadMT;
             set
@@ -159,7 +147,7 @@ namespace OlympiadWPF.Models
             }
         }
        
-        public Olympiad? SelectedOlympiadM
+        public Olympiad_? SelectedOlympiadM
         {
             get => selectedOlympiadM;
             set
@@ -169,7 +157,7 @@ namespace OlympiadWPF.Models
             }
         }
         
-        public Olympiad? SelectedOlympiadCR
+        public Olympiad_? SelectedOlympiadCR
         {
             get => selectedOlympiadCR;
             set
@@ -203,7 +191,7 @@ namespace OlympiadWPF.Models
 
         public IEnumerable<Sport>? Sports => sports;
 
-        public IEnumerable<Olympiad> ComboBoxOlympiad => olympiads;
+        public IEnumerable<Olympiad_> ComboBoxOlympiad => olympiads;
 
         public IEnumerable<CountryResultInfo>? CountryResult => sports?.Where(x => x.Id != -1 )
                                                                       .Select(x => new CountryResultInfo()
@@ -237,16 +225,12 @@ namespace OlympiadWPF.Models
         public OlympiadDBModel() 
         {
             unitOW = new UnitOfWork();
-            AddSportsman = new((o) => addSportsman(o));
-            EditSportsman = new((o) => editSportsman(o));
-            AddOlympiad = new((o) => addOlympiad(o));
-            EditOlympiad = new((o) => editOlympiad(o));
         }
 
-        public RelayCommand AddSportsman;
-        public RelayCommand EditSportsman;
-        public RelayCommand AddOlympiad;
-        public RelayCommand EditOlympiad;
+        public RelayCommand AddSportsman => new((o) => addSportsman(o));
+        public RelayCommand EditSportsman => new((o) => editSportsman(o));
+        public RelayCommand AddOlympiad => new((o) => addOlympiad(o));
+        public RelayCommand EditOlympiad => new((o) => editOlympiad(o));
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

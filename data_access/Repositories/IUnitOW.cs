@@ -13,9 +13,10 @@ namespace data_access.Repositories
         IRepository<Sportsman> Sportsmans { get; }
         IRepository<Sport> Sports { get; }
         IRepository<Award> Awards { get; }
-        IRepository<Olympiad> Olympiads { get; }
+        IRepository<Olympiad_> Olympiads { get; }
         IRepository<SportsmanAwardOlympiad> SAOlympiad { get; }
         IRepository<Country> Countries { get; }
+        IRepository<Gender> Genders { get; }
         void Save();
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace data_access.Entities.Configs
 {
-    internal class GenreConfig : IEntityTypeConfiguration<Genre>
+    internal class GenderConfig : IEntityTypeConfiguration<Gender>
     {
-        public void Configure(EntityTypeBuilder<Genre> builder)
+        public void Configure(EntityTypeBuilder<Gender> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(56);

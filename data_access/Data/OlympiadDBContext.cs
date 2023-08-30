@@ -16,7 +16,7 @@ namespace data_access.Data
     {
         public OlympiadDBContext()
         {
-           // Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
             
         }
@@ -32,8 +32,8 @@ namespace data_access.Data
             modelBuilder.ApplyConfiguration<Award>(new AwardConfig());
             modelBuilder.ApplyConfiguration<City>(new CityConfig());
             modelBuilder.ApplyConfiguration<Country>(new CountryConfig());
-            modelBuilder.ApplyConfiguration<Genre>(new GenreConfig());
-            modelBuilder.ApplyConfiguration<Olympiad>(new OlympiadConfig());
+            modelBuilder.ApplyConfiguration<Gender>(new GenderConfig());
+            modelBuilder.ApplyConfiguration<Olympiad_>(new OlympiadConfig());
             modelBuilder.ApplyConfiguration<Season>(new SeasonConfig());
             modelBuilder.ApplyConfiguration<Sport>(new SportConfig());
             modelBuilder.ApplyConfiguration<Sportsman>(new SportsmanConfig());
@@ -43,10 +43,10 @@ namespace data_access.Data
 
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Gender> Gender { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Sport> Sports { get; set; }
-        public DbSet<Olympiad> Olympiads { get; set; }
+        public DbSet<Olympiad_> Olympiads { get; set; }
         public DbSet<Award> Awards { get; set; }
         public DbSet<Sportsman> Sportsmans { get; set; }
         public DbSet<SportsmanAwardOlympiad> SportsmanAwardOlympiads { get; set; }

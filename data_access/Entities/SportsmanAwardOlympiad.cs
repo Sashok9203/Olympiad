@@ -13,7 +13,7 @@ namespace data_access.Entities
         public Sportsman Sportsman { get; set; }
 
         public int OlympiadId { get; set; }
-        public Olympiad Olympiad { get; set; }
+        public Olympiad_ Olympiad { get; set; }
 
         public int? AwardId { get; set; }
         public Award? Award { get; set; }

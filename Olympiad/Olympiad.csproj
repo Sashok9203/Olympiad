@@ -95,4 +95,10 @@
     <PackageReference Include="EntityFrameworkProfiler.Appender" Version="6.0.6040" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Models\SportsmanWindowModel.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>

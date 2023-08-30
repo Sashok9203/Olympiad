@@ -27,8 +27,8 @@ namespace data_access.Entities
 
         public string? PhotoPath { get; set; }
 
-        public int GenreId { get; set; }
-        public Genre Genre { get; set; }
+        public int GenderId { get; set; }
+        public Gender Gender { get; set; }
    
 
         public ICollection<SportsmanAwardOlympiad> AwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();

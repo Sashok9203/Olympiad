@@ -22,10 +22,10 @@ namespace data_access.Data
         {
             modelBuilder.Entity<City>().HasData(Cities);
             modelBuilder.Entity<Country>().HasData(Countries);
-            modelBuilder.Entity<Genre>().HasData(Genres);
+            modelBuilder.Entity<Gender>().HasData(Genders);
             modelBuilder.Entity<Season>().HasData(Seasons);
             modelBuilder.Entity<Sport>().HasData(Sports);
-            modelBuilder.Entity<Olympiad>().HasData(Olympiads);
+            modelBuilder.Entity<Olympiad_>().HasData(Olympiads);
             modelBuilder.Entity<Award>().HasData(Awards);
             modelBuilder.Entity<Sportsman>().HasData(Sportsmans);
             modelBuilder.Entity<SportsmanAwardOlympiad>().HasData(SportsmanAwardOlympiadsInit());
@@ -70,56 +70,56 @@ namespace data_access.Data
         }
         public static readonly Sportsman[] Sportsmans =
         {
-            new (){ Id = 1, Name = "Norman", Surname = "McCoole", CountryId = 19, Birthday = new DateTime(1985, 6, 15), SportId = 9, GenreId = 2 },
-            new (){ Id = 2, Name = "Cassandre", Surname = "Doddemeade", CountryId = 14, Birthday = new DateTime(1978, 4, 23), SportId = 31, GenreId = 2 },
-            new (){ Id = 3, Name = "Chloe", Surname = "Denham", CountryId = 10, Birthday = new DateTime(1992, 9, 8), SportId = 42, GenreId = 2 },
-            new (){ Id = 4, Name = "Nicol", Surname = "Tolcher", CountryId = 16, Birthday = new DateTime(1988, 11, 30), SportId = 5, GenreId = 2 },
-            new (){ Id = 5, Name = "Michelle", Surname = "Coney", CountryId = 22, Birthday = new DateTime(1993, 7, 19), SportId = 4, GenreId = 2 ,PhotoPath = "Images/Sportsmans/box.png"},
-            new (){ Id = 6, Name = "Candis", Surname = "Holhouse", CountryId = 12, Birthday = new DateTime(1982, 3, 8), SportId = 5, GenreId = 2 },
-            new (){ Id = 7, Name = "Granny", Surname = "Tarply", CountryId = 23, Birthday = new DateTime(1974, 5, 12), SportId = 11, GenreId = 2 },
-            new (){ Id = 8, Name = "Budd", Surname = "Tresler", CountryId = 7, Birthday = new DateTime(1981, 9, 28), SportId = 13,  GenreId = 2 },
-            new (){ Id = 9, Name = "Moise", Surname = "Tonner", CountryId = 23, Birthday = new DateTime(1975, 2, 7), SportId = 1, GenreId = 1 },
-            new (){ Id = 10, Name = "Bria", Surname = "Vallentin", CountryId = 17, Birthday = new DateTime(1989, 8, 15), SportId = 33, GenreId = 2 },
-            new (){ Id = 11, Name = "Mei", Surname = "Pietruszewicz", CountryId = 11, Birthday = new DateTime(1983, 4, 2), SportId = 27, GenreId = 2 },
-            new (){ Id = 12, Name = "Trueman", Surname = "Mannock", CountryId = 1, Birthday = new DateTime(1979, 11, 19), SportId = 9, GenreId = 2 },
-            new (){ Id = 13, Name = "Caye", Surname = "Robben", CountryId = 21, Birthday = new DateTime(1986, 7, 8), SportId = 4, GenreId = 2 ,PhotoPath = "Images/Sportsmans/box.png"},
-            new (){ Id = 14, Name = "Mason", Surname = "Tatlow", CountryId = 22, Birthday = new DateTime(1987, 10, 3), SportId = 22, GenreId = 2 },
-            new (){ Id = 15, Name = "Clem", Surname = "Waters", CountryId = 12, Birthday = new DateTime(1980, 1, 17), SportId = 38, GenreId = 1 },
-            new (){ Id = 16, Name = "Candie", Surname = "Ricold", CountryId = 20, Birthday = new DateTime(1985, 3, 25), SportId = 1, GenreId = 2 },
-            new (){ Id = 17, Name = "Wanids", Surname = "Bellham", CountryId = 11, Birthday = new DateTime(1987, 2, 4), SportId = 13, GenreId = 2 },
-            new (){ Id = 18, Name = "Virginia", Surname = "Lilly", CountryId = 19, Birthday = new DateTime(1988, 7, 21), SportId = 46, GenreId = 2 },
-            new (){ Id = 19, Name = "Casey", Surname = "Shardlow", CountryId = 14, Birthday = new DateTime(1972, 11, 16), SportId = 39, GenreId = 1 },
-            new (){ Id = 20, Name = "Clarance", Surname = "Edson", CountryId = 11, Birthday = new DateTime(1981, 3, 9), SportId = 43, GenreId = 2 },
-            new (){ Id = 21, Name = "Arte", Surname = "Broz", CountryId = 10, Birthday = new DateTime(1984, 6, 12), SportId = 22, GenreId = 2 },
-            new (){ Id = 22, Name = "Charmane", Surname = "Groven", CountryId = 10, Birthday = new DateTime(1986, 9, 30), SportId = 8, GenreId = 2 },
-            new (){ Id = 23, Name = "Lyon", Surname = "Matuszkiewicz", CountryId = 22, Birthday = new DateTime(1982, 1, 6), SportId = 17, GenreId = 2 },
-            new (){ Id = 24, Name = "Jerrold", Surname = "Rodrigues", CountryId = 17, Birthday = new DateTime(1990, 5, 18), SportId = 19, GenreId = 1 },
-            new (){ Id = 25, Name = "Angy", Surname = "Grimsley", CountryId = 19, Birthday = new DateTime(1975, 8, 27), SportId = 3, GenreId = 1 },
-            new (){ Id = 26, Name = "Gregorio", Surname = "Ogelbe", CountryId = 21, Birthday = new DateTime(1979, 12, 9), SportId = 37, GenreId = 1 },
-            new (){ Id = 27, Name = "Kariotta", Surname = "Bilovsky", CountryId = 22, Birthday = new DateTime(1983, 7, 2), SportId = 35, GenreId = 1 },
-            new (){ Id = 28, Name = "Otes", Surname = "Farens", CountryId = 14, Birthday = new DateTime(1972, 4, 15), SportId = 36, GenreId = 2 },
-            new (){ Id = 29, Name = "Chelsie", Surname = "Larderot", CountryId = 2, Birthday = new DateTime(1971, 8, 9), SportId = 10, GenreId = 2 },
-            new (){ Id = 30, Name = "Raimundo", Surname = "Pressdee", CountryId = 8, Birthday = new DateTime(1989, 11, 21), SportId = 45, GenreId = 1 },
-            new (){ Id = 31, Name = "Rudolf", Surname = "Yakobovicz", CountryId = 15, Birthday = new DateTime(1980, 2, 4), SportId = 12, GenreId = 2 },
-            new (){ Id = 32, Name = "Francklin", Surname = "Purchall", CountryId = 18, Birthday = new DateTime(1978, 5, 17), SportId = 11, GenreId = 2 },
-            new (){ Id = 33, Name = "Kaitlynn", Surname = "Matejic", CountryId = 10, Birthday = new DateTime(1986, 9, 12), SportId = 3, GenreId = 2 },
-            new (){ Id = 34, Name = "Aloise", Surname = "Tebbet", CountryId = 3, Birthday = new DateTime(1995, 1, 30), SportId = 20, GenreId = 1 },
-            new (){ Id = 35, Name = "Braden", Surname = "McKellen", CountryId = 6, Birthday = new DateTime(1984, 6, 5), SportId = 20, GenreId = 2 },
-            new (){ Id = 36, Name = "Guillema", Surname = "Haime", CountryId = 4, Birthday = new DateTime(1982, 3, 16), SportId = 33, GenreId = 2 },
-            new (){ Id = 37, Name = "Tressa", Surname = "Faveryear", CountryId = 7, Birthday = new DateTime(1987, 10, 22), SportId = 30, GenreId = 2 },
-            new (){ Id = 38, Name = "Antonella", Surname = "Rookwell", CountryId = 7, Birthday = new DateTime(1994, 7, 19), SportId = 44, GenreId = 2 },
-            new (){ Id = 39, Name = "Paquito", Surname = "Mixer", CountryId = 9, Birthday = new DateTime(1988, 12, 7), SportId = 31, GenreId = 2 },
-            new (){ Id = 40, Name = "Glenden", Surname = "Welchman", CountryId = 5, Birthday = new DateTime(1981, 4, 28), SportId = 46, GenreId = 1 },
-            new (){ Id = 41, Name = "Oona", Surname = "Brockwell", CountryId = 5, Birthday = new DateTime(1983, 6, 3), SportId = 45, GenreId = 2 },
-            new (){ Id = 42, Name = "Gerti", Surname = "Sallan", CountryId = 21, Birthday = new DateTime(1979, 8, 14), SportId = 4, GenreId = 2 ,PhotoPath = "Images/Sportsmans/box.png"},
-            new (){ Id = 43, Name = "Crystie", Surname = "Sheber", CountryId = 5, Birthday = new DateTime(1986, 10, 9), SportId = 8, GenreId = 2 },
-            new (){ Id = 44, Name = "Rubia", Surname = "Carloni", CountryId = 1, Birthday = new DateTime(1993, 2, 17), SportId = 8, GenreId = 1 },
-            new (){ Id = 45, Name = "Krystle", Surname = "Drejer", CountryId = 13, Birthday = new DateTime(1988, 7, 5), SportId = 2, GenreId = 2 },
-            new (){ Id = 46, Name = "Dew", Surname = "Knath", CountryId = 5, Birthday = new DateTime(1987, 4, 30), SportId = 34, GenreId = 1 },
-            new (){ Id = 47, Name = "Angelle", Surname = "Peschke", CountryId = 11, Birthday = new DateTime(1974, 11, 27), SportId = 36, GenreId = 1 },
-            new (){ Id = 48, Name = "Bertram", Surname = "Sill", CountryId = 14, Birthday = new DateTime(1982, 10, 15), SportId = 10, GenreId = 1 },
-            new (){ Id = 49, Name = "Erroll", Surname = "Burgh", CountryId = 18, Birthday = new DateTime(1977, 9, 7), SportId = 34, GenreId = 1 },
-            new (){ Id = 50, Name = "Ambur", Surname = "Erskine", CountryId = 21, Birthday = new DateTime(1988, 11, 1), SportId = 40, GenreId = 2 }
+            new (){ Id = 1, Name = "Norman", Surname = "McCoole", CountryId = 19, Birthday = new DateTime(1985, 6, 15), SportId = 9, GenderId = 2 },
+            new (){ Id = 2, Name = "Cassandre", Surname = "Doddemeade", CountryId = 14, Birthday = new DateTime(1978, 4, 23), SportId = 31, GenderId = 2 },
+            new (){ Id = 3, Name = "Chloe", Surname = "Denham", CountryId = 10, Birthday = new DateTime(1992, 9, 8), SportId = 42, GenderId = 2 },
+            new (){ Id = 4, Name = "Nicol", Surname = "Tolcher", CountryId = 16, Birthday = new DateTime(1988, 11, 30), SportId = 5, GenderId = 2 },
+            new (){ Id = 5, Name = "Michelle", Surname = "Coney", CountryId = 22, Birthday = new DateTime(1993, 7, 19), SportId = 4, GenderId = 2 ,PhotoPath = "Images/Sportsmans/box.png"},
+            new (){ Id = 6, Name = "Candis", Surname = "Holhouse", CountryId = 12, Birthday = new DateTime(1982, 3, 8), SportId = 5, GenderId = 2 },
+            new (){ Id = 7, Name = "Granny", Surname = "Tarply", CountryId = 23, Birthday = new DateTime(1974, 5, 12), SportId = 11, GenderId = 2 },
+            new (){ Id = 8, Name = "Budd", Surname = "Tresler", CountryId = 7, Birthday = new DateTime(1981, 9, 28), SportId = 13,  GenderId = 2 },
+            new (){ Id = 9, Name = "Moise", Surname = "Tonner", CountryId = 23, Birthday = new DateTime(1975, 2, 7), SportId = 1, GenderId = 1 },
+            new (){ Id = 10, Name = "Bria", Surname = "Vallentin", CountryId = 17, Birthday = new DateTime(1989, 8, 15), SportId = 33, GenderId = 2 },
+            new (){ Id = 11, Name = "Mei", Surname = "Pietruszewicz", CountryId = 11, Birthday = new DateTime(1983, 4, 2), SportId = 27, GenderId = 2 },
+            new (){ Id = 12, Name = "Trueman", Surname = "Mannock", CountryId = 1, Birthday = new DateTime(1979, 11, 19), SportId = 9, GenderId = 2 },
+            new (){ Id = 13, Name = "Caye", Surname = "Robben", CountryId = 21, Birthday = new DateTime(1986, 7, 8), SportId = 4, GenderId = 2 ,PhotoPath = "Images/Sportsmans/box.png"},
+            new (){ Id = 14, Name = "Mason", Surname = "Tatlow", CountryId = 22, Birthday = new DateTime(1987, 10, 3), SportId = 22, GenderId = 2 },
+            new (){ Id = 15, Name = "Clem", Surname = "Waters", CountryId = 12, Birthday = new DateTime(1980, 1, 17), SportId = 38, GenderId = 1 },
+            new (){ Id = 16, Name = "Candie", Surname = "Ricold", CountryId = 20, Birthday = new DateTime(1985, 3, 25), SportId = 1, GenderId = 2 },
+            new (){ Id = 17, Name = "Wanids", Surname = "Bellham", CountryId = 11, Birthday = new DateTime(1987, 2, 4), SportId = 13, GenderId = 2 },
+            new (){ Id = 18, Name = "Virginia", Surname = "Lilly", CountryId = 19, Birthday = new DateTime(1988, 7, 21), SportId = 46, GenderId = 2 },
+            new (){ Id = 19, Name = "Casey", Surname = "Shardlow", CountryId = 14, Birthday = new DateTime(1972, 11, 16), SportId = 39, GenderId = 1 },
+            new (){ Id = 20, Name = "Clarance", Surname = "Edson", CountryId = 11, Birthday = new DateTime(1981, 3, 9), SportId = 43, GenderId = 2 },
+            new (){ Id = 21, Name = "Arte", Surname = "Broz", CountryId = 10, Birthday = new DateTime(1984, 6, 12), SportId = 22, GenderId = 2 },
+            new (){ Id = 22, Name = "Charmane", Surname = "Groven", CountryId = 10, Birthday = new DateTime(1986, 9, 30), SportId = 8, GenderId = 2 },
+            new (){ Id = 23, Name = "Lyon", Surname = "Matuszkiewicz", CountryId = 22, Birthday = new DateTime(1982, 1, 6), SportId = 17, GenderId = 2 },
+            new (){ Id = 24, Name = "Jerrold", Surname = "Rodrigues", CountryId = 17, Birthday = new DateTime(1990, 5, 18), SportId = 19, GenderId = 1 },
+            new (){ Id = 25, Name = "Angy", Surname = "Grimsley", CountryId = 19, Birthday = new DateTime(1975, 8, 27), SportId = 3, GenderId = 1 },
+            new (){ Id = 26, Name = "Gregorio", Surname = "Ogelbe", CountryId = 21, Birthday = new DateTime(1979, 12, 9), SportId = 37, GenderId = 1 },
+            new (){ Id = 27, Name = "Kariotta", Surname = "Bilovsky", CountryId = 22, Birthday = new DateTime(1983, 7, 2), SportId = 35, GenderId = 1 },
+            new (){ Id = 28, Name = "Otes", Surname = "Farens", CountryId = 14, Birthday = new DateTime(1972, 4, 15), SportId = 36, GenderId = 2 },
+            new (){ Id = 29, Name = "Chelsie", Surname = "Larderot", CountryId = 2, Birthday = new DateTime(1971, 8, 9), SportId = 10, GenderId = 2 },
+            new (){ Id = 30, Name = "Raimundo", Surname = "Pressdee", CountryId = 8, Birthday = new DateTime(1989, 11, 21), SportId = 45, GenderId = 1 },
+            new (){ Id = 31, Name = "Rudolf", Surname = "Yakobovicz", CountryId = 15, Birthday = new DateTime(1980, 2, 4), SportId = 12, GenderId = 2 },
+            new (){ Id = 32, Name = "Francklin", Surname = "Purchall", CountryId = 18, Birthday = new DateTime(1978, 5, 17), SportId = 11, GenderId = 2 },
+            new (){ Id = 33, Name = "Kaitlynn", Surname = "Matejic", CountryId = 10, Birthday = new DateTime(1986, 9, 12), SportId = 3, GenderId = 2 },
+            new (){ Id = 34, Name = "Aloise", Surname = "Tebbet", CountryId = 3, Birthday = new DateTime(1995, 1, 30), SportId = 20, GenderId = 1 },
+            new (){ Id = 35, Name = "Braden", Surname = "McKellen", CountryId = 6, Birthday = new DateTime(1984, 6, 5), SportId = 20, GenderId = 2 },
+            new (){ Id = 36, Name = "Guillema", Surname = "Haime", CountryId = 4, Birthday = new DateTime(1982, 3, 16), SportId = 33, GenderId = 2 },
+            new (){ Id = 37, Name = "Tressa", Surname = "Faveryear", CountryId = 7, Birthday = new DateTime(1987, 10, 22), SportId = 30, GenderId = 2 },
+            new (){ Id = 38, Name = "Antonella", Surname = "Rookwell", CountryId = 7, Birthday = new DateTime(1994, 7, 19), SportId = 44, GenderId = 2 },
+            new (){ Id = 39, Name = "Paquito", Surname = "Mixer", CountryId = 9, Birthday = new DateTime(1988, 12, 7), SportId = 31, GenderId = 2 },
+            new (){ Id = 40, Name = "Glenden", Surname = "Welchman", CountryId = 5, Birthday = new DateTime(1981, 4, 28), SportId = 46, GenderId = 1 },
+            new (){ Id = 41, Name = "Oona", Surname = "Brockwell", CountryId = 5, Birthday = new DateTime(1983, 6, 3), SportId = 45, GenderId = 2 },
+            new (){ Id = 42, Name = "Gerti", Surname = "Sallan", CountryId = 21, Birthday = new DateTime(1979, 8, 14), SportId = 4, GenderId = 2 ,PhotoPath = "Images/Sportsmans/box.png"},
+            new (){ Id = 43, Name = "Crystie", Surname = "Sheber", CountryId = 5, Birthday = new DateTime(1986, 10, 9), SportId = 8, GenderId = 2 },
+            new (){ Id = 44, Name = "Rubia", Surname = "Carloni", CountryId = 1, Birthday = new DateTime(1993, 2, 17), SportId = 8, GenderId = 1 },
+            new (){ Id = 45, Name = "Krystle", Surname = "Drejer", CountryId = 13, Birthday = new DateTime(1988, 7, 5), SportId = 2, GenderId = 2 },
+            new (){ Id = 46, Name = "Dew", Surname = "Knath", CountryId = 5, Birthday = new DateTime(1987, 4, 30), SportId = 34, GenderId = 1 },
+            new (){ Id = 47, Name = "Angelle", Surname = "Peschke", CountryId = 11, Birthday = new DateTime(1974, 11, 27), SportId = 36, GenderId = 1 },
+            new (){ Id = 48, Name = "Bertram", Surname = "Sill", CountryId = 14, Birthday = new DateTime(1982, 10, 15), SportId = 10, GenderId = 1 },
+            new (){ Id = 49, Name = "Erroll", Surname = "Burgh", CountryId = 18, Birthday = new DateTime(1977, 9, 7), SportId = 34, GenderId = 1 },
+            new (){ Id = 50, Name = "Ambur", Surname = "Erskine", CountryId = 21, Birthday = new DateTime(1988, 11, 1), SportId = 40, GenderId = 2 }
         };
         public static readonly Award[] Awards =
         {
@@ -189,7 +189,7 @@ namespace data_access.Data
         
 
 
-        public static readonly Genre[] Genres =
+        public static readonly Gender[] Genders =
         {
             new (){ Id = 1, Name = "Male"},
             new (){ Id = 2, Name = "Female"},
@@ -223,7 +223,7 @@ namespace data_access.Data
             new(){Id = 24,Name ="Malaysia" ,FlagPath = "Images/Flags/Flag_of_Malaysia.png" }
         };
 
-        public static readonly Olympiad[] Olympiads =
+        public static readonly Olympiad_[] Olympiads =
        {
            new(){Id = 1,Year=2008,CityId=5, SeasonId = 2},
            new(){Id = 2,Year=1992,CityId=29, SeasonId = 2},//Summer

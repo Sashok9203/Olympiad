@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace data_access.Entities
 {
-    public class Olympiad
+    public class Olympiad_
     {
         public int Id { get; set; }
 

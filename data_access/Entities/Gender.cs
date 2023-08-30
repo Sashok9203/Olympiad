@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace data_access.Entities
 {
-    public class Genre
+    public class Gender
     {
         public int Id { get; set; }
 
