@@ -12,8 +12,7 @@
     <Window.Resources>
 
         <Style x:Key="tbStyle" TargetType="TextBox">
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="25"/>
+          <Setter Property="Height" Value="25"/>
         </Style>
         <Style x:Key="txtStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
@@ -24,10 +23,10 @@
     </Window.Resources>
     
 
-    <Grid  Width="300" Margin="20">
+    <Grid   Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="90"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -40,16 +39,16 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="3" Text="Sportsman" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
-        <Border Grid.Row="1" Grid.Column="0"  Width="50" BorderThickness ="1" CornerRadius="3" BorderBrush="DarkGray">
-            <Image Source="{Binding EditableSportsman.PhotoPath,Mode=TwoWay}" Stretch="Fill"/>
+        <Border Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="45" BorderThickness ="1" CornerRadius="3" BorderBrush="DarkGray">
+            <Image Source="{Binding EditableSportsman.Photo}" Stretch="Fill"/>
         </Border>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox Text="{Binding EditableSportsman.PhotoPath,Mode=OneWayToSource}"  Width="175" Height="25"/>
-            <Button Margin="5,0,0,0" Content="..." Width="20" Height="20" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding EditableSportsman.PhotoPath,Mode=OneWayToSource}"  Width="212" Height="25"/>
+            <Button Margin="5,0,0,0" Content="..." Width="25" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <TextBlock Grid.Row="2" Grid.Column="0"  Text="Name" Style="{StaticResource txtStyle}"/>
@@ -68,9 +67,27 @@
         <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding EditableSportsman.Country,Mode=TwoWay}" Grid.Row="6" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Sport" Style="{StaticResource txtStyle}"/>
-        <ComboBox ItemsSource="{Binding Sports}" DisplayMemberPath="Name"  SelectedItem="{Binding EditableSportsman.Sport,Mode=TwoWay}" Grid.Row="7" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+        <ComboBox ItemsSource="{Binding Sports}" SelectedIndex="{Binding SelectedSportIndex,UpdateSourceTrigger=LostFocus}" DisplayMemberPath="Name"  SelectedItem="{Binding EditableSportsman.Sport,Mode=TwoWay}" Grid.Row="7" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
+        <StackPanel Orientation ="Vertical"  Grid.Row="8" Grid.ColumnSpan="2">
+            <TextBlock  Margin ="0,0,0,4" Text="Olympiad" Style="{StaticResource txtStyle}"/>
+            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding EditWindowComboBoxOlympiads}" DisplayMemberPath="SmallDescription"  SelectedItem="{Binding SelectedOlympiad,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+        </StackPanel>
+        <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="8" Grid.Column="2">
+            <StackPanel  Orientation ="Vertical" Width="90" >
+                <TextBlock  Margin ="0,0,0,4" Text="Award" Style="{StaticResource txtStyle}"/>
+                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+            </StackPanel>
+            <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding Add}"/>
+        </StackPanel>
 
+        <DataGrid  AutoGenerateColumns="False" Grid.Row="9" Grid.ColumnSpan="3" ItemsSource="{Binding EditableSportsmanAwardsOlympiads}" CanUserDeleteRows="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Olympiad" Binding="{Binding Olympiad.SmallDescription}" Width="2*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Season" Binding="{Binding Olympiad.Season.Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Award" Binding="{Binding Award.Name}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Button Grid.Row="10" Grid.Column="0" Content="Save" Height="40" Width="100" Grid.ColumnSpan="2" Command="{Binding Save}" CommandParameter=""/>
         <Button Grid.Row="10" Grid.Column="2" Content="Cancel" Height="40" Width="100" IsCancel="True" />

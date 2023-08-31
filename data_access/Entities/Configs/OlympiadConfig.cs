@@ -17,6 +17,7 @@ namespace data_access.Entities.Configs
             builder.HasOne(x => x.City).WithMany(x => x.Olympiads).HasForeignKey(x => x.CityId);
             builder.HasOne(x => x.Season).WithMany(x => x.Olympiads).HasForeignKey(x => x.SeasonId);
             builder.Ignore(x=>x.Description);
+            builder.Ignore(x => x.SmallDescription);
 
         }
     }

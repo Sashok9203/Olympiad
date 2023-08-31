@@ -200,7 +200,7 @@
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
                                 <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Left" Width="550">
-                                    <Image Source="{Binding PhotoPath}" Height="80" Width="60" Stretch="Fill"/>
+                                    <Image Source="{Binding Sportsman.Photo}" Height="80" Width="60" Stretch="Fill"/>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
                                             <Image Margin="5,0,5,0" Source="{Binding Sportsman.Country.FlagPath}" Width="30" Height="20" Stretch="Fill"/>
@@ -212,7 +212,7 @@
                                         </StackPanel>
                                         <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
                                             <TextBlock Margin="5,0,5,0" Text="Bithday : "/>
-                                            <TextBlock Margin="5,0,5,0" Text="{Binding Sportsman.Birthday.Date}"/>
+                                            <TextBlock Margin="5,0,5,0" Text="{Binding Sportsman.BirthdayStr}"/>
                                         </StackPanel>
                                         <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
                                             <TextBlock Margin="5,0,5,0" Text="Sport  : "/>

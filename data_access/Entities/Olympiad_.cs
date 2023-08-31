@@ -19,7 +19,9 @@ namespace data_access.Entities
         public int SeasonId { get; set; }
         public Season Season { get; set; }
 
-        public string Description => Id == -1 ? "All" : $"{City?.Country?.Name} \"{City?.Name} {Year} {Season?.Name}\"" ; 
+        public string Description => Id == -1 ? "All" : $"{City?.Country?.Name} \"{City?.Name} {Year} {Season?.Name}\"" ;
+
+        public string SmallDescription => Id == -1 ? "All" : $"{City?.Name} {Year} {Season?.Name}";
 
         public ICollection<SportsmanAwardOlympiad> SportsmanAward { get; set; } = new HashSet<SportsmanAwardOlympiad>();
     }

@@ -19,6 +19,8 @@ namespace data_access.Entities.Configs
             builder.ToTable(t => t.HasCheckConstraint("Name_check", "[Name] <> ''"));
             builder.ToTable(t => t.HasCheckConstraint("Birthday_check", "Birthday < getdate()"));
             builder.Ignore(x=>x.FullName);
+            builder.Ignore(x => x.BirthdayStr);
+            builder.Ignore(x => x.Photo);
             builder.HasOne(x => x.Sport).WithMany(x => x.Sportsmans).HasForeignKey(x=>x.SportId);
             builder.HasOne(x => x.Country).WithMany(x => x.Sportsmens).HasForeignKey(x => x.CountryId);
             builder.HasOne(x => x.Gender).WithMany(x => x.Sportsmens).HasForeignKey(x => x.GenderId);

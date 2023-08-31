@@ -17,6 +17,10 @@ namespace data_access.Entities
 
         public string FullName => Name + " " + Surname;
 
+        public string BirthdayStr => Birthday.ToShortDateString();
+
+        public string Photo => string.IsNullOrEmpty(PhotoPath) ? "Images/Sportsmans/NoPhoto.png" : PhotoPath;
+
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
