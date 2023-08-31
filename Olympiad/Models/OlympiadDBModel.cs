@@ -1,5 +1,6 @@
 ﻿using data_access.Entities;
 using data_access.Repositories;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Olympiad;
 using OlympiadWPF.Models.CommonClasses;
 using System;
@@ -85,6 +86,14 @@ namespace OlympiadWPF.Models
                     olmp = new() { new() { Id = -1 } };
                     var temp = unitOW.Olympiads.Get(includeProperties: "City,Season").OrderBy(x => x.Year);
                     olmp.AddRange(temp);
+                    selectedOlympiadMT = olmp[0];
+
+                    selectedOlympiadM = olmp[0];
+
+                    selectedOlympiadCR = olmp[0];
+                    OnPropertyChanged("SelectedOlympiadMT");
+                    OnPropertyChanged("SelectedOlympiadM");
+                    OnPropertyChanged("SelectedOlympiadCR");
                 }
                 return olmp;
             }
@@ -111,11 +120,8 @@ namespace OlympiadWPF.Models
         }
 
 
-        private void addOlympiad(object o)
-        {
-
-        }
-
+        private void addOlympiad(object o) => ModifyOlimpiad(true);
+        
         private void editOlympiad(object o)
         {
 

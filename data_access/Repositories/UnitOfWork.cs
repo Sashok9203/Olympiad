@@ -19,6 +19,8 @@ namespace data_access.Repositories
         private Repository<SportsmanAwardOlympiad>? sAOlympiad;
         private Repository<Country>? countries;
         private Repository<Gender>? genders;
+        private Repository<City>? cities;
+        private Repository<Season>? seasons;
         private bool disposed = false;
 
         public IRepository<Sportsman> Sportsmans => sportsman ??= new Repository<Sportsman>(context);
@@ -34,6 +36,10 @@ namespace data_access.Repositories
         public IRepository<Country> Countries => countries ??= new Repository<Country>(context);
 
         public IRepository<Gender> Genders => genders ??= new Repository<Gender>(context);
+
+        public IRepository<City> Cities => cities ??= new Repository<City>(context);
+
+        public IRepository<Season> Seasons => seasons ??= new Repository<Season>(context);
 
         public void Save()
         {

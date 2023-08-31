@@ -96,7 +96,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Models\SportsmanWindowModel.cs">
+    <Compile Update="Models\ModifySportsmanWindowModel.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>

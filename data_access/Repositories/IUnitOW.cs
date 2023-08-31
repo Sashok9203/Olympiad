@@ -17,6 +17,8 @@ namespace data_access.Repositories
         IRepository<SportsmanAwardOlympiad> SAOlympiad { get; }
         IRepository<Country> Countries { get; }
         IRepository<Gender> Genders { get; }
+        IRepository<City> Cities  {get;}
+        IRepository<Season> Seasons { get; }
         void Save();
     }
 }

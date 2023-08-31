@@ -1,0 +1,93 @@
+﻿<Window x:Class="Olympiad.ModifyOlympiadWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Olympiad"
+        xmlns:vms="clr-namespace:OlympiadWPF.Models"
+        d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
+        mc:Ignorable="d"
+        Title="Olympiad" Height="700" Width="400" MaxHeight="700" MaxWidth="400">
+
+        <Window.Resources>
+
+            <Style x:Key="tbStyle" TargetType="TextBox">
+                <Setter Property="Height" Value="25" />
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="txtStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+
+        </Window.Resources>
+
+
+        <Grid   Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock  Grid.ColumnSpan="3" Text="Olympiad" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Year" Style="{StaticResource txtStyle}"/>
+            <TextBox Text="{Binding EditableOlympiad.Year,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Style="{StaticResource tbStyle}"/>
+            
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="City" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding EditableOlympiad.City,Mode=TwoWay}" DisplayMemberPath="Name" Grid.Row="2" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Season" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding OlympiadSeason,Mode=TwoWay}" DisplayMemberPath="Name" Grid.Row="3" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Sp. Country" Style="{StaticResource txtStyle}"/>
+        <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding CountryFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Sp. Sport" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding OlympiadSports}"  DisplayMemberPath="Name"  SelectedItem="{Binding SportFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+
+        <StackPanel Orientation ="Vertical"  Grid.Row="6" Grid.ColumnSpan="2">
+            <TextBlock  Margin ="0,0,0,4" Text="Sportsman" Style="{StaticResource txtStyle}"/>
+            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsman}" DisplayMemberPath="FullName"  SelectedItem="{Binding SelectedOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"  Height="25" />
+        </StackPanel>
+        <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="6" Grid.Column="2">
+            <StackPanel  Orientation ="Vertical" Width="90" >
+                <TextBlock  Margin ="0,0,0,4" Text="Award" Style="{StaticResource txtStyle}"/>
+                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+            </StackPanel>
+            <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding AddSportsmanAward}"/>
+        </StackPanel>
+
+        <DataGrid SelectedItem="{Binding SelectedOlympiadSportsmanAward }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding OlympiadSportsmanAwards}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Full Name" Width="2*" IsReadOnly="True" Binding="{Binding Sportsman.FullName}"/>
+                    <DataGridTextColumn Header="Gender"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.Gender.Name}"/>
+                    <DataGridTextColumn Header="Birthday"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.BirthdayStr}"/>
+                    <DataGridTextColumn Header="Award"  Width="*" IsReadOnly="True" Binding="{Binding Award.Name}"/>
+            </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Command="{Binding Delete}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+
+        <Button Grid.Row="10" Grid.Column="0" Content="Save" Height="40" Width="100" Grid.ColumnSpan="2" Command="{Binding SaveOlympiad}" CommandParameter=""/>
+            <Button Grid.Row="10" Grid.Column="2" Content="Cancel" Height="40" Width="100" IsCancel="True" />
+
+    </Grid>
+</Window>
