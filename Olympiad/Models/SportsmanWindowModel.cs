@@ -14,7 +14,7 @@ namespace OlympiadWPF.Models
     {
         private ModifySpotrsmanWindow? SportsmanWindow;
 
-        private int selectedSportIndex;
+        private Sport? newSport;
 
         private List<Gender>? gndr = null;
 
@@ -36,6 +36,7 @@ namespace OlympiadWPF.Models
             to.Gender = from.Gender;
             to.GenderId = from.GenderId;
             to.PhotoPath = from.PhotoPath;
+            to.AwardOlympiads.Clear();
             foreach (var item in from.AwardOlympiads)
                 to.AwardOlympiads.Add(item);
         }
@@ -73,8 +74,11 @@ namespace OlympiadWPF.Models
         private void ModifySportsman(bool isNew)
         {
             EditableSportsman = new();
-            if (!isNew) copySportsman(SlectedSportsmanForEdit,EditableSportsman);
-            
+            if (!isNew)
+            {
+                copySportsman(SlectedSportsmanForEdit, EditableSportsman);
+                NewSport = SlectedSportsmanForEdit.Sport;
+            }
             countries?.RemoveAt(0);
             sports?.RemoveAt(0);
             olympiads?.RemoveAt(0);
@@ -90,7 +94,7 @@ namespace OlympiadWPF.Models
                 unitOW.Save();
                 sptms = null;
                 spAwOl = null;
-                OnPropertyChanged("AllSportsmans");
+                if (!isNew) OnPropertyChanged("AllSportsmans");
                 OnPropertyChanged("Sportsmans");
                 OnPropertyChanged("CountryResult");
                 OnPropertyChanged("MedalTable");
@@ -104,7 +108,7 @@ namespace OlympiadWPF.Models
 
         public IEnumerable<Award> Awards => awards;
 
-        public IEnumerable<Olympiad_> EditWindowComboBoxOlympiads => olympiads.Where(x => x.SeasonId == EditableSportsman?.Sport?.SeasonId && !EditableSportsman.AwardOlympiads.Any(y=>y.Olympiad.Id == x.Id));
+        public IEnumerable<Olympiad_> EditWindowComboBoxOlympiads => olympiads.Where(x => x.SeasonId == EditableSportsman?.Sport?.Season.Id && !EditableSportsman.AwardOlympiads.Any(y=>y.Olympiad.Id == x.Id));
 
         public IEnumerable<Gender> Genders => genders;
 
@@ -134,20 +138,24 @@ namespace OlympiadWPF.Models
         public RelayCommand GetPhoto => new((o) => getPhoto(o));
 
 
-        public int SelectedSportIndex
+        public Sport? NewSport
         {
-            get { return selectedSportIndex; }
+            get { return newSport; }
             set
             {
-                selectedSportIndex = value;
-                if (selectedSportIndex >= 0)
+                newSport = value;
+                
+                if (newSport != null )
                 {
-                   
-                    if (EditableSportsman.Sport.SeasonId != Sports.ElementAt(selectedSportIndex).SeasonId) EditableSportsman?.AwardOlympiads?.Clear();
+                    if (EditableSportsman?.Sport?.SeasonId != newSport.SeasonId)
+                           EditableSportsman?.AwardOlympiads?.Clear();
+                                   
+                    EditableSportsman.Sport = newSport;
                     OnPropertyChanged("EditWindowComboBoxOlympiads");
                     OnPropertyChanged("EditableSportsmanAwardsOlympiads");
                 }
-             
+                
+                
             }
         }
 
