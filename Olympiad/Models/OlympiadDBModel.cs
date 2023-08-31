@@ -14,6 +14,7 @@ namespace OlympiadWPF.Models
 
     internal partial class OlympiadDBModel : INotifyPropertyChanged, IDisposable
     {
+        private EditSpotrsmenWindow? editSpotrsmanWindow;
         private bool disposedValue;
 
         private readonly IUnitOW unitOW;
@@ -48,7 +49,6 @@ namespace OlympiadWPF.Models
 
         private Country? selectedCountryCR;
 
-
         private List<Country>? countries
         {
             get
@@ -56,7 +56,7 @@ namespace OlympiadWPF.Models
                 if (countr == null)
                 {
                     countr = new() { new() { Name = "All", Id = -1 } };
-                    countr.AddRange(unitOW.Countries.Get());
+                    countr.AddRange(unitOW.Countries.Get().OrderBy(x=>x.Name));
                 }
                 return countr;
             }
@@ -69,7 +69,7 @@ namespace OlympiadWPF.Models
                 if (sprt == null)
                 {
                     sprt = new() { new() { Name = "All", Id = -1 } };
-                    sprt.AddRange(unitOW.Sports.Get(includeProperties: "Season"));
+                    sprt.AddRange(unitOW.Sports.Get(includeProperties: "Season").OrderBy(x=>x.Name));
                 }
                 return sprt;
             }
@@ -90,7 +90,7 @@ namespace OlympiadWPF.Models
             }
         }
 
-        private List<Sportsman> sportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Gender").ToList();
+        public List<Sportsman> AllSportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Gender").ToList();
 
         private List<SportsmanAwardOlympiad> SpAwOlympiads
         {
@@ -101,11 +101,15 @@ namespace OlympiadWPF.Models
             }
         }
 
-       
+        private void addSportsman(object o) => ModifySportsman(true);
+
+
         private void editSportsman(object o)
         {
-
+            editSpotrsmanWindow = new() {DataContext = this };
+            editSpotrsmanWindow.ShowDialog();
         }
+
 
         private void addOlympiad(object o)
         {
@@ -202,7 +206,7 @@ namespace OlympiadWPF.Models
                                                                           Bronze = x.Sportsmans.Where(q => idFilter(q.CountryId, SelectedCountryCR?.Id)).SelectMany(y => y.AwardOlympiads.Where(z => z.Award?.Name == "Bronze" && idFilter(z.OlympiadId, SelectedOlympiadCR?.Id))).Count()
                                                                       });
 
-        public IEnumerable<SpotrsmenInfo> Sportsmans => sportsmans.Where(x => idFilter(x.SportId ,SelectedSport?.Id) && x.AwardOlympiads.Any(y=>((y.Award != null) || !WithMedals) && idFilter(y.Sportsman.CountryId ,SelectedCountry?.Id) && idFilter(y.OlympiadId,SelectedOlympiadM?.Id)))
+        public IEnumerable<SpotrsmenInfo> Sportsmans => AllSportsmans.Where(x => idFilter(x.SportId ,SelectedSport?.Id) && x.AwardOlympiads.Any(y=>((y.Award != null) || !WithMedals) && idFilter(y.Sportsman.CountryId ,SelectedCountry?.Id) && idFilter(y.OlympiadId,SelectedOlympiadM?.Id)))
                                                                   .Select(x=> new SpotrsmenInfo()
                                                                   {
                                                                       Sportsman = x,
