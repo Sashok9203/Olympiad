@@ -8,28 +8,42 @@
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
         Title="Edit Spotrsmen" Height="450" Width="600">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
+         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Edit sportsman" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="DemiBold"/>
-        <Button Content="Edit" Grid.Column="1" Grid.Row="2" Width="90" Height="40" Command="{Binding EditButton}"/>
-        <Button Content="Delete" Grid.Column="2" Grid.Row="2" Width="90" Height="40" Command="{Binding DeleteButton}"/>
-        <Button Content="Exit" Grid.Column="3" Grid.Row="3" Width="90" Height="40" IsCancel="True" Command="{Binding ExitButton}"/>
-        <DataGrid AutoGenerateColumns="False" Margin="5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}">
+        <StackPanel Grid.Row="2" Orientation ="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Edit"  Command="{Binding EditButton}"/>
+            <Button Content="Delete" Command="{Binding DeleteButton}"/>
+            <Button Content="Exit" IsCancel="True" Command="{Binding ExitButton}"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" Margin="5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}" ColumnHeaderHeight="30">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding FullName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Gender" Width="*" Binding="{Binding Gender.Name}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Birthday" Width="*" Binding="{Binding BirthdayStr}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Country.Name}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header ="Country" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation ="Horizontal">
+                                <Image Source="{Binding Country.FlagPath}" Width="20" Height="15"/>
+                                <TextBlock Margin="3,0,0,0" Text ="{Binding Country.Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Sport" Width="*" Binding="{Binding Sport.Name}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="PhotoPath" Width="*" Binding="{Binding PhotoPath}" IsReadOnly="True"/>
             </DataGrid.Columns>

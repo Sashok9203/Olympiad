@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media.TextFormatting;
 
@@ -82,7 +83,13 @@ namespace OlympiadWPF.Models
 
 
 
-        private void saveButton(object o) => SportsmanWindow.DialogResult = true;
+        private void saveButton(object o)
+        {
+            if (MessageBox.Show("Are you sure?", "Save changes",
+                   MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No, 
+                   MessageBoxOptions.DefaultDesktopOnly) == MessageBoxResult.Yes)
+                SportsmanWindow.DialogResult = true;
+        }
 
         private void deleteContextMenu(object o)
         {

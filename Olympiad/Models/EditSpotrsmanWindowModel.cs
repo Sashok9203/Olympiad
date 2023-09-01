@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OlympiadWPF.Models
 {
@@ -12,6 +13,8 @@ namespace OlympiadWPF.Models
     {
         private void deleteButton(object o)
         {
+            if (MessageBox.Show("Are you sure you want to delete this sportsman?","Delete sportsman", 
+                MessageBoxButton.YesNo,MessageBoxImage.Warning,MessageBoxResult.No,MessageBoxOptions.DefaultDesktopOnly) == MessageBoxResult.No ) return;
             BSportsmanForEdit?.AwardOlympiads.Clear();
             unitOW.Sportsmans.Update(BSportsmanForEdit);
             unitOW.Sportsmans.Delete(BSportsmanForEdit);

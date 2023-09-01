@@ -46,33 +46,33 @@
             <TextBlock  Grid.ColumnSpan="3" Text="Olympiad" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
             
             <TextBlock Grid.Row="1" Grid.Column="0"  Text="Year" Style="{StaticResource txtStyle}"/>
-            <TextBox Text="{Binding EditableOlympiad.Year,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Style="{StaticResource tbStyle}"/>
+            <TextBox Text="{Binding BYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Style="{StaticResource tbStyle}"/>
             
             <TextBlock Grid.Row="2" Grid.Column="0" Text="City" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding EditableOlympiad.City,Mode=TwoWay}" DisplayMemberPath="Name" Grid.Row="2" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Grid.Row="2" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
             
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Season" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding OlympiadSeason,Mode=TwoWay}" DisplayMemberPath="Name" Grid.Row="3" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding BSeason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Grid.Row="3" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Sp. Country" Style="{StaticResource txtStyle}"/>
-        <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding CountryFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding CountryFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
             <TextBlock Grid.Row="5" Grid.Column="0" Text="Sp. Sport" Style="{StaticResource txtStyle}"/>
             <ComboBox ItemsSource="{Binding OlympiadSports}"  DisplayMemberPath="Name"  SelectedItem="{Binding SportFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
         <StackPanel Orientation ="Vertical"  Grid.Row="6" Grid.ColumnSpan="2">
             <TextBlock  Margin ="0,0,0,4" Text="Sportsman" Style="{StaticResource txtStyle}"/>
-            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsman}" DisplayMemberPath="FullName"  SelectedItem="{Binding SelectedOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"  Height="25" />
+            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsman}" DisplayMemberPath="FullName"  SelectedItem="{Binding BOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
         </StackPanel>
         <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="6" Grid.Column="2">
             <StackPanel  Orientation ="Vertical" Width="90" >
                 <TextBlock  Margin ="0,0,0,4" Text="Award" Style="{StaticResource txtStyle}"/>
-                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding BAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
             </StackPanel>
             <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding AddSportsmanAward}"/>
         </StackPanel>
 
-        <DataGrid SelectedItem="{Binding SelectedOlympiadSportsmanAward }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding OlympiadSportsmanAwards}">
+        <DataGrid SelectedItem="{Binding SelectedOlympiadSportsmanAward }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding BAwardOlympiads}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Full Name" Width="2*" IsReadOnly="True" Binding="{Binding Sportsman.FullName}"/>
                     <DataGridTextColumn Header="Gender"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.Gender.Name}"/>
