@@ -95,6 +95,7 @@ namespace OlympiadWPF.Models
         {
             BAwardOlympiads.Remove(BAwardOlympiad);
             OnPropertyChanged("EditWindowComboBoxOlympiads");
+            OnPropertyChanged("OlympiadSportsmans");
         }
 
         private void addAwardOlympiad(object o)

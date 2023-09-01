@@ -24,6 +24,8 @@ namespace OlympiadWPF.Models
 
         private List<City>? sts;
 
+        public List<City>? cities => sts ??= unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
+
         private List<Season>? ssn;
 
         private int bYear;
@@ -48,16 +50,26 @@ namespace OlympiadWPF.Models
             if (BAwardOlympiads.Count > 0)
                 foreach (var item in BAwardOlympiads)
                     newOlympiad.SportsmanAward.Add(item);
-            BAwardOlympiads.Clear();
             return newOlympiad;
+        }
+
+        private void setOlympiadBValues(Olympiad_? olympiad = null)
+        {
+
+            BYear = olympiad?.Year ?? 0;
+            BCity = olympiad?.City;
+            BSeason = olympiad?.Season;
+            BAwardOlympiads.Clear();
+            if (olympiad?.SportsmanAward.Count > 0)
+                foreach (var item in olympiad.SportsmanAward)
+                    BAwardOlympiads.Add(item);
+           
         }
 
         private void ModifyOlimpiad(bool isNew)
         {
-            countries?.RemoveAt(0);
-            sports?.RemoveAt(0);
-
             modifyOlympiadWindow = new() { DataContext = this };
+            setOlympiadBValues();
             if (modifyOlympiadWindow.ShowDialog() == true)
             {
                 if (isNew) unitOW.Olympiads.Insert(getNewOlympiad());
@@ -74,15 +86,11 @@ namespace OlympiadWPF.Models
                 if (!isNew) OnPropertyChanged("AllSportsmans");
                 OnPropertyChanged("ComboBoxOlympiad");
             }
-
-            countries?.Insert(0, new() { Name = "All", Id = -1 });
-            sports?.Insert(0, new() { Name = "All", Id = -1 });
-
         }
 
         public IEnumerable<Season>? Seasons => ssn ??= unitOW.Seasons.Get().ToList();
 
-        public IEnumerable<City>? Cities => sts ??= unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
+        public IEnumerable<City>? Cities => cities?.Where(x=> !x.Olympiads.Any(y=>y.Year == BYear));
 
         
 
@@ -91,12 +99,12 @@ namespace OlympiadWPF.Models
             BAwardOlympiads.Add(new() { Sportsman = BOlympiadSportsman, Award = BAward });
             BOlympiadSportsman = null;
             BAward = null;
-            OnPropertyChanged("SelectedOlympiadSportsman");
-            OnPropertyChanged("SelectedAward");
-            OnPropertyChanged("OlympiadSportsman");
+            OnPropertyChanged("BAward");
+            OnPropertyChanged("BOlympiadSportsman");
+            OnPropertyChanged("OlympiadSportsmans");
         }
 
-        public SportsmanAwardOlympiad SelectedOlympiadSportsmanAward { get; set; }
+       
 
         public Sport? SportFilter
         {
@@ -105,10 +113,7 @@ namespace OlympiadWPF.Models
             {
                 sportFilter = value;
                 if (sportFilter != null && countryFilter != null && bSeason != null)
-                {
-                    OnPropertyChanged("OlympiadSportsman");
-                   
-                }
+                    OnPropertyChanged("OlympiadSportsmans");
             } 
         }
 
@@ -118,15 +123,15 @@ namespace OlympiadWPF.Models
             set
             {
                 countryFilter = value;
-                if (sportFilter != null && countryFilter != null && bSeason != null) OnPropertyChanged("OlympiadSportsman");
+                if (sportFilter != null && countryFilter != null && bSeason != null) OnPropertyChanged("OlympiadSportsmans");
                 
             }
         }
 
-        public IEnumerable<Sport>? OlympiadSports => Sports?.Where(x => x.SeasonId == BSeason?.Id);
+        public IEnumerable<Sport>? OlympiadSports => Sports?.Where(x => x.Id ==-1 || x.SeasonId == BSeason?.Id);
 
-        public IEnumerable<Sportsman> OlympiadSportsman => AllSportsmans.Where(x => x.SportId == SportFilter?.Id 
-                                                                                         && x.CountryId == CountryFilter?.Id 
+        public IEnumerable<Sportsman> OlympiadSportsmans => AllSportsmans.Where(x => idFilter(x.SportId , SportFilter?.Id) 
+                                                                                         && idFilter(x.CountryId, CountryFilter?.Id) 
                                                                                          && !BAwardOlympiads.Any(y=>y.Sportsman.Id == x.Id)
                                                                                          && BYear > x.Birthday.Year + 16);
 
@@ -155,13 +160,14 @@ namespace OlympiadWPF.Models
                         foreach (var item in temp)
                             BAwardOlympiads.Remove(item);
                 }
-                OnPropertyChanged("OlympiadSportsman");
+                OnPropertyChanged("OlympiadSportsmans");
+                OnPropertyChanged("Cities");
             }
         }
 
        
 
-    public City BCity { get; set; }
+    public City? BCity { get; set; }
 
        
 

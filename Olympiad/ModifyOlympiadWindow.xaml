@@ -62,7 +62,7 @@
 
         <StackPanel Orientation ="Vertical"  Grid.Row="6" Grid.ColumnSpan="2">
             <TextBlock  Margin ="0,0,0,4" Text="Sportsman" Style="{StaticResource txtStyle}"/>
-            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsman}" DisplayMemberPath="FullName"  SelectedItem="{Binding BOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsmans}" DisplayMemberPath="FullName"  SelectedItem="{Binding BOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
         </StackPanel>
         <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="6" Grid.Column="2">
             <StackPanel  Orientation ="Vertical" Width="90" >
@@ -72,13 +72,15 @@
             <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding AddSportsmanAward}"/>
         </StackPanel>
 
-        <DataGrid SelectedItem="{Binding SelectedOlympiadSportsmanAward }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding BAwardOlympiads}">
+        <DataGrid SelectedItem="{Binding BAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding BAwardOlympiads}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Full Name" Width="2*" IsReadOnly="True" Binding="{Binding Sportsman.FullName}"/>
                     <DataGridTextColumn Header="Gender"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.Gender.Name}"/>
-                    <DataGridTextColumn Header="Birthday"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.BirthdayStr}"/>
+                    <DataGridTextColumn Header="Country"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.Country.Name}"/>
+                <DataGridTextColumn Header="Sport"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.Sport.Name}"/>
+                <DataGridTextColumn Header="Birthday"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.BirthdayStr}"/>
                     <DataGridTextColumn Header="Award"  Width="*" IsReadOnly="True" Binding="{Binding Award.Name}"/>
-            </DataGrid.Columns>
+                </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Delete" Command="{Binding Delete}"/>
