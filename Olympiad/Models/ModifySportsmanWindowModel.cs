@@ -1,12 +1,16 @@
 ﻿using data_access.Entities;
 using data_access.Repositories;
 using Google.Protobuf.WellKnownTypes;
+using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using Olympiad;
 using OlympiadWPF.Models.CommonClasses;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Documents;
+using System.Windows.Media.TextFormatting;
 
 namespace OlympiadWPF.Models
 {
@@ -14,7 +18,11 @@ namespace OlympiadWPF.Models
     {
         private ModifySpotrsmanWindow? SportsmanWindow;
 
-        private Sport? newSport;
+        private DateTime bBirthday;
+
+        private Sport? bSport;
+
+        string? bPhotoPath;
 
         private List<Gender>? gndr = null;
 
@@ -24,42 +32,71 @@ namespace OlympiadWPF.Models
 
         private List<Award> awards => awd ??= unitOW.Awards.Get().ToList();
 
-        private void copySportsman(Sportsman from,Sportsman to)
+        private Sportsman getNewSportsman()
         {
-            to.Sport = from.Sport;
-            to.Birthday = from.Birthday;
-            to.Surname = from.Surname;
-            to.Name = from.Name;
-            to.SportId = from.SportId;
-            to.Country = from.Country;
-            to.CountryId = from.CountryId;
-            to.Gender = from.Gender;
-            to.GenderId = from.GenderId;
-            to.PhotoPath = from.PhotoPath;
-            to.AwardOlympiads.Clear();
-            foreach (var item in from.AwardOlympiads)
-                to.AwardOlympiads.Add(item);
+            Sportsman newSportsman = new()
+            {
+                Name = BName,
+                Surname = BSurname,
+                Country = BCountry,
+                Birthday = BBirthday,
+                Sport = BSport,
+                PhotoPath = BPhotoPath,
+                Gender = BGender
+            };
+            if (BAwardOlympiads.Count > 0)
+                foreach (var item in BAwardOlympiads)
+                    newSportsman.AwardOlympiads.Add(item);
+
+            return newSportsman;
         }
+
+        private void setBValues(Sportsman? spotrsman = null)
+        {
+            BName = spotrsman?.Name;
+            BSurname = spotrsman?.Surname;
+            BCountry = spotrsman?.Country;
+            BSport = spotrsman?.Sport;
+            BPhotoPath = spotrsman?.PhotoPath;
+            BGender = spotrsman?.Gender;
+            BBirthday = spotrsman?.Birthday ?? new DateTime(2000,1,1);
+            BAwardOlympiads.Clear();
+            if (spotrsman != null)
+                foreach (var item in spotrsman.AwardOlympiads)
+                    BAwardOlympiads.Add(item);
+        }
+
+        private void setFromBValues(Sportsman spotrsman )
+        {
+            spotrsman.Name = BName;
+            spotrsman.Surname = BSurname;
+            spotrsman.Country = BCountry;
+            spotrsman.Sport = BSport;
+            spotrsman.PhotoPath = BPhotoPath;
+            spotrsman.Gender  = BGender;
+            spotrsman.Birthday = BBirthday;
+            spotrsman.AwardOlympiads.Clear();
+             foreach (var item in BAwardOlympiads)
+                spotrsman.AwardOlympiads.Add(item);
+        }
+
+
 
         private void saveButton(object o) => SportsmanWindow.DialogResult = true;
 
         private void deleteContextMenu(object o)
         {
-            EditableSportsman?.AwardOlympiads.Remove(SelectedAwardOlympiad);
-            OnPropertyChanged("EditableSportsmanAwardsOlympiads");
+            BAwardOlympiads.Remove(BAwardOlympiad);
             OnPropertyChanged("EditWindowComboBoxOlympiads");
         }
 
         private void addAwardOlympiad(object o)
         {
-            SportsmanAwardOlympiad temp = new() { Olympiad = SelectedOlympiad, Award = SelectedAward };
-            EditableSportsman?.AwardOlympiads.Add(temp);
-
-            SelectedOlympiad = null;
-            SelectedAward = null;
-            OnPropertyChanged("SelectedOlympiad");
-            OnPropertyChanged("SelectedAward");
-            OnPropertyChanged("EditableSportsmanAwardsOlympiads");
+            BAwardOlympiads.Add(new() { Olympiad = BOlympiad, Award = BAward });
+            BOlympiad = null;
+            BAward = null;
+            OnPropertyChanged("BOlympiad");
+            OnPropertyChanged("BAward");
             OnPropertyChanged("EditWindowComboBoxOlympiads");
         }
 
@@ -67,29 +104,25 @@ namespace OlympiadWPF.Models
         {
             OpenFileDialog openFileDialog = new() { Filter = "Image Files (*.png;*.jpeg;*.jpg;)|*.jpg;*.jpeg;*.png;" };
             openFileDialog.ShowDialog();
-                EditableSportsman.PhotoPath =  openFileDialog.FileName;
-            OnPropertyChanged("EditableSportsman");
+            BPhotoPath =  openFileDialog.FileName;
+            OnPropertyChanged("BPhotoPath");
         }
 
         private void ModifySportsman(bool isNew)
         {
-            EditableSportsman = new();
-            if (!isNew)
-            {
-                copySportsman(SlectedSportsmanForEdit, EditableSportsman);
-                NewSport = SlectedSportsmanForEdit.Sport;
-            }
+            if (!isNew) setBValues(BSportsmanForEdit);
+            else setBValues(); 
             countries?.RemoveAt(0);
             sports?.RemoveAt(0);
             olympiads?.RemoveAt(0);
             SportsmanWindow = new() { DataContext = this };
             if (SportsmanWindow.ShowDialog() == true)
             {
-                if (isNew) unitOW.Sportsmans.Insert(EditableSportsman);
+                if (isNew) unitOW.Sportsmans.Insert(getNewSportsman());
                 else
                 {
-                    copySportsman(EditableSportsman,SlectedSportsmanForEdit);
-                    unitOW.Sportsmans.Update(SlectedSportsmanForEdit);
+                    setFromBValues(BSportsmanForEdit);
+                    unitOW.Sportsmans.Update(BSportsmanForEdit);
                 }
                 unitOW.Save();
                 sptms = null;
@@ -105,60 +138,82 @@ namespace OlympiadWPF.Models
             olympiads?.Insert(0, new() { Id = -1 });
         }
 
-
         public IEnumerable<Award> Awards => awards;
-
-        public IEnumerable<Olympiad_> EditWindowComboBoxOlympiads => olympiads.Where(x => x.SeasonId == EditableSportsman?.Sport?.Season.Id && !EditableSportsman.AwardOlympiads.Any(y=>y.Olympiad.Id == x.Id));
 
         public IEnumerable<Gender> Genders => genders;
 
-        public IEnumerable<SportsmanAwardOlympiad>? EditableSportsmanAwardsOlympiads => EditableSportsman?.AwardOlympiads.ToArray();
+        public IEnumerable<Olympiad_> EditWindowComboBoxOlympiads => olympiads.Where(x => x.SeasonId == BSport?.Season.Id 
+                                                                                                    && !BAwardOlympiads.Any(y=>y.Olympiad.Id == x.Id)
+                                                                                                    && x.Year > BBirthday.Year + 16);
 
-        public Olympiad_? SelectedOlympiad { get; set; }
+        public RelayCommand Save => new((o) =>saveButton(o),(o=> !string.IsNullOrEmpty(BName) 
+                                                                                  && !string.IsNullOrEmpty(BSurname)
+                                                                                  && BSport!=null 
+                                                                                  && BCountry!=null
+                                                                                  && BGender!= null));
 
-        public Award? SelectedAward { get; set; }
+        public RelayCommand Add => new((o) => addAwardOlympiad(o),(o)=> BOlympiad != null);
 
-        public Sportsman? EditableSportsman { get; set; }
-
-        public Sportsman? SlectedSportsmanForEdit { get; set; }
-
-        public SportsmanAwardOlympiad? SelectedAwardOlympiad { get; set; }
-
-
-        public RelayCommand Save => new((o) =>saveButton(o),(o=> !string.IsNullOrEmpty(EditableSportsman?.Name) 
-                                                                              && !string.IsNullOrEmpty(EditableSportsman.Surname)
-                                                                              && EditableSportsman.Sport!=null 
-                                                                              && EditableSportsman.Country!=null
-                                                                              && EditableSportsman.Gender!= null));
-
-        public RelayCommand Add => new((o) => addAwardOlympiad(o),(o)=> SelectedOlympiad != null);
-
-        public RelayCommand Delete => new((o) => deleteContextMenu(o),(o)=> SelectedAwardOlympiad != null);
+        public RelayCommand Delete => new((o) => deleteContextMenu(o),(o)=> BAwardOlympiad != null);
 
         public RelayCommand GetPhoto => new((o) => getPhoto(o));
 
+        
+        //Binding properties
+        public Award? BAward { get; set; }
 
-        public Sport? NewSport
+        public string? BName { get; set; }
+       
+        public string? BSurname { get; set; }
+
+        public string? BPhotoPath
         {
-            get { return newSport; }
+            get =>  string.IsNullOrEmpty(bPhotoPath) ? "Images/Sportsmans/NoPhoto.png" : bPhotoPath;
+            set => bPhotoPath = value;
+        }
+
+        public DateTime BBirthday 
+        {
+            get =>bBirthday;
             set
             {
-                newSport = value;
-                
-                if (newSport != null )
+                bBirthday = value;
+                OnPropertyChanged("EditWindowComboBoxOlympiads");
+                if (BAwardOlympiads.Count > 0)
                 {
-                    if (EditableSportsman?.Sport?.SeasonId != newSport.SeasonId)
-                           EditableSportsman?.AwardOlympiads?.Clear();
-                                   
-                    EditableSportsman.Sport = newSport;
-                    OnPropertyChanged("EditWindowComboBoxOlympiads");
-                    OnPropertyChanged("EditableSportsmanAwardsOlympiads");
+                    List<SportsmanAwardOlympiad> temp = new();
+                    foreach(var item in BAwardOlympiads)
+                        if (item.Olympiad.Year < bBirthday.Year + 16) temp.Add(item);
+                    if (temp.Count > 0)
+                        foreach (var item in temp)
+                            BAwardOlympiads.Remove(item);
                 }
-                
-                
             }
         }
 
-        
+        public Olympiad_? BOlympiad { get; set; }
+
+        public Sportsman? BSportsmanForEdit { get; set; }
+
+        public Country? BCountry { get; set; }
+
+        public Gender? BGender { get; set; }
+
+        public ObservableCollection<SportsmanAwardOlympiad> BAwardOlympiads { get; set; } = new();
+
+        public Sport? BSport
+        {
+            get=> bSport; 
+            set
+            {
+                if (value?.SeasonId != bSport?.SeasonId)
+                        BAwardOlympiads?.Clear();
+                bSport = value;
+                OnPropertyChanged("EditWindowComboBoxOlympiads");
+            }
+        }
+
+        public SportsmanAwardOlympiad? BAwardOlympiad { get; set; }
+
     }
 }

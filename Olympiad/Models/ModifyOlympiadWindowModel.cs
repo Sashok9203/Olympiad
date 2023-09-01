@@ -45,18 +45,19 @@ namespace OlympiadWPF.Models
                     EditableOlympiad.Season = olympiadSeason;
                     OnPropertyChanged("OlympiadSports");
                     if (countryFilter != null) OnPropertyChanged("OlympiadSportsman");
+                    EditableOlympiad.SportsmanAward.Clear();
+                    OnPropertyChanged("OlympiadSportsmanAwards");
                 }
-                else EditableOlympiad.SportsmanAward.Clear();
             }
         }
         public IEnumerable<SportsmanAwardOlympiad>? OlympiadSportsmanAwards => EditableOlympiad?.SportsmanAward.ToArray();
         private void addAwardSportsmen(object o)
         {
-            SportsmanAwardOlympiad temp = new() { Sportsman = SelectedOlympiadSportsman, Award = SelectedAward };
+            SportsmanAwardOlympiad temp = new() { Sportsman = SelectedOlympiadSportsman, Award = BAward };
             EditableOlympiad?.SportsmanAward.Add(temp);
 
             SelectedOlympiadSportsman = null;
-            SelectedAward = null;
+            BAward = null;
             OnPropertyChanged("SelectedOlympiadSportsman");
             OnPropertyChanged("SelectedAward");
             OnPropertyChanged("OlympiadSportsmanAwards");
@@ -71,7 +72,11 @@ namespace OlympiadWPF.Models
             set
             {
                 sportFilter = value;
-                if (sportFilter != null && countryFilter != null && olympiadSeason != null) OnPropertyChanged("OlympiadSportsman");
+                if (sportFilter != null && countryFilter != null && olympiadSeason != null)
+                {
+                    OnPropertyChanged("OlympiadSportsman");
+                   
+                }
             } 
         }
 

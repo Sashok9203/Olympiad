@@ -45,44 +45,44 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Sportsman" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" Width="60" Height="80" BorderThickness ="1" CornerRadius="3" BorderBrush="DarkGray">
-            <Image Source="{Binding EditableSportsman.Photo}" Stretch="Fill"/>
+            <Image Source="{Binding BPhotoPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stretch="Fill"/>
         </Border>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox Text="{Binding EditableSportsman.PhotoPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="212" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding BPhotoPath}"  Width="212" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"/>
             <Button Margin="5,0,0,0" Content="..." Width="25" Height="25" VerticalContentAlignment="Center" Command="{Binding GetPhoto}"/>
         </StackPanel>
 
         <TextBlock Grid.Row="2" Grid.Column="0"  Text="Name" Style="{StaticResource txtStyle}"/>
-        <TextBox Text="{Binding EditableSportsman.Name,Mode=TwoWay}" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="1" Style="{StaticResource tbStyle}"/>
+        <TextBox Text="{Binding BName,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="1" Style="{StaticResource tbStyle}"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Surname" Style="{StaticResource txtStyle}"/>
-        <TextBox  Text="{Binding EditableSportsman.Surname,Mode=TwoWay}" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" Style="{StaticResource tbStyle}"/>
+        <TextBox  Text="{Binding BSurname,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" Style="{StaticResource tbStyle}"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Gender" Style="{StaticResource txtStyle}"/>
-        <ComboBox ItemsSource="{Binding Genders}"  SelectedItem="{Binding EditableSportsman.Gender,Mode=TwoWay}" DisplayMemberPath="Name" Grid.Row="4" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+        <ComboBox ItemsSource="{Binding Genders}"  SelectedItem="{Binding BGender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Grid.Row="4" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Birthday" Style="{StaticResource txtStyle}"/>
-        <DatePicker Grid.Row="5" SelectedDate="{Binding EditableSportsman.Birthday,Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <DatePicker Grid.Row="5" SelectedDate="{Binding BBirthday,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Country" Style="{StaticResource txtStyle}"/>
-        <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding EditableSportsman.Country,Mode=TwoWay}" Grid.Row="6" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+        <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding BCountry,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Sport" Style="{StaticResource txtStyle}"/>
-        <ComboBox ItemsSource="{Binding Sports}" SelectedIndex="{Binding SelectedSportIndex,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"  SelectedItem="{Binding NewSport,Mode=TwoWay}" Grid.Row="7" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+        <ComboBox ItemsSource="{Binding Sports}"  DisplayMemberPath="Name"  SelectedItem="{Binding BSport,Mode=TwoWay}" Grid.Row="7" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
 
         <StackPanel Orientation ="Vertical"  Grid.Row="8" Grid.ColumnSpan="2">
             <TextBlock  Margin ="0,0,0,4" Text="Olympiad" Style="{StaticResource txtStyle}"/>
-            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding EditWindowComboBoxOlympiads}" DisplayMemberPath="SmallDescription"  SelectedItem="{Binding SelectedOlympiad,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"  Height="25" />
+            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding EditWindowComboBoxOlympiads}" DisplayMemberPath="SmallDescription"  SelectedItem="{Binding BOlympiad,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
         </StackPanel>
         <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="8" Grid.Column="2">
             <StackPanel  Orientation ="Vertical" Width="90" >
                 <TextBlock  Margin ="0,0,0,4" Text="Award" Style="{StaticResource txtStyle}"/>
-                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding BAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
             </StackPanel>
             <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding Add}"/>
         </StackPanel>
 
-        <DataGrid SelectedItem="{Binding SelectedAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="9" Grid.ColumnSpan="3" ItemsSource="{Binding EditableSportsmanAwardsOlympiads}" CanUserDeleteRows="True">
+        <DataGrid SelectedItem="{Binding BAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="9" Grid.ColumnSpan="3" ItemsSource="{Binding BAwardOlympiads}" CanUserDeleteRows="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Olympiad" Binding="{Binding Olympiad.SmallDescription}" Width="2*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Season" Binding="{Binding Olympiad.Season.Name}" Width="*" IsReadOnly="True"/>

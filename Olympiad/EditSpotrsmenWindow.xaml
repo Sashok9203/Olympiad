@@ -24,7 +24,7 @@
         <Button Content="Edit" Grid.Column="1" Grid.Row="2" Width="90" Height="40" Command="{Binding EditButton}"/>
         <Button Content="Delete" Grid.Column="2" Grid.Row="2" Width="90" Height="40" Command="{Binding DeleteButton}"/>
         <Button Content="Exit" Grid.Column="3" Grid.Row="3" Width="90" Height="40" IsCancel="True" Command="{Binding ExitButton}"/>
-        <DataGrid AutoGenerateColumns="False" Margin="5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding SlectedSportsmanForEdit}">
+        <DataGrid AutoGenerateColumns="False" Margin="5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding FullName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Gender" Width="*" Binding="{Binding Gender.Name}" IsReadOnly="True"/>

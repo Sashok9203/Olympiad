@@ -12,11 +12,9 @@ namespace OlympiadWPF.Models
     {
         private void deleteButton(object o)
         {
-            var olympiadsAwardsToDelete = SpAwOlympiads.Where(x => x.SportsmanId == SlectedSportsmanForEdit.Id);
-            foreach (var item in olympiadsAwardsToDelete)
-                unitOW.SAOlympiad.Delete(item);
-            unitOW.Sportsmans.Delete(SlectedSportsmanForEdit);
-           
+            BSportsmanForEdit?.AwardOlympiads.Clear();
+            unitOW.Sportsmans.Update(BSportsmanForEdit);
+            unitOW.Sportsmans.Delete(BSportsmanForEdit);
             unitOW.Save();
             sptms = null;
             spAwOl = null;
