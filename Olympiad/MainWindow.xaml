@@ -126,6 +126,19 @@
                 <Setter Property="FontWeight" Value="DemiBold"/>
             </Style>
         </TabControl.Resources>
+        <TabItem Header="Top Country">
+            <Grid Margin="50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image  Source="/Images/Olympic_Logo.png" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Text="{Binding TopCountry.Name}" HorizontalAlignment="Center" FontSize="60" FontWeight="DemiBold" FontFamily="Comic Sans MS, Verdana"/>
+                <Image Grid.Row="2" Source="/Images/Olympic_Logo2.png" HorizontalAlignment="Center"/>
+            </Grid>
+
+        </TabItem>
         <TabItem Header="Medal table" >
             <Grid>
                 <Grid.RowDefinitions>

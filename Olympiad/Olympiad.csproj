@@ -48,7 +48,10 @@
     <None Remove="Images\Flags\Flag_of_Ukraine.png" />
     <None Remove="Images\Flags\Unknown_Flag.png" />
     <None Remove="Images\gold.png" />
+    <None Remove="Images\Olympic_Logo.png" />
+    <None Remove="Images\Olympic_Logo2.png" />
     <None Remove="Images\olympic_rings.png" />
+    <None Remove="Images\olynpic_sportsman.png" />
     <None Remove="Images\silver.png" />
     <None Remove="Images\Sportsmans\box.png" />
     <None Remove="Images\Sportsmans\NoPhoto.png" />
@@ -87,7 +90,10 @@
     <Resource Include="Images\Flags\Flag_of_Ukraine.png" />
     <Resource Include="Images\Flags\Unknown_Flag.png" />
     <Resource Include="Images\gold.png" />
+    <Resource Include="Images\Olympic_Logo.png" />
+    <Resource Include="Images\Olympic_Logo2.png" />
     <Resource Include="Images\olympic_rings.png" />
+    <Resource Include="Images\olynpic_sportsman.png" />
     <Resource Include="Images\silver.png" />
     <Resource Include="Images\Sportsmans\box.png" />
     <Resource Include="Images\Sportsmans\NoPhoto.png" />

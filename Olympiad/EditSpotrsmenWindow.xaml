@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
-        Title="Edit Spotrsmen" Height="450" Width="600">
+        Title="Edit Spotrsmen" Height="500" Width="700" MinHeight="500" MinWidth="700">
 
     <Window.Resources>
         <Style TargetType="Button">

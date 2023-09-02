@@ -7,7 +7,7 @@
         d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
         xmlns:local="clr-namespace:Olympiad"
         mc:Ignorable="d"
-        Title="Spotrsman" Height="700" Width="400" MaxHeight="700" MaxWidth="400">
+        Title="Spotrsman" Height="700" Width="750"  MinHeight="700" MinWidth="750">
         
 
     <Window.Resources>
@@ -48,6 +48,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -102,7 +103,7 @@
             <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding Add}"/>
         </StackPanel>
 
-        <DataGrid SelectedItem="{Binding BAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="9" Grid.ColumnSpan="3" ItemsSource="{Binding BAwardOlympiads}" CanUserDeleteRows="True">
+        <DataGrid SelectedItem="{Binding BAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="9" Grid.ColumnSpan="4" ItemsSource="{Binding BAwardOlympiads}" CanUserDeleteRows="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Olympiad" Binding="{Binding Olympiad.SmallDescription}" Width="2*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Season" Binding="{Binding Olympiad.Season.Name}" Width="*" IsReadOnly="True"/>
@@ -114,9 +115,10 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-
-        <Button Grid.Row="10" Grid.Column="0" Content="Save" Height="40" Width="100" Grid.ColumnSpan="2" Command="{Binding Save}" CommandParameter=""/>
-        <Button Grid.Row="10" Grid.Column="2" Content="Cancel" Height="40" Width="100" IsCancel="True" />
-
+        <StackPanel Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="0,0,20,0" Content="Save" Height="40" Width="100" Grid.ColumnSpan="2" Command="{Binding Save}" CommandParameter=""/>
+            <Button  Content="Cancel" Height="40" Width="100" IsCancel="True" />
+        </StackPanel>
+        <Image Margin="20,0,0,0" Grid.Column="3" Grid.Row="1" Grid.RowSpan="7" Source="/Images/olynpic_sportsman.png"/>
     </Grid>
 </Window>

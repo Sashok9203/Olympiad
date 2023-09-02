@@ -22,11 +22,10 @@ namespace OlympiadWPF.Models
 
         private Season? bSeason;
 
-        private List<City>? sts = null;
-
-        public  List<City>? cities => sts ??= unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
+        private List<City> cts;
 
         private List<Season>? ssn = null;
+
         public IEnumerable<Season>? seasons => ssn ??= unitOW.Seasons.Get().ToList();
 
         private int bYear;
@@ -80,18 +79,19 @@ namespace OlympiadWPF.Models
                     //unitOW.Sportsmans.Update(SlectedSportsmanForEdit);
                 }
                 unitOW.Save();
-                olmp = null;
+                olympiads = null;
                 sptms = null;
                 spAwOl = null;
 
                 if (!isNew) OnPropertyChanged("AllSportsmans");
                 OnPropertyChanged("ComboBoxOlympiad");
+                OnPropertyChanged("TopCountry");
             }
         }
 
         public IEnumerable<Season>? Seasons => seasons.Where(x=>!x.Olympiads.Any(y => y.Year == BYear));
 
-        public IEnumerable<City>? Cities => cities;
+        public IEnumerable<City>? Cities => cts;
 
         
 

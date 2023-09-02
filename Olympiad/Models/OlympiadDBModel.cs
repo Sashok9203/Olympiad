@@ -1,5 +1,6 @@
 ﻿using data_access.Entities;
 using data_access.Repositories;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Olympiad;
 using OlympiadWPF.Models.CommonClasses;
@@ -26,11 +27,11 @@ namespace OlympiadWPF.Models
             else return id == selId;
         }
 
-        private List<Country>? countr = null;
+        private List<Country>? countries = null;
 
-        private List<Sport>? sprt = null;
+        private List<Sport>? sports = null;
 
-        private List<Olympiad_>? olmp;
+        private List<Olympiad_>? olympiads;
 
         private List<Sportsman>? sptms = null;
 
@@ -50,66 +51,8 @@ namespace OlympiadWPF.Models
 
         private Country? selectedCountryCR;
 
-        private List<Country>? countries
-        {
-            get
-            {
-                if (countr == null)
-                {
-                    countr = new() { new() { Name = "All", Id = -1 } };
-                    countr.AddRange(unitOW.Countries.Get().OrderBy(x=>x.Name));
-                }
-                return countr;
-            }
-        }
-
-        private List<Sport>? sports
-        {
-            get
-            {
-                if (sprt == null)
-                {
-                    sprt = new() { new() { Name = "All", Id = -1 } };
-                    sprt.AddRange(unitOW.Sports.Get(includeProperties: "Season").OrderBy(x=>x.Name));
-                }
-                return sprt;
-            }
-        }
-
-        private List<Olympiad_> olympiads
-        {
-
-            get
-            {
-                if (olmp == null)
-                {
-                    olmp = new() { new() { Id = -1 } };
-                    var temp = unitOW.Olympiads.Get(includeProperties: "City,Season").OrderBy(x => x.Year);
-                    olmp.AddRange(temp);
-                    selectedOlympiadMT = olmp[0];
-
-                    selectedOlympiadM = olmp[0];
-
-                    selectedOlympiadCR = olmp[0];
-                    OnPropertyChanged("SelectedOlympiadMT");
-                    OnPropertyChanged("SelectedOlympiadM");
-                    OnPropertyChanged("SelectedOlympiadCR");
-                }
-                return olmp;
-            }
-        }
-
-        public List<Sportsman> AllSportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Gender").ToList();
-
-        private List<SportsmanAwardOlympiad> SpAwOlympiads
-        {
-            get
-            {
-                unitOW.Countries.Get();
-                return  spAwOl ??= unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad").ToList();
-            }
-        }
-
+        private List<SportsmanAwardOlympiad> SpAwOlympiads => spAwOl ??= unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad").ToList();
+       
         private void addSportsman(object o) => ModifySportsman(true);
 
 
@@ -126,6 +69,11 @@ namespace OlympiadWPF.Models
         {
 
         }
+
+
+        public List<Sportsman> AllSportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Gender").ToList();
+
+        public Country? TopCountry => Countries?.Where(x=>x.Id != -1 && x.Cities.Any(z=>z.Olympiads.Count>0)).OrderByDescending(y=>y.Cities.SelectMany(z=>z.Olympiads).Count()).FirstOrDefault();
 
         public bool WithMedals 
         {
@@ -197,11 +145,51 @@ namespace OlympiadWPF.Models
             }
         }
 
-        public IEnumerable<Country>? Countries => countries;
+        public IEnumerable<Country>? Countries
+        {
+            get
+            {
+                if (countries == null)
+                {
+                    countries = new() { new() { Name = "All", Id = -1 } };
+                    countries.AddRange(unitOW.Countries.Get().OrderBy(x => x.Name));
+                }
+                return countries;
+            }
+        }
 
-        public IEnumerable<Sport>? Sports => sports;
+        public IEnumerable<Sport>? Sports
+        {
+            get
+            {
+                if (sports == null)
+                {
+                    sports = new() { new() { Name = "All", Id = -1 } };
+                    sports.AddRange(unitOW.Sports.Get(includeProperties: "Season").OrderBy(x => x.Name));
+                }
+                return sports;
+            }
+        }
 
-        public IEnumerable<Olympiad_> ComboBoxOlympiad => olympiads;
+        public IEnumerable<Olympiad_> ComboBoxOlympiad
+        {
+            get
+            {
+                if (olympiads == null)
+                {
+                    olympiads = new() { new() { Id = -1 } };
+                    var temp = unitOW.Olympiads.Get(includeProperties: "City,Season").OrderBy(x => x.Year);
+                    olympiads.AddRange(temp);
+                    selectedOlympiadMT = olympiads[0];
+                    selectedOlympiadM = olympiads[0];
+                    selectedOlympiadCR = olympiads[0];
+                    OnPropertyChanged("SelectedOlympiadMT");
+                    OnPropertyChanged("SelectedOlympiadM");
+                    OnPropertyChanged("SelectedOlympiadCR");
+                }
+                return olympiads;
+            }
+        }
 
         public IEnumerable<CountryResultInfo>? CountryResult => sports?.Where(x => x.Id != -1 )
                                                                       .Select(x => new CountryResultInfo()
@@ -235,6 +223,8 @@ namespace OlympiadWPF.Models
         public OlympiadDBModel() 
         {
             unitOW = new UnitOfWork();
+            cts = unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
+            unitOW.Olympiads.Get();
         }
 
         public RelayCommand AddSportsman => new((o) => addSportsman(o));
