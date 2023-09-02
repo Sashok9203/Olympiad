@@ -48,7 +48,6 @@ namespace OlympiadWPF.Models
             if (BAwardOlympiads.Count > 0)
                 foreach (var item in BAwardOlympiads)
                     newSportsman.AwardOlympiads.Add(item);
-
             return newSportsman;
         }
 
@@ -140,7 +139,6 @@ namespace OlympiadWPF.Models
                 OnPropertyChanged("CountryResult");
                 OnPropertyChanged("MedalTable");
             }
-               
             countries?.Insert(0, new() { Name = "All", Id = -1 });
             sports?.Insert(0, new() { Name = "All", Id = -1 });
             olympiads?.Insert(0, new() { Id = -1 });

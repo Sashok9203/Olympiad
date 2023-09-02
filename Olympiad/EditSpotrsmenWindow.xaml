@@ -16,20 +16,26 @@
             <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
-    
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
+            <GradientStop Color="#FF484C80" Offset="0.851"/>
+            <GradientStop Color="#FF484C80" Offset="0.183"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
          <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Edit sportsman" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="DemiBold"/>
+        <TextBlock Text="Edit sportsman" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="DemiBold" Foreground="White"/>
         <StackPanel Grid.Row="2" Orientation ="Horizontal" HorizontalAlignment="Right">
             <Button Content="Edit"  Command="{Binding EditButton}"/>
             <Button Content="Delete" Command="{Binding DeleteButton}"/>
             <Button Content="Exit" IsCancel="True" Command="{Binding ExitButton}"/>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" Margin="5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}" ColumnHeaderHeight="30">
+        <DataGrid AutoGenerateColumns="False" Margin="10,5,10,5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}" ColumnHeaderHeight="30">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding FullName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Gender" Width="*" Binding="{Binding Gender.Name}" IsReadOnly="True"/>

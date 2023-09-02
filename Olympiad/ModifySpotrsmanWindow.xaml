@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:Olympiad"
         mc:Ignorable="d"
         Title="Spotrsman" Height="700" Width="400" MaxHeight="700" MaxWidth="400">
+        
 
     <Window.Resources>
 
@@ -21,7 +22,7 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Grid.Column" Value="0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            
+            <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style x:Key="cbStyle" TargetType="ComboBox">
             <Setter Property="Height" Value="25" />
@@ -31,11 +32,19 @@
             <Setter Property="Grid.ColumnSpan" Value="2"/>
             <Setter Property="DisplayMemberPath" Value="Name"/>
         </Style>
-
     </Window.Resources>
     
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
+            <GradientStop Color="#FF484C80" Offset="0.851"/>
+            <GradientStop Color="#FF484C80" Offset="0.183"/>
+        </LinearGradientBrush>
+    </Window.Background>
 
-    <Grid   Margin="20">
+
+
+    <Grid   Margin="20" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="90"/>
@@ -54,7 +63,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Sportsman" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Sportsman" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" Width="60" Height="80" BorderThickness ="1" CornerRadius="3" BorderBrush="DarkGray">
             <Image Source="{Binding BPhotoPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stretch="Fill"/>
         </Border>

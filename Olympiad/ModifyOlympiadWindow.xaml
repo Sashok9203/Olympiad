@@ -20,7 +20,8 @@
                 <Setter Property="Grid.Column" Value="0"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-            </Style>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
         <Style x:Key="cbStyle" TargetType="ComboBox">
             <Setter Property="Height" Value="25" />
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -33,7 +34,15 @@
 
     </Window.Resources>
 
-        <Grid   Margin="20">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
+            <GradientStop Color="#FF484C80" Offset="0.851"/>
+            <GradientStop Color="#FF484C80" Offset="0.183"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid   Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="90"/>
@@ -52,16 +61,16 @@
                 <RowDefinition Height="2*"/>
             <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock  Grid.ColumnSpan="3" Text="Olympiad" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
+            <TextBlock  Grid.ColumnSpan="3" Text="Olympiad" FontSize="19" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
             
             <TextBlock Grid.Row="1" Text="Year" Style="{StaticResource txtStyle}"/>
             <TextBox Text="{Binding BYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource tbStyle}"/>
             
-            <TextBlock Grid.Row="2" Text="City" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"   Style="{StaticResource cbStyle}"/>
+            <TextBlock Grid.Row="3" Text="City" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="3"   Style="{StaticResource cbStyle}"/>
             
-            <TextBlock Grid.Row="3" Text="Season" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding BSeason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="3"  Style="{StaticResource cbStyle}"/>
+            <TextBlock Grid.Row="2" Text="Season" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding BSeason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"  Style="{StaticResource cbStyle}"/>
 
             <TextBlock Grid.Row="4"  Text="Sp. Country" Style="{StaticResource txtStyle}"/>
             <ComboBox ItemsSource="{Binding Countries}"  SelectedItem="{Binding CountryFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4"  Style="{StaticResource cbStyle}"/>

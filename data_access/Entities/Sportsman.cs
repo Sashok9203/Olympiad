@@ -15,12 +15,6 @@ namespace data_access.Entities
 
         public string Surname { get; set; }
 
-        public string FullName => Name + " " + Surname;
-
-        public string BirthdayStr => Birthday.ToShortDateString();
-
-        public string Photo => string.IsNullOrEmpty(PhotoPath) ? "Images/Sportsmans/NoPhoto.png" : PhotoPath;
-
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
@@ -33,7 +27,12 @@ namespace data_access.Entities
 
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
-   
+
+        public string FullName => Name + " " + Surname;
+
+        public string BirthdayStr => Birthday.ToShortDateString();
+
+        public string Photo => string.IsNullOrEmpty(PhotoPath) ? "Images/Sportsmans/NoPhoto.png" : PhotoPath;
 
         public ICollection<SportsmanAwardOlympiad> AwardOlympiads { get; set; } = new HashSet<SportsmanAwardOlympiad>();
 
