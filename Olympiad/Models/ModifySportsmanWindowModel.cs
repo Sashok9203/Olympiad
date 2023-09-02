@@ -189,7 +189,7 @@ namespace OlympiadWPF.Models
                 {
                     List<SportsmanAwardOlympiad> temp = new();
                     foreach(var item in BAwardOlympiads)
-                        if (item.Olympiad.Year < bBirthday.Year + 16) temp.Add(item);
+                        if (item.Olympiad?.Year < bBirthday.Year + 16) temp.Add(item);
                     if (temp.Count > 0)
                         foreach (var item in temp)
                             BAwardOlympiads.Remove(item);

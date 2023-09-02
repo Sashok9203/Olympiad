@@ -22,11 +22,12 @@ namespace OlympiadWPF.Models
 
         private Season? bSeason;
 
-        private List<City>? sts;
+        private List<City>? sts = null;
 
-        public List<City>? cities => sts ??= unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
+        public  List<City>? cities => sts ??= unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
 
-        private List<Season>? ssn;
+        private List<Season>? ssn = null;
+        public IEnumerable<Season>? seasons => ssn ??= unitOW.Seasons.Get().ToList();
 
         private int bYear;
 
@@ -88,9 +89,9 @@ namespace OlympiadWPF.Models
             }
         }
 
-        public IEnumerable<Season>? Seasons => ssn ??= unitOW.Seasons.Get().ToList();
+        public IEnumerable<Season>? Seasons => seasons.Where(x=>!x.Olympiads.Any(y => y.Year == BYear));
 
-        public IEnumerable<City>? Cities => cities?.Where(x=> !x.Olympiads.Any(y=>y.Year == BYear && y.Season == BSeason));
+        public IEnumerable<City>? Cities => cities;
 
         
 
@@ -163,14 +164,13 @@ namespace OlympiadWPF.Models
                 }
                 OnPropertyChanged("OlympiadSportsmans");
                 OnPropertyChanged("Cities");
+                OnPropertyChanged("Seasons");
             }
         }
 
        
 
     public City? BCity { get; set; }
-
-       
 
         public Season? BSeason
         {
