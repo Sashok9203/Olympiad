@@ -64,7 +64,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Sportsman" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Sportsman" FontSize="26" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" Width="60" Height="80" BorderThickness ="1" CornerRadius="3" BorderBrush="DarkGray">
             <Image Source="{Binding BPhotoPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stretch="Fill"/>
         </Border>

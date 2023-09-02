@@ -66,7 +66,7 @@
                 <RowDefinition Height="2*"/>
             <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock  Grid.ColumnSpan="3" Text="Olympiad" FontSize="19" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock  Grid.Column="1" Text="Olympiad" FontSize="26" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
             
             <TextBlock Grid.Row="1" Text="Year" Style="{StaticResource txtStyle}"/>
             <TextBox Text="{Binding BYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"  Grid.Row="1" Style="{StaticResource tbStyle}"/>
