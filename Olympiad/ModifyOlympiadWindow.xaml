@@ -14,15 +14,24 @@
             <Style x:Key="tbStyle" TargetType="TextBox">
                 <Setter Property="Height" Value="25" />
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-            </Style>
+               <Setter Property="Grid.Column" Value="1"/>
+        </Style>
             <Style x:Key="txtStyle" TargetType="TextBlock">
+                <Setter Property="Grid.Column" Value="0"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="DisplayMemberPath" Value="Name"/>
+        </Style>
 
 
-        </Window.Resources>
-
+    </Window.Resources>
 
         <Grid   Margin="20">
             <Grid.ColumnDefinitions>
@@ -45,34 +54,34 @@
             </Grid.RowDefinitions>
             <TextBlock  Grid.ColumnSpan="3" Text="Olympiad" FontSize="16" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center"/>
             
-            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Year" Style="{StaticResource txtStyle}"/>
-            <TextBox Text="{Binding BYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Style="{StaticResource tbStyle}"/>
+            <TextBlock Grid.Row="1" Text="Year" Style="{StaticResource txtStyle}"/>
+            <TextBox Text="{Binding BYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource tbStyle}"/>
             
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="City" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Grid.Row="2" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Row="2" Text="City" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"   Style="{StaticResource cbStyle}"/>
             
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Season" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding BSeason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Grid.Row="3" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Row="3" Text="Season" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding BSeason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="3"  Style="{StaticResource cbStyle}"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Sp. Country" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding CountryFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Row="4"  Text="Sp. Country" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding Countries}"  SelectedItem="{Binding CountryFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4"  Style="{StaticResource cbStyle}"/>
 
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="Sp. Sport" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding OlympiadSports}"  DisplayMemberPath="Name"  SelectedItem="{Binding SportFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Height="25" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Row="5" Text="Sp. Sport" Style="{StaticResource txtStyle}"/>
+            <ComboBox ItemsSource="{Binding OlympiadSports}"   SelectedItem="{Binding SportFilter,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5"   Style="{StaticResource cbStyle}"/>
 
-        <StackPanel Orientation ="Vertical"  Grid.Row="6" Grid.ColumnSpan="2">
-            <TextBlock  Margin ="0,0,0,4" Text="Sportsman" Style="{StaticResource txtStyle}"/>
-            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsmans}" DisplayMemberPath="FullName"  SelectedItem="{Binding BOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
-        </StackPanel>
-        <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="6" Grid.Column="2">
-            <StackPanel  Orientation ="Vertical" Width="90" >
-                <TextBlock  Margin ="0,0,0,4" Text="Award" Style="{StaticResource txtStyle}"/>
-                <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding BAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+            <StackPanel Orientation ="Vertical"  Grid.Row="6" Grid.ColumnSpan="2">
+                <TextBlock  Margin ="0,0,0,4" Text="Sportsman" Style="{StaticResource txtStyle}"/>
+                <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding OlympiadSportsmans}" DisplayMemberPath="FullName"  SelectedItem="{Binding BOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
             </StackPanel>
-            <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding AddSportsmanAward}"/>
-        </StackPanel>
+            <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="6" Grid.Column="2">
+                <StackPanel  Orientation ="Vertical" Width="90" >
+                    <TextBlock  Margin ="0,0,0,4" Text="Award" Style="{StaticResource txtStyle}"/>
+                    <ComboBox ItemsSource="{Binding Awards}" DisplayMemberPath="Name"  SelectedItem="{Binding BAward,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+                </StackPanel>
+                <Button Margin="5,0,0,4" Content="Add" Width="50" Height="25" VerticalAlignment="Bottom" Command="{Binding AddSportsmanAward}"/>
+            </StackPanel>
 
-        <DataGrid SelectedItem="{Binding BAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding BAwardOlympiads}">
+            <DataGrid SelectedItem="{Binding BAwardOlympiad }" AutoGenerateColumns="False" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" ItemsSource="{Binding BAwardOlympiads}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Full Name" Width="2*" IsReadOnly="True" Binding="{Binding Sportsman.FullName}"/>
                     <DataGridTextColumn Header="Gender"  Width="*" IsReadOnly="True" Binding="{Binding Sportsman.Gender.Name}"/>
@@ -88,8 +97,8 @@
                 </DataGrid.ContextMenu>
             </DataGrid>
 
-        <Button Grid.Row="10" Grid.Column="0" Content="Save" Height="40" Width="100" Grid.ColumnSpan="2" Command="{Binding SaveOlympiad}" CommandParameter=""/>
+            <Button Grid.Row="10" Grid.Column="0" Content="Save" Height="40" Width="100" Grid.ColumnSpan="2" Command="{Binding SaveOlympiad}" CommandParameter=""/>
             <Button Grid.Row="10" Grid.Column="2" Content="Cancel" Height="40" Width="100" IsCancel="True" />
 
-    </Grid>
+        </Grid>
 </Window>

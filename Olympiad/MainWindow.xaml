@@ -80,7 +80,21 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-        
+
+        <Style x:Key="sportsmanElementStack" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
+        <Style x:Key="medalElementStack" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Vertical"/>
+            <Setter Property="Margin" Value="0,0,25,0"/>
+        </Style>
+
+        <Style x:Key="medalElementStack2" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Vertical"/>
+            <Setter Property="Margin" Value="0,10,25,10"/>
+        </Style>
+
     </Window.Resources>
 
     <TabControl Background="{StaticResource   headerGradient}" >
@@ -202,34 +216,34 @@
                                 <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Left" Width="550">
                                     <Image Source="{Binding Sportsman.Photo}" Height="80" Width="60" Stretch="Fill"/>
                                     <StackPanel Orientation="Vertical">
-                                        <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
+                                        <StackPanel  Style="{StaticResource sportsmanElementStack}">
                                             <Image Margin="5,0,5,0" Source="{Binding Sportsman.Country.FlagPath}" Width="30" Height="20" Stretch="Fill"/>
                                             <TextBlock Margin="5,0,5,0" Text="{Binding Sportsman.Country.Name}"/>
                                         </StackPanel>
-                                        <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
+                                        <StackPanel  Style="{StaticResource sportsmanElementStack}">
                                             <TextBlock Margin="5,0,5,0" Text="Name : "/>
                                             <TextBlock Margin="5,0,5,0" Text="{Binding Sportsman.FullName}"/>
                                         </StackPanel>
-                                        <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
+                                        <StackPanel  Style="{StaticResource sportsmanElementStack}">
                                             <TextBlock Margin="5,0,5,0" Text="Bithday : "/>
                                             <TextBlock Margin="5,0,5,0" Text="{Binding Sportsman.BirthdayStr}"/>
                                         </StackPanel>
-                                        <StackPanel Margin="5,0,5,0" Orientation="Horizontal">
+                                        <StackPanel  Style="{StaticResource sportsmanElementStack}">
                                             <TextBlock Margin="5,0,5,0" Text="Sport  : "/>
                                             <TextBlock Margin="5,0,5,0" Text="{Binding Sportsman.Sport.Name}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel  Orientation="Horizontal" VerticalAlignment="Center">
-                                    <StackPanel Orientation="Vertical" Margin="0,0,25,0">
+                                    <StackPanel Style="{StaticResource medalElementStack}">
                                         <Image Source="/Images/gold.png" Style="{StaticResource medalImage}"/>
                                         <TextBlock Text="{Binding Gold}" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="0,0,25,0">
+                                    <StackPanel Style="{StaticResource medalElementStack}">
                                         <Image Source="/Images/silver.png" Style="{StaticResource medalImage}"/>
                                         <TextBlock Text="{Binding Silver}" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="0,0,25,0">
+                                    <StackPanel Style="{StaticResource medalElementStack}">
                                         <Image Source="/Images/bronze.png" Style="{StaticResource medalImage}"/>
                                         <TextBlock Text="{Binding Bronze}" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -274,15 +288,15 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Margin="25,0,5,0" Text="{Binding Sport.Name}" Width="350" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
                                 <StackPanel  Orientation="Horizontal" VerticalAlignment="Center">
-                                    <StackPanel Orientation="Vertical" Margin="0,10,25,10">
+                                    <StackPanel Style="{StaticResource medalElementStack2}">
                                         <Image Source="/Images/gold.png" Style="{StaticResource medalImage}"/>
                                         <TextBlock Text="{Binding Gold}" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="0,10,25,10">
+                                    <StackPanel Style="{StaticResource medalElementStack2}">
                                         <Image Source="/Images/silver.png" Style="{StaticResource medalImage}"/>
                                         <TextBlock Text="{Binding Silver}" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="0,10,25,10">
+                                    <StackPanel Style="{StaticResource medalElementStack2}">
                                         <Image Source="/Images/bronze.png" Style="{StaticResource medalImage}"/>
                                         <TextBlock Text="{Binding Bronze}" HorizontalAlignment="Center"/>
                                     </StackPanel>
