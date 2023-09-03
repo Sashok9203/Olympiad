@@ -37,7 +37,7 @@
             <Image Source="{Binding BPhotoPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stretch="Fill"/>
         </Border>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <TextBox Text="{Binding BPhotoPath}"  Width="170" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding bPhotoPath , Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="170" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"/>
             <Button Margin="5,0,0,0" Content="..." Width="25" Height="25" VerticalContentAlignment="Center" Command="{Binding GetPhoto}"/>
         </StackPanel>
 

@@ -297,7 +297,7 @@
                         <ComboBox DisplayMemberPath="Description" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedOlympiadCR,Mode=TwoWay}" ItemsSource="{Binding ComboBoxOlympiad}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="0,10,0,0" Orientation ="Horizontal" >
-                        <TextBlock Text="Counry"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
+                        <TextBlock Text="Country"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
                         <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedCountryCR,Mode=TwoWay}" ItemsSource="{Binding Countries}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <Border Style="{StaticResource headerStyle}">

@@ -21,7 +21,7 @@ namespace OlympiadWPF.Models
             unitOW.Save();
             sptms = null;
             spAwOl = null;
-           // OnPropertyChanged("AllSportsmans");
+            OnPropertyChanged("AllSportsmans");
             OnPropertyChanged("Sportsmans");
             OnPropertyChanged("CountryResult");
             OnPropertyChanged("MedalTable");

@@ -19,11 +19,13 @@ namespace OlympiadWPF.Models
     {
         private ModifySpotrsmanWindow? SportsmanWindow;
 
-        private DateTime bBirthday;
+        private readonly string defaultPhoto = "Images/Sportsmans/NoPhoto.png";
+
+        public DateTime bBirthday;
 
         private Sport? bSport;
 
-        string? bPhotoPath;
+        public string? bPhotoPath { get; set; }
 
         private List<Gender>? genders = null;
 
@@ -38,7 +40,7 @@ namespace OlympiadWPF.Models
                 Country = BCountry,
                 Birthday = BBirthday,
                 Sport = BSport,
-                PhotoPath = BPhotoPath,
+                PhotoPath = bPhotoPath,
                 Gender = BGender
             };
             if (BAwardOlympiads.Count > 0)
@@ -68,17 +70,13 @@ namespace OlympiadWPF.Models
             spotrsman.Surname = BSurname;
             spotrsman.Country = BCountry;
             spotrsman.Sport = BSport;
-            spotrsman.PhotoPath = BPhotoPath;
+            spotrsman.PhotoPath = bPhotoPath;
             spotrsman.Gender  = BGender;
             spotrsman.Birthday = BBirthday;
             spotrsman.AwardOlympiads.Clear();
              foreach (var item in BAwardOlympiads)
                 spotrsman.AwardOlympiads.Add(item);
         }
-
-
-
-        
 
         private void deleteContextMenu(object o)
         {
@@ -107,7 +105,7 @@ namespace OlympiadWPF.Models
 
         private void ModifySportsman(bool newSportsman)
         {
-            if (newSportsman) setBValues(BSportsmanForEdit);
+            if (!newSportsman) setBValues(BSportsmanForEdit);
             else setBValues(); 
             countries?.RemoveAt(0);
             sports?.RemoveAt(0);
@@ -165,8 +163,12 @@ namespace OlympiadWPF.Models
 
         public string? BPhotoPath
         {
-            get =>  string.IsNullOrEmpty(bPhotoPath) ? "Images/Sportsmans/NoPhoto.png" : bPhotoPath;
-            set => bPhotoPath = value;
+            get =>  string.IsNullOrEmpty(bPhotoPath) ? defaultPhoto : bPhotoPath;
+            set
+            {
+                bPhotoPath = value ;
+                OnPropertyChanged("bPhotoPath");
+            }
         }
 
         public DateTime BBirthday 

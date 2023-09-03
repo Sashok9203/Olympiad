@@ -17,9 +17,9 @@ namespace Olympiad
     /// <summary>
     /// Логика взаимодействия для EditSpotrsmenWindow.xaml
     /// </summary>
-    public partial class EditSpotrsmenWindow : Window
+    public partial class EditSpotrsmanWindow : Window
     {
-        public EditSpotrsmenWindow()
+        public EditSpotrsmanWindow()
         {
             InitializeComponent();
         }

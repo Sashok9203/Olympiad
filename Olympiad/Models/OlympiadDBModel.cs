@@ -16,7 +16,7 @@ namespace OlympiadWPF.Models
 
     internal partial class OlympiadDBModel : INotifyPropertyChanged, IDisposable
     {
-        private EditSpotrsmenWindow? editSpotrsmanWindow;
+        private EditSpotrsmanWindow? editSpotrsmanWindow;
 
         private EditOlympiadWindow? editOlympiadWindow;
 
@@ -99,7 +99,9 @@ namespace OlympiadWPF.Models
 
         public List<Sportsman> AllSportsmans => sptms ??= unitOW.Sportsmans.Get(includeProperties: "Country,Sport,Gender").ToList();
 
-        public Country? TopCountry => Countries?.Where(x=>x.Id != -1 && x.Cities.Any(z=>z.Olympiads.Count>0)).OrderByDescending(y=>y.Cities.SelectMany(z=>z.Olympiads).Count()).FirstOrDefault();
+        public Country? TopCountry => Countries?.Where(x=>x.Id != -1 && x.Cities.Any(z=>z.Olympiads.Count>0))
+                                                .OrderByDescending(y=>y.Cities.SelectMany(z=>z.Olympiads).Count())
+                                                .ThenByDescending(x=>x.Sportsmens.SelectMany(z=>z.AwardOlympiads.Where(q=>q.Award!=null)).Count()).FirstOrDefault();
 
         public bool WithMedals 
         {
