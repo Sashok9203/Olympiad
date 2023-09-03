@@ -61,8 +61,12 @@ namespace OlympiadWPF.Models
         private Country? selectedCountryCR;
 
         private List<SportsmanAwardOlympiad> SpAwOlympiads => spAwOl ??= unitOW.SAOlympiad.Get(includeProperties: "Sportsman,Award,Olympiad").ToList();
-       
-        private void addSportsman(object o) => ModifySportsman(true);
+
+        private void addSportsman(object o)
+        {
+            isNew = true;
+            ModifySportsman(isNew);
+        }
 
         private void saveButton(object o)
         {
@@ -74,14 +78,20 @@ namespace OlympiadWPF.Models
 
         private void editSportsman(object o)
         {
+            isNew = false;
             editSpotrsmanWindow = new() {DataContext = this };
             editSpotrsmanWindow.ShowDialog();
         }
 
-        private void addOlympiad(object o) => ModifyOlimpiad(true);
+        private void addOlympiad(object o)
+        {
+            isNew = true;
+            ModifyOlimpiad(isNew);
+        }
         
         private void editOlympiad(object o)
         {
+            isNew = false;
             editOlympiadWindow = new() { DataContext = this };
             editOlympiadWindow.ShowDialog();
         }
@@ -127,9 +137,12 @@ namespace OlympiadWPF.Models
             set
             {
                 selectedOlympiadM = value;
-                SelectedSport = all_Sports;
-                OnPropertyChanged("SelectedSport");
-                OnPropertyChanged("ComboboxSports");
+                if (selectedOlympiadM?.SeasonId != SelectedSport?.SeasonId)
+                {
+                    SelectedSport = all_Sports;
+                    OnPropertyChanged("SelectedSport");
+                    OnPropertyChanged("ComboboxSports");
+                }
                 OnPropertyChanged("Sportsmans");
             }
         }

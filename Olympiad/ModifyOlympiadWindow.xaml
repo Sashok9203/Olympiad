@@ -7,7 +7,7 @@
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
         mc:Ignorable="d"
-        Title="Olympiad" Height="700" Width="750"  MinHeight="700" MinWidth="750" WindowStartupLocation="CenterScreen" Icon="/Images/Olympic_Logo.png">
+        Title="Olympiad" Height="700" Width="750"  MinHeight="700" MinWidth="750" WindowStartupLocation="CenterScreen" Icon="/Images/Olympic_Logo.png" Name="modifyOlympiad">
 
         <Window.Resources>
          
@@ -101,7 +101,7 @@
             </DataGrid>
         <Image Grid.Column="2" Margin="20,0,0,0" Grid.Row="1" Grid.RowSpan="5" Source="/Images/olympic_rings.png" />
         <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Right" Grid.Row="10" Grid.Column="1" Orientation="Horizontal">
-            <Button Margin="0,0,20,0" Content="Save" Height="40" Width="100"  Command="{Binding SaveOlympiad}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Margin="0,0,20,0" Content="Save" Height="40" Width="100"  Command="{Binding SaveOlympiad}" CommandParameter="{Binding ElementName=modifyOlympiad}"/>
             <Button  Content="Cancel" Height="40" Width="100" IsCancel="True" />
         </StackPanel>
     </Grid>

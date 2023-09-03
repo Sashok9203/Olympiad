@@ -28,6 +28,8 @@ namespace OlympiadWPF.Models
 
         private int bYear;
 
+        private bool isNew;
+
         private Olympiad_ getNewOlympiad()
         {
             Olympiad_ newOlympiad = new()
@@ -68,14 +70,14 @@ namespace OlympiadWPF.Models
 
         }
 
-        private void ModifyOlimpiad(bool isNew)
+        private void ModifyOlimpiad(bool newOlympiad)
         {
             modifyOlympiadWindow = new() { DataContext = this };
-            if (isNew) setOlympiadBValues();
+            if (newOlympiad) setOlympiadBValues();
             else setOlympiadBValues(BOlympiadForEdit);
             if (modifyOlympiadWindow.ShowDialog() == true)
             {
-                if (isNew) unitOW.Olympiads.Insert(getNewOlympiad());
+                if (newOlympiad) unitOW.Olympiads.Insert(getNewOlympiad());
                 else
                 {
                     setOlympiadFromBValues(BOlympiadForEdit);
@@ -86,7 +88,7 @@ namespace OlympiadWPF.Models
                 sptms = null;
                 spAwOl = null;
 
-                if (!isNew) OnPropertyChanged("AllSportsmans");
+                if (!newOlympiad) OnPropertyChanged("AllSportsmans");
                 OnPropertyChanged("ComboBoxOlympiad");
                 OnPropertyChanged("TopCountry");
             }
@@ -128,7 +130,7 @@ namespace OlympiadWPF.Models
 
         public IEnumerable<Season>? seasons => ssn ??= unitOW.Seasons.Get().ToList();
 
-        public IEnumerable<Season>? Seasons => seasons?.Where(x => !x.Olympiads.Any(y => y.Year == BYear));
+        public IEnumerable<Season>? Seasons => seasons?.Where(x =>(!isNew && (x.Id == BSeason?.Id || !x.Olympiads.Any(y => y.Year == BYear))) || !x.Olympiads.Any(y => y.Year == BYear));
 
         public IEnumerable<City>? Cities => cts;
 
@@ -145,9 +147,9 @@ namespace OlympiadWPF.Models
 
         public RelayCommand AddSportsmanAward => new((o) => addAwardSportsmen(o), (o) => BOlympiadSportsman != null);
 
-        public RelayCommand SaveOlympiad => new((o) => saveButton(o), (o => BYear >= 1896
+        public RelayCommand SaveOlympiad => new((o) => saveButton(o), (o) => BYear >= 1896
                                                                               && BCity !=null
-                                                                              && BSeason != null));
+                                                                              && BSeason != null);
         //Binding Properties
 
         public Olympiad_? BOlympiadForEdit { get; set; }
@@ -164,7 +166,10 @@ namespace OlympiadWPF.Models
                 {
                     List<SportsmanAwardOlympiad> temp = new();
                     foreach (var item in BAwardOlympiads)
-                        if (bYear - item.Sportsman.Birthday.Year >= 16 && (bYear - item.Sportsman.Birthday.Year <= 39)) temp.Add(item);
+                    {
+                        int age = bYear - item.Sportsman.Birthday.Year;
+                        if (age < 16 || age > 39) temp.Add(item);
+                    }
                     if (temp.Count > 0)
                         foreach (var item in temp)
                             BAwardOlympiads.Remove(item);
@@ -177,7 +182,7 @@ namespace OlympiadWPF.Models
 
        
 
-    public City? BCity { get; set; }
+        public City? BCity { get; set; }
 
         public Season? BSeason
         {

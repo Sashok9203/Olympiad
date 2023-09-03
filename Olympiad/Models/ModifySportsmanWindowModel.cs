@@ -105,9 +105,9 @@ namespace OlympiadWPF.Models
             OnPropertyChanged("BPhotoPath");
         }
 
-        private void ModifySportsman(bool isNew)
+        private void ModifySportsman(bool newSportsman)
         {
-            if (!isNew) setBValues(BSportsmanForEdit);
+            if (newSportsman) setBValues(BSportsmanForEdit);
             else setBValues(); 
             countries?.RemoveAt(0);
             sports?.RemoveAt(0);
@@ -115,7 +115,7 @@ namespace OlympiadWPF.Models
             SportsmanWindow = new() { DataContext = this };
             if (SportsmanWindow.ShowDialog() == true)
             {
-                if (isNew) unitOW.Sportsmans.Insert(getNewSportsman());
+                if (newSportsman) unitOW.Sportsmans.Insert(getNewSportsman());
                 else
                 {
                     setFromBValues(BSportsmanForEdit);
@@ -124,7 +124,7 @@ namespace OlympiadWPF.Models
                 unitOW.Save();
                 sptms = null;
                 spAwOl = null;
-                if (!isNew) OnPropertyChanged("AllSportsmans");
+                if (!newSportsman) OnPropertyChanged("AllSportsmans");
                 OnPropertyChanged("Sportsmans");
                 OnPropertyChanged("CountryResult");
                 OnPropertyChanged("MedalTable");
@@ -179,8 +179,11 @@ namespace OlympiadWPF.Models
                 if (BAwardOlympiads.Count > 0)
                 {
                     List<SportsmanAwardOlympiad> temp = new();
-                    foreach(var item in BAwardOlympiads)
-                        if (item.Olympiad?.Year - bBirthday.Year >= 16 && (item.Olympiad?.Year - bBirthday.Year <= 39)) temp.Add(item);
+                    foreach (var item in BAwardOlympiads)
+                    {
+                        int age = item.Olympiad.Year - bBirthday.Year;
+                        if (age < 16 || age > 39) temp.Add(item);
+                    }
                     if (temp.Count > 0)
                         foreach (var item in temp)
                             BAwardOlympiads.Remove(item);
