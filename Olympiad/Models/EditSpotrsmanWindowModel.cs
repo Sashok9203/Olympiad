@@ -21,21 +21,14 @@ namespace OlympiadWPF.Models
             unitOW.Save();
             sptms = null;
             spAwOl = null;
-            OnPropertyChanged("AllSportsmans");
+           // OnPropertyChanged("AllSportsmans");
             OnPropertyChanged("Sportsmans");
             OnPropertyChanged("CountryResult");
             OnPropertyChanged("MedalTable");
         }
 
         private void editButton(object o) => ModifySportsman(false);
-        
-
-        private void exitButton(object o) => editSpotrsmanWindow.DialogResult = true;
-       
-
         public RelayCommand DeleteButton => new((o)=> deleteButton(o));
         public RelayCommand EditButton => new((o) => editButton(o));
-        public RelayCommand ExitButton => new((o) => exitButton(o));
-
     }
 }

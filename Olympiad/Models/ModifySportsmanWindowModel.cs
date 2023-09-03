@@ -121,7 +121,7 @@ namespace OlympiadWPF.Models
             else setBValues(); 
             countries?.RemoveAt(0);
             sports?.RemoveAt(0);
-            olympiads?.RemoveAt(0);
+            olmp?.RemoveAt(0);
             SportsmanWindow = new() { DataContext = this };
             if (SportsmanWindow.ShowDialog() == true)
             {
@@ -141,14 +141,14 @@ namespace OlympiadWPF.Models
             }
             countries?.Insert(0, new() { Name = "All", Id = -1 });
             sports?.Insert(0, new() { Name = "All", Id = -1 });
-            olympiads?.Insert(0, new() { Id = -1 });
+            olmp?.Insert(0, new() { Id = -1 });
         }
 
         public IEnumerable<Award> Awards => awards;
 
         public IEnumerable<Gender> Genders => genders;
 
-        public IEnumerable<Olympiad_> EditWindowComboBoxOlympiads => olympiads.Where(x => x.SeasonId == BSport?.Season.Id 
+        public IEnumerable<Olympiad_>? EditWindowComboBoxOlympiads => Olympiads?.Where(x => x.SeasonId == BSport?.Season.Id 
                                                                                                     && !BAwardOlympiads.Any(y=>y.Olympiad.Id == x.Id)
                                                                                                     && x.Year > BBirthday.Year + 16);
 

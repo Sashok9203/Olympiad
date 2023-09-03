@@ -17,9 +17,18 @@ namespace OlympiadWPF.Models
     internal partial class OlympiadDBModel : INotifyPropertyChanged, IDisposable
     {
         private EditSpotrsmenWindow? editSpotrsmanWindow;
+
+        private EditOlympiadWindow? editOlympiadWindow;
+
         private bool disposedValue;
 
         private readonly IUnitOW unitOW;
+
+        private readonly Olympiad_ all_Olympiads = new() {  Id = -1  };
+
+        private readonly Country all_Countries = new() { Name = "All", Id = -1 };
+
+        private readonly Sport all_Sports = new() { Name = "All", Id = -1 };
 
         private bool idFilter(int id, int? selId)
         {
@@ -31,7 +40,7 @@ namespace OlympiadWPF.Models
 
         private List<Sport>? sports = null;
 
-        private List<Olympiad_>? olympiads;
+        private List<Olympiad_>? olmp = null;
 
         private List<Sportsman>? sptms = null;
 
@@ -67,7 +76,8 @@ namespace OlympiadWPF.Models
         
         private void editOlympiad(object o)
         {
-
+            editOlympiadWindow = new() { DataContext = this };
+            editOlympiadWindow.ShowDialog();
         }
 
 
@@ -151,8 +161,8 @@ namespace OlympiadWPF.Models
             {
                 if (countries == null)
                 {
-                    countries = new() { new() { Name = "All", Id = -1 } };
-                    countries.AddRange(unitOW.Countries.Get().OrderBy(x => x.Name));
+                    countries = new() { all_Countries };
+                    countries.AddRange(unitOW.Countries.Get(orderBy: (x) => x.OrderBy(z => z.Name)));
                 }
                 return countries;
             }
@@ -164,31 +174,28 @@ namespace OlympiadWPF.Models
             {
                 if (sports == null)
                 {
-                    sports = new() { new() { Name = "All", Id = -1 } };
-                    sports.AddRange(unitOW.Sports.Get(includeProperties: "Season").OrderBy(x => x.Name));
+                    sports = new() { all_Sports };
+                    sports.AddRange(unitOW.Sports.Get(includeProperties: "Season",orderBy:(x)=>x.OrderBy(z=>z.Name)));
                 }
                 return sports;
             }
         }
 
+        public IEnumerable<Olympiad_>? Olympiads => olmp ??= unitOW.Olympiads.Get(includeProperties: "City,Season", orderBy: (x) => x.OrderBy(z => z.Year)).ToList();
+
         public IEnumerable<Olympiad_> ComboBoxOlympiad
         {
             get
             {
-                if (olympiads == null)
-                {
-                    olympiads = new() { new() { Id = -1 } };
-                    var temp = unitOW.Olympiads.Get(includeProperties: "City,Season").OrderBy(x => x.Year);
-                    olympiads.AddRange(temp);
-                    selectedOlympiadMT = olympiads[0];
-                    selectedOlympiadM = olympiads[0];
-                    selectedOlympiadCR = olympiads[0];
-                    OnPropertyChanged("SelectedOlympiadMT");
-                    OnPropertyChanged("SelectedOlympiadM");
-                    OnPropertyChanged("SelectedOlympiadCR");
-                }
-                return olympiads;
+                 List<Olympiad_> olymp = new() { all_Olympiads };
+                 olymp.AddRange(Olympiads);
+                 OnPropertyChanged("SelectedOlympiadMT");
+                 OnPropertyChanged("SelectedOlympiadM");
+                 OnPropertyChanged("SelectedOlympiadCR");
+                 return olymp;
             }
+               
+            
         }
 
         public IEnumerable<CountryResultInfo>? CountryResult => sports?.Where(x => x.Id != -1 )
@@ -198,7 +205,7 @@ namespace OlympiadWPF.Models
                                                                           Gold = x.Sportsmans.Where(q=>idFilter(q.CountryId,SelectedCountryCR?.Id)).SelectMany(y => y.AwardOlympiads.Where(z => z.Award?.Name == "Gold" && idFilter(z.OlympiadId,SelectedOlympiadCR?.Id))).Count(),
                                                                           Silver = x.Sportsmans.Where(q => idFilter(q.CountryId, SelectedCountryCR?.Id)).SelectMany(y => y.AwardOlympiads.Where(z => z.Award?.Name == "Silver" && idFilter(z.OlympiadId, SelectedOlympiadCR?.Id))).Count(),
                                                                           Bronze = x.Sportsmans.Where(q => idFilter(q.CountryId, SelectedCountryCR?.Id)).SelectMany(y => y.AwardOlympiads.Where(z => z.Award?.Name == "Bronze" && idFilter(z.OlympiadId, SelectedOlympiadCR?.Id))).Count()
-                                                                      });
+                                                                      }).OrderByDescending(x => x.Gold).ThenByDescending(x => x.Silver).ThenByDescending(x => x.Bronze);
 
         public IEnumerable<SpotrsmenInfo> Sportsmans => AllSportsmans.Where(x => idFilter(x.SportId ,SelectedSport?.Id) && x.AwardOlympiads.Any(y=>((y.Award != null) || !WithMedals) && idFilter(y.Sportsman.CountryId ,SelectedCountry?.Id) && idFilter(y.OlympiadId,SelectedOlympiadM?.Id)))
                                                                   .Select(x=> new SpotrsmenInfo()
@@ -207,7 +214,7 @@ namespace OlympiadWPF.Models
                                                                       Gold = x.AwardOlympiads.Where(y=>y.Award?.Name == "Gold" && idFilter(y.OlympiadId, SelectedOlympiadM?.Id)).Count(),
                                                                       Silver = x.AwardOlympiads.Where(y => y.Award?.Name == "Silver" && idFilter(y.OlympiadId, SelectedOlympiadM?.Id)).Count(),
                                                                       Bronze = x.AwardOlympiads.Where(y => y.Award?.Name == "Bronze" && idFilter(y.OlympiadId, SelectedOlympiadM?.Id)).Count(),
-                                                                  }).OrderByDescending(x=>x.Gold);
+                                                                  }).OrderByDescending(x=>x.Gold).ThenByDescending(x=>x.Silver).ThenByDescending(x=>x.Bronze);
 
         public IEnumerable<MedalTableInfo> MedalTable => SpAwOlympiads.Where(x=> idFilter(x.OlympiadId, SelectedOlympiadMT?.Id))
                                                                     .GroupBy(x=>x.Sportsman.Country)
@@ -218,13 +225,16 @@ namespace OlympiadWPF.Models
                                                                         Gold =  y.Where(x => x.Award?.Name == "Gold").Count(),
                                                                         Silver = y.Where(x => x.Award?.Name == "Silver").Count(),
                                                                         Bronze = y.Where(x => x.Award?.Name == "Bronze").Count(),
-                                                                    }).OrderByDescending(x=>x.Total);
+                                                                    }).OrderByDescending(x=>x.Total).ThenByDescending(x=>x.Gold).ThenByDescending(x=>x.Silver).ThenByDescending(x=>x.Bronze);
 
         public OlympiadDBModel() 
         {
             unitOW = new UnitOfWork();
-            cts = unitOW.Cities.Get().OrderBy(x => x.Name).ToList();
-            unitOW.Olympiads.Get();
+            cts = unitOW.Cities.Get(orderBy: (x) => x.OrderBy(z => z.Name)).ToList();
+            olmp = unitOW.Olympiads.Get(includeProperties: "City,Season").ToList();
+            selectedOlympiadMT = all_Olympiads;
+            selectedOlympiadM = all_Olympiads;
+            selectedOlympiadCR = all_Olympiads;
         }
 
         public RelayCommand AddSportsman => new((o) => addSportsman(o));

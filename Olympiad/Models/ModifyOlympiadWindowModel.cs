@@ -16,6 +16,8 @@ namespace OlympiadWPF.Models
     {
         private ModifyOlympiadWindow? modifyOlympiadWindow;
 
+        public Olympiad_ BOlympiadForEdit { get; set; }
+
         private Sport? sportFilter;
 
         private Country? countryFilter;
@@ -66,20 +68,34 @@ namespace OlympiadWPF.Models
            
         }
 
+        private void setOlympiadFromBValues(Olympiad_ olympiad)
+        {
+
+            olympiad.Year = BYear;
+            olympiad.City  = BCity;
+            olympiad.Season = BSeason;
+            olympiad.SportsmanAward.Clear();
+            if (BAwardOlympiads.Count > 0)
+                foreach (var item in BAwardOlympiads)
+                    olympiad.SportsmanAward.Add(item);
+
+        }
+
         private void ModifyOlimpiad(bool isNew)
         {
             modifyOlympiadWindow = new() { DataContext = this };
-            setOlympiadBValues();
+            if (isNew) setOlympiadBValues();
+            else setOlympiadBValues(BOlympiadForEdit);
             if (modifyOlympiadWindow.ShowDialog() == true)
             {
                 if (isNew) unitOW.Olympiads.Insert(getNewOlympiad());
                 else
                 {
-                    //copySportsman(EditableSportsman, SlectedSportsmanForEdit);
-                    //unitOW.Sportsmans.Update(SlectedSportsmanForEdit);
+                    setOlympiadFromBValues(BOlympiadForEdit);
+                    unitOW.Olympiads.Update(BOlympiadForEdit);
                 }
                 unitOW.Save();
-                olympiads = null;
+                olmp = null;
                 sptms = null;
                 spAwOl = null;
 
@@ -89,7 +105,7 @@ namespace OlympiadWPF.Models
             }
         }
 
-        public IEnumerable<Season>? Seasons => seasons.Where(x=>!x.Olympiads.Any(y => y.Year == BYear));
+        public IEnumerable<Season>? Seasons => seasons?.Where(x=>!x.Olympiads.Any(y => y.Year == BYear));
 
         public IEnumerable<City>? Cities => cts;
 
