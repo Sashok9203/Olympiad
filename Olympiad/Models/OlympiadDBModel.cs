@@ -64,13 +64,19 @@ namespace OlympiadWPF.Models
        
         private void addSportsman(object o) => ModifySportsman(true);
 
+        private void saveButton(object o)
+        {
+            if (MessageBox.Show("Are you sure?", "Save changes",
+                   MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No,
+                   MessageBoxOptions.DefaultDesktopOnly) == MessageBoxResult.Yes)
+                (o as Window).DialogResult = true;
+        }
 
         private void editSportsman(object o)
         {
             editSpotrsmanWindow = new() {DataContext = this };
             editSpotrsmanWindow.ShowDialog();
         }
-
 
         private void addOlympiad(object o) => ModifyOlimpiad(true);
         

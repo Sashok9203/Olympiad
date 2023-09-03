@@ -16,8 +16,6 @@ namespace OlympiadWPF.Models
     {
         private ModifyOlympiadWindow? modifyOlympiadWindow;
 
-        public Olympiad_ BOlympiadForEdit { get; set; }
-
         private Sport? sportFilter;
 
         private Country? countryFilter;
@@ -28,18 +26,7 @@ namespace OlympiadWPF.Models
 
         private List<Season>? ssn = null;
 
-        public IEnumerable<Season>? seasons => ssn ??= unitOW.Seasons.Get().ToList();
-
         private int bYear;
-
-        private void saveOlympiadButton(object o)
-        {
-
-            if (MessageBox.Show("Are you sure?", "Save changes",
-                   MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No,
-                   MessageBoxOptions.DefaultDesktopOnly) == MessageBoxResult.Yes)
-                modifyOlympiadWindow.DialogResult = true;
-        }
 
         private Olympiad_ getNewOlympiad()
         {
@@ -105,12 +92,6 @@ namespace OlympiadWPF.Models
             }
         }
 
-        public IEnumerable<Season>? Seasons => seasons?.Where(x=>!x.Olympiads.Any(y => y.Year == BYear));
-
-        public IEnumerable<City>? Cities => cts;
-
-        
-
         private void addAwardSportsmen(object o)
         {
             BAwardOlympiads.Add(new() { Sportsman = BOlympiadSportsman, Award = BAward });
@@ -145,6 +126,13 @@ namespace OlympiadWPF.Models
             }
         }
 
+        public IEnumerable<Season>? seasons => ssn ??= unitOW.Seasons.Get().ToList();
+
+        public IEnumerable<Season>? Seasons => seasons?.Where(x => !x.Olympiads.Any(y => y.Year == BYear));
+
+        public IEnumerable<City>? Cities => cts;
+
+
         public IEnumerable<Sport>? OlympiadSports => Sports?.Where(x => x.Id ==-1 || x.SeasonId == BSeason?.Id);
 
         public IEnumerable<Sportsman> OlympiadSportsmans => AllSportsmans.Where(x => idFilter(x.SportId , SportFilter?.Id) 
@@ -156,10 +144,12 @@ namespace OlympiadWPF.Models
 
         public RelayCommand AddSportsmanAward => new((o) => addAwardSportsmen(o), (o) => BOlympiadSportsman != null);
 
-        public RelayCommand SaveOlympiad => new((o) => saveOlympiadButton(o), (o => BYear >= 1896
+        public RelayCommand SaveOlympiad => new((o) => saveButton(o), (o => BYear >= 1896
                                                                               && BCity !=null
                                                                               && BSeason != null));
         //Binding Properties
+
+        public Olympiad_? BOlympiadForEdit { get; set; }
 
         public Sportsman? BOlympiadSportsman { get; set; }
 

@@ -82,13 +82,7 @@ namespace OlympiadWPF.Models
 
 
 
-        private void saveButton(object o)
-        {
-            if (MessageBox.Show("Are you sure?", "Save changes",
-                   MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No, 
-                   MessageBoxOptions.DefaultDesktopOnly) == MessageBoxResult.Yes)
-                SportsmanWindow.DialogResult = true;
-        }
+        
 
         private void deleteContextMenu(object o)
         {
