@@ -15,7 +15,6 @@ namespace data_access.Entities.Configs
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(56);
             builder.Property(x => x.PhotoPath).HasMaxLength(256);
-            builder.HasIndex(x => x.Name).IsUnique();
             builder.ToTable(t => t.HasCheckConstraint("Name_check", "[Name] <> ''"));
             builder.ToTable(t => t.HasCheckConstraint("Birthday_check", "Birthday < getdate()"));
             builder.Ignore(x=>x.FullName);

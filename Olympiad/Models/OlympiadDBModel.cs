@@ -127,6 +127,9 @@ namespace OlympiadWPF.Models
             set
             {
                 selectedOlympiadM = value;
+                SelectedSport = all_Sports;
+                OnPropertyChanged("SelectedSport");
+                OnPropertyChanged("ComboboxSports");
                 OnPropertyChanged("Sportsmans");
             }
         }
@@ -187,6 +190,8 @@ namespace OlympiadWPF.Models
             }
         }
 
+        public IEnumerable<Sport>? ComboboxSports => Sports?.Where( x=>x.Id == -1 || selectedOlympiadM?.SeasonId == 0 || (x.Id != -1 && x.SeasonId == selectedOlympiadM?.SeasonId));
+
         public IEnumerable<Olympiad_>? Olympiads => olmp ??= unitOW.Olympiads.Get(includeProperties: "City,Season", orderBy: (x) => x.OrderBy(z => z.Year)).ToList();
 
         public IEnumerable<Olympiad_> ComboBoxOlympiad
@@ -231,7 +236,7 @@ namespace OlympiadWPF.Models
                                                                         Gold =  y.Where(x => x.Award?.Name == "Gold").Count(),
                                                                         Silver = y.Where(x => x.Award?.Name == "Silver").Count(),
                                                                         Bronze = y.Where(x => x.Award?.Name == "Bronze").Count(),
-                                                                    }).OrderByDescending(x=>x.Total).ThenByDescending(x=>x.Gold).ThenByDescending(x=>x.Silver).ThenByDescending(x=>x.Bronze);
+                                                                    }).OrderByDescending(x=>x.Gold).ThenByDescending(x=>x.Silver).ThenByDescending(x=>x.Bronze);
 
         public OlympiadDBModel() 
         {

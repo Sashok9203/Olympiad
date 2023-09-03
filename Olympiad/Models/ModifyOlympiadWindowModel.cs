@@ -139,7 +139,8 @@ namespace OlympiadWPF.Models
                                                                                          && idFilter(x.CountryId, CountryFilter?.Id)
                                                                                          && x.Sport.SeasonId == BSeason?.Id
                                                                                          && !BAwardOlympiads.Any(y=>y.Sportsman.Id == x.Id)
-                                                                                         && BYear > x.Birthday.Year + 16);
+                                                                                         && BYear - x.Birthday.Year >= 16
+                                                                                         && (BYear - x.Birthday.Year <= 39));
 
 
         public RelayCommand AddSportsmanAward => new((o) => addAwardSportsmen(o), (o) => BOlympiadSportsman != null);
@@ -163,7 +164,7 @@ namespace OlympiadWPF.Models
                 {
                     List<SportsmanAwardOlympiad> temp = new();
                     foreach (var item in BAwardOlympiads)
-                        if (bYear < item.Sportsman.Birthday.Year + 16) temp.Add(item);
+                        if (bYear - item.Sportsman.Birthday.Year >= 16 && (bYear - item.Sportsman.Birthday.Year <= 39)) temp.Add(item);
                     if (temp.Count > 0)
                         foreach (var item in temp)
                             BAwardOlympiads.Remove(item);

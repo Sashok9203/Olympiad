@@ -85,6 +85,12 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
 
+        <Style x:Key="medalResultText" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
         <Style x:Key="sportsmanElementStack" TargetType="StackPanel">
             <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="Margin" Value="5,0,5,0"/>
@@ -182,10 +188,10 @@
                                     <Image Source="{Binding Flag}"   Height="40" Width="60" Margin="15,5,0,0" Stretch="Fill"/>
                                     <TextBlock  Text ="{Binding Country.Name}" FontSize="19" Margin="15,5,5,5" />
                                 </StackPanel>
-                                <TextBlock Grid.Column="1" Text ="{Binding Gold}"    FontSize="18"  HorizontalAlignment="Center"/>
-                                <TextBlock Grid.Column="2" Text ="{Binding Silver}"  FontSize="18"  HorizontalAlignment="Center"/>
-                                <TextBlock Grid.Column="3" Text ="{Binding Bronze}"  FontSize="18" HorizontalAlignment="Center"/>
-                                <TextBlock Grid.Column="4" Text ="{Binding Total}"   FontSize="18"  HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text ="{Binding Gold}"    Style="{StaticResource medalResultText}"/>
+                                <TextBlock Grid.Column="2" Text ="{Binding Silver}"  Style="{StaticResource medalResultText}"/>
+                                <TextBlock Grid.Column="3" Text ="{Binding Bronze}"  Style="{StaticResource medalResultText}"/>
+                                <TextBlock Grid.Column="4" Text ="{Binding Total}"   Style="{StaticResource medalResultText}"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -210,7 +216,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel  Orientation ="Horizontal"  Margin="20,10,0,10" >
                         <TextBlock Text="Sport" Margin="0,0,30,0" VerticalAlignment="Center" FontSize="16" Foreground="White" />
-                        <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedSport}" ItemsSource="{Binding Sports}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
+                        <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedSport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ComboboxSports}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation ="Horizontal"  Margin="20,0,0,0" >
                         <TextBlock Text="Qlympiad"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
