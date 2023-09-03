@@ -215,6 +215,9 @@ namespace OlympiadWPF.Models
             {
                  List<Olympiad_> olymp = new() { all_Olympiads };
                  olymp.AddRange(Olympiads);
+                 SelectedOlympiadMT = all_Olympiads;
+                 SelectedOlympiadM = all_Olympiads;
+                 SelectedOlympiadCR = all_Olympiads;
                  OnPropertyChanged("SelectedOlympiadMT");
                  OnPropertyChanged("SelectedOlympiadM");
                  OnPropertyChanged("SelectedOlympiadCR");
