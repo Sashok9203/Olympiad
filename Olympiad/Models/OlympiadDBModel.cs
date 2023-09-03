@@ -222,7 +222,7 @@ namespace OlympiadWPF.Models
             
         }
 
-        public IEnumerable<CountryResultInfo>? CountryResult => sports?.Where(x => x.Id != -1 )
+        public IEnumerable<CountryResultInfo>? CountryResult => sports?.Where(x => x.Id != -1 && (SelectedOlympiadCR?.Id == -1 || SelectedOlympiadCR?.SeasonId == x.SeasonId) )
                                                                       .Select(x => new CountryResultInfo()
                                                                       {
                                                                           Sport = x,
