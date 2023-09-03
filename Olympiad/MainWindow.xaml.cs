@@ -23,9 +23,7 @@ namespace OlympiadWPF
     {
         public MainWindow()
         {
-           // HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
             InitializeComponent();
-           
         }
     }
 }

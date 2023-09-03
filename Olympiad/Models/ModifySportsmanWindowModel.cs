@@ -25,13 +25,9 @@ namespace OlympiadWPF.Models
 
         string? bPhotoPath;
 
-        private List<Gender>? gndr = null;
+        private List<Gender>? genders = null;
 
-        private List<Award>? awd = null;
-
-        private List<Gender> genders => gndr ??= unitOW.Genders.Get().ToList();
-
-        private List<Award> awards => awd ??= unitOW.Awards.Get().ToList();
+        private List<Award>? awards = null;
 
         private Sportsman getNewSportsman()
         {
@@ -138,9 +134,9 @@ namespace OlympiadWPF.Models
             olmp?.Insert(0, new() { Id = -1 });
         }
 
-        public IEnumerable<Award> Awards => awards;
+        public IEnumerable<Award> Awards => awards ??= unitOW.Awards.Get().ToList();
 
-        public IEnumerable<Gender> Genders => genders;
+        public IEnumerable<Gender> Genders => genders ??= unitOW.Genders.Get().ToList();
 
         public IEnumerable<Olympiad_>? EditWindowComboBoxOlympiads => Olympiads?.Where(x => x.SeasonId == BSport?.Season.Id 
                                                                                                     && !BAwardOlympiads.Any(y=>y.Olympiad.Id == x.Id)

@@ -6,12 +6,16 @@
         xmlns:local="clr-namespace:OlympiadWPF"
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         mc:Ignorable="d"
-        Title="OlympiadBD" Height="700" Width="900" MinWidth="700" MinHeight="450" Background="#FF7D84DE">
+        Title="OlympiadBD" Height="700" Width="900" MinWidth="700" MinHeight="450" Icon="/Images/Olympic_Logo.png" WindowStartupLocation="CenterScreen" >
 
     <Window.DataContext>
         <vms:OlympiadDBModel/>
     </Window.DataContext>
-
+    
+    <Window.Background>
+        <StaticResource ResourceKey="windowsBackground" />
+    </Window.Background>
+    
     <Window.Resources>
         
         <LinearGradientBrush x:Key ="headerGradient"  EndPoint="0.5,1" StartPoint="0.5,0">
@@ -94,7 +98,6 @@
             <Setter Property="Orientation" Value="Vertical"/>
             <Setter Property="Margin" Value="0,10,25,10"/>
         </Style>
-
     </Window.Resources>
 
     <TabControl Background="{StaticResource   headerGradient}" >

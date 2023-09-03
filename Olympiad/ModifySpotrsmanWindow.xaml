@@ -7,48 +7,16 @@
         d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
         xmlns:local="clr-namespace:Olympiad"
         mc:Ignorable="d"
-        Title="Spotrsman" Height="700" Width="750"  MinHeight="700" MinWidth="750">
-        
-
-    <Window.Resources>
-
-        <Style x:Key="tbStyle" TargetType="TextBox">
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="Grid.ColumnSpan" Value="2"/>
-        </Style>
-        <Style x:Key="txtStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Grid.Column" Value="0"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style x:Key="cbStyle" TargetType="ComboBox">
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Grid.ColumnSpan" Value="2"/>
-            <Setter Property="DisplayMemberPath" Value="Name"/>
-        </Style>
-    </Window.Resources>
+        Title="Spotrsman" Height="700" Width="750"  MinHeight="700" MinWidth="750" Icon="/Images/olynpic_sportsman.png" WindowStartupLocation="CenterScreen">
     
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
-            <GradientStop Color="#FF484C80" Offset="0.851"/>
-            <GradientStop Color="#FF484C80" Offset="0.183"/>
-        </LinearGradientBrush>
+        <StaticResource ResourceKey="windowsBackground" />
     </Window.Background>
-
-
 
     <Grid   Margin="20" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="90"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -64,12 +32,12 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Sportsman" FontSize="26" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
+        <TextBlock Grid.Column="1"  Text="Sportsman" FontSize="26" HorizontalAlignment="Center" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White"/>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" Width="60" Height="80" BorderThickness ="1" CornerRadius="3" BorderBrush="DarkGray">
             <Image Source="{Binding BPhotoPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stretch="Fill"/>
         </Border>
-        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox Text="{Binding BPhotoPath}"  Width="212" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <TextBox Text="{Binding BPhotoPath}"  Width="170" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"/>
             <Button Margin="5,0,0,0" Content="..." Width="25" Height="25" VerticalContentAlignment="Center" Command="{Binding GetPhoto}"/>
         </StackPanel>
 
@@ -83,7 +51,7 @@
         <ComboBox ItemsSource="{Binding Genders}"  SelectedItem="{Binding BGender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4"   Style="{StaticResource cbStyle}"/>
 
         <TextBlock Grid.Row="5"  Text="Birthday" Style="{StaticResource txtStyle}"/>
-        <DatePicker Grid.Row="5" SelectedDate="{Binding BBirthday,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <DatePicker Grid.Row="5" SelectedDate="{Binding BBirthday,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Grid.Column="1" VerticalAlignment="Center" />
         
         <TextBlock Grid.Row="6"  Text="Country" Style="{StaticResource txtStyle}"/>
         <ComboBox ItemsSource="{Binding Countries}"  SelectedItem="{Binding BCountry,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Style="{StaticResource cbStyle}"/>
@@ -93,7 +61,7 @@
 
         <StackPanel Orientation ="Vertical"  Grid.Row="8" Grid.ColumnSpan="2">
             <TextBlock  Margin ="0,0,0,4" Text="Olympiad" Style="{StaticResource txtStyle}"/>
-            <ComboBox Margin ="0,0,5,0" ItemsSource="{Binding EditWindowComboBoxOlympiads}" DisplayMemberPath="SmallDescription"  SelectedItem="{Binding BOlympiad,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
+            <ComboBox ItemsSource="{Binding EditWindowComboBoxOlympiads}" DisplayMemberPath="SmallDescription"  SelectedItem="{Binding BOlympiad,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" />
         </StackPanel>
         <StackPanel Margin ="5,0,0,0" Orientation ="Horizontal" Grid.Row="8" Grid.Column="2">
             <StackPanel  Orientation ="Vertical" Width="90" >

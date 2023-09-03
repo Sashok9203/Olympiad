@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:vms="clr-namespace:OlympiadWPF.Models"
         d:DataContext="{d:DesignInstance Type = vms:OlympiadDBModel}"
-        Title="Edit Spotrsmen" Height="500" Width="700" MinHeight="500" MinWidth="700">
+        Title="Edit Spotrsmen" Height="500" Width="700" MinHeight="500" MinWidth="700" Icon="/Images/olynpic_sportsman.png" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -17,11 +17,7 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
-            <GradientStop Color="#FF484C80" Offset="0.851"/>
-            <GradientStop Color="#FF484C80" Offset="0.183"/>
-        </LinearGradientBrush>
+        <StaticResource ResourceKey="windowsBackground" />
     </Window.Background>
     <Grid>
          <Grid.RowDefinitions>

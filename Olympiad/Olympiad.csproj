@@ -48,11 +48,13 @@
     <None Remove="Images\Flags\Flag_of_Ukraine.png" />
     <None Remove="Images\Flags\Unknown_Flag.png" />
     <None Remove="Images\gold.png" />
+    <None Remove="Images\olympiad.png" />
     <None Remove="Images\Olympic_Logo.png" />
     <None Remove="Images\Olympic_Logo2.png" />
     <None Remove="Images\olympic_rings.png" />
     <None Remove="Images\olynpic_sportsman.png" />
     <None Remove="Images\silver.png" />
+    <None Remove="Images\sportsman.png" />
     <None Remove="Images\Sportsmans\box.png" />
     <None Remove="Images\Sportsmans\NoPhoto.png" />
   </ItemGroup>

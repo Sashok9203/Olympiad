@@ -4,6 +4,33 @@
              xmlns:local="clr-namespace:OlympiadWPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style x:Key="tbStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="1"/>
+        </Style>
+
+        <Style x:Key="txtStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style x:Key="cbStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="DisplayMemberPath" Value="Name"/>
+        </Style>
+
+        <LinearGradientBrush  x:Key="windowsBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF8A92F7" Offset="0.514"/>
+            <GradientStop Color="#FF484C80" Offset="0.851"/>
+            <GradientStop Color="#FF484C80" Offset="0.183"/>
+        </LinearGradientBrush>
+
     </Application.Resources>
 </Application>
