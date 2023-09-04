@@ -219,11 +219,11 @@
                         <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedSport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ComboboxSports}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation ="Horizontal"  Margin="20,0,0,0" >
-                        <TextBlock Text="Qlympiad"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
+                        <TextBlock Text="Olympiad"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
                         <ComboBox DisplayMemberPath="Description" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedOlympiadM,Mode=TwoWay}" ItemsSource="{Binding ComboBoxOlympiad}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation ="Horizontal" >
-                        <TextBlock Text="Counry"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
+                        <TextBlock Text="Country"  VerticalAlignment="Center" FontSize="16"  Foreground="White" />
                         <ComboBox DisplayMemberPath="Name" Margin="10,0,0,0" SelectedIndex="0" Width="Auto" SelectedItem="{Binding SelectedCountry,Mode=TwoWay}" ItemsSource="{Binding Countries}" DockPanel.Dock="Left"   Height="25" FontSize="15" />
                     </StackPanel>
                     <CheckBox Grid.Column="1" Grid.Row="1"  Content="With medals" VerticalContentAlignment="Center" IsChecked="{Binding WithMedals,Mode =TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
