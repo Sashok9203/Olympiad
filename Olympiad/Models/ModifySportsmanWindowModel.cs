@@ -1,6 +1,5 @@
 ﻿using data_access.Entities;
 using data_access.Repositories;
-using Google.Protobuf.WellKnownTypes;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using Olympiad;

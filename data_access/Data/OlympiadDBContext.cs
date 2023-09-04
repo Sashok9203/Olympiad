@@ -16,7 +16,7 @@ namespace data_access.Data
     {
         public OlympiadDBContext()
         {
-           // Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
             
         }

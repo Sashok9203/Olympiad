@@ -22,7 +22,6 @@
             <Setter Property="Height" Value="25" />
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="Height" Value="25"/>
             <Setter Property="DisplayMemberPath" Value="Name"/>
         </Style>
 

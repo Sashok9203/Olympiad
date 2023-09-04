@@ -47,7 +47,16 @@
             <TextBox Text="{Binding BYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"  Grid.Row="1" Style="{StaticResource tbStyle}"/>
             
             <TextBlock Grid.Row="3" Text="City" Style="{StaticResource txtStyle}"/>
-            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="3"   Style="{StaticResource cbStyle}"/>
+            <ComboBox ItemsSource="{Binding Cities}"  SelectedItem="{Binding BCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Height="25">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Country.FlagPath}" Width="20" Margin="0,0,5,0"/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            </ComboBox>
             
             <TextBlock Grid.Row="2" Text="Season" Style="{StaticResource txtStyle}"/>
             <ComboBox ItemsSource="{Binding Seasons}"  SelectedItem="{Binding BSeason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"  Style="{StaticResource cbStyle}"/>
@@ -63,15 +72,21 @@
                 <ComboBox  ItemsSource="{Binding OlympiadSportsmans}"  SelectedItem="{Binding BOlympiadSportsman,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel LastChildFill="True">
-                            <StackPanel Orientation="Horizontal" Margin="3" DockPanel.Dock="Left">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Margin="2,0,2,0" Source="{Binding Country.FlagPath}" Width="20" Height="15" Stretch="Fill"/>
-                                    <TextBlock Margin="2,0,2,0" Text="{Binding FullName}"/>
-                                    <TextBlock Margin="2,0,2,0" Text="{Binding Sport.Name}"/>
-                                </StackPanel>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <Image Margin="2,0,2,0" Source="{Binding Country.FlagPath}" Width="20" Height="15" Stretch="Fill"/>
+                                <TextBlock Margin="2,0,2,0" Text="{Binding FullName}"/>
                             </StackPanel>
-                        </DockPanel >
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,0,0" HorizontalAlignment="Left">
+                                <TextBlock Text="-=" FontWeight="DemiBold"/>
+                                <TextBlock Margin="2,0,2,0" Text="{Binding Sport.Name}" FontWeight="DemiBold"/>
+                                <TextBlock Text="=-" FontWeight="DemiBold"/>
+                            </StackPanel>
+                         </Grid >
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

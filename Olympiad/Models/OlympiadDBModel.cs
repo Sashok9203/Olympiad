@@ -1,7 +1,5 @@
 ﻿using data_access.Entities;
 using data_access.Repositories;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Olympiad;
 using OlympiadWPF.Models.CommonClasses;
 using System;
@@ -259,7 +257,7 @@ namespace OlympiadWPF.Models
         public OlympiadDBModel() 
         {
             unitOW = new UnitOfWork();
-            cts = unitOW.Cities.Get(orderBy: (x) => x.OrderBy(z => z.Name)).ToList();
+            cts = unitOW.Cities.Get(orderBy: (x) => x.OrderBy(z => z.Country.Name)).ToList();
             olmp = unitOW.Olympiads.Get(includeProperties: "City,Season").ToList();
             selectedOlympiadMT = all_Olympiads;
             selectedOlympiadM = all_Olympiads;
