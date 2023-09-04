@@ -12,7 +12,7 @@ using data_access.Data;
 namespace data_access.Migrations
 {
     [DbContext(typeof(OlympiadDBContext))]
-    [Migration("20230904074158_Create")]
+    [Migration("20230904075434_Create")]
     partial class Create
     {
         /// <inheritdoc />
