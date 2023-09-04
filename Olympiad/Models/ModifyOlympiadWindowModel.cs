@@ -67,7 +67,7 @@ namespace OlympiadWPF.Models
             if (BAwardOlympiads.Count > 0)
                 foreach (var item in BAwardOlympiads)
                     olympiad.SportsmanAward.Add(item);
-
+            BAwardOlympiads.Clear();
         }
 
         private void ModifyOlimpiad(bool newOlympiad)

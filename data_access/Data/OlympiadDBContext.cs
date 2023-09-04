@@ -17,7 +17,7 @@ namespace data_access.Data
         public OlympiadDBContext()
         {
             //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+           // Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,7 +37,7 @@ namespace data_access.Data
             modelBuilder.ApplyConfiguration<Sport>(new SportConfig());
             modelBuilder.ApplyConfiguration<Sportsman>(new SportsmanConfig());
             modelBuilder.ApplyConfiguration<SportsmanAwardOlympiad>(new SportsmanAwardOlympiadConfig());
-            //DefaultData.Initialize(modelBuilder);
+           // DefaultData.Initialize(modelBuilder);
         }
 
         public DbSet<City> Cities { get; set; }

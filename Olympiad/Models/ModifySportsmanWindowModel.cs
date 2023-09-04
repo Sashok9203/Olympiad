@@ -75,6 +75,7 @@ namespace OlympiadWPF.Models
             spotrsman.AwardOlympiads.Clear();
              foreach (var item in BAwardOlympiads)
                 spotrsman.AwardOlympiads.Add(item);
+            BAwardOlympiads.Clear();
         }
 
         private void deleteContextMenu(object o)
