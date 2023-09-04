@@ -22,6 +22,7 @@ namespace OlympiadWPF.Models
             olmp = null;
             sptms = null;
             spAwOl = null;
+            OnPropertyChanged("ComboBoxOlympiad");
             OnPropertyChanged("Olympiads");
             OnPropertyChanged("Sportsmans");
             OnPropertyChanged("CountryResult");
