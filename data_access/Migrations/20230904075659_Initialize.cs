@@ -5131,10 +5131,7 @@ namespace data_access.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
-             
-
-           
+               
         }
     }
 }
