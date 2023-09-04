@@ -31,8 +31,30 @@ namespace OlympiadWPF.Models
 
         private void editButton(object o) => ModifySportsman(false);
 
+        private Sport bESSport;
 
-        public IEnumerable<Sportsman> EditAllSportsmans => AllSportsmans.Where(x=> (BSport?.Id == -1 || x.SportId == BSport?.Id) && (BCountry?.Id == -1 || x.CountryId == BCountry?.Id));
+        public Sport BESSport
+        {
+            get => bESSport;
+            set 
+            {
+                bESSport = value;
+                OnPropertyChanged("EditAllSportsmans");
+            }
+        }
+
+        private Country bESCountry;
+
+        public Country BESCountry
+        {
+            get => bESCountry;
+            set
+            {
+                bESCountry = value;
+                OnPropertyChanged("EditAllSportsmans");
+            }
+        }
+        public IEnumerable<Sportsman> EditAllSportsmans => AllSportsmans.Where(x=> (BESSport?.Id == -1 || x.SportId == BESSport?.Id) && (BESCountry?.Id == -1 || x.CountryId == BESCountry?.Id));
 
         public RelayCommand DeleteButton => new((o)=> deleteButton(o));
         public RelayCommand EditButton => new((o) => editButton(o));

@@ -77,8 +77,6 @@ namespace OlympiadWPF.Models
         private void editSportsman(object o)
         {
             isNew = false;
-            BSport = all_Sports;
-            BCountry = all_Countries;
             editSpotrsmanWindow = new() {DataContext = this };
             editSpotrsmanWindow.ShowDialog();
         }
@@ -264,6 +262,8 @@ namespace OlympiadWPF.Models
             selectedOlympiadMT = all_Olympiads;
             selectedOlympiadM = all_Olympiads;
             selectedOlympiadCR = all_Olympiads;
+            bESSport = all_Sports;
+            bESCountry = all_Countries;
         }
 
         public RelayCommand AddSportsman => new((o) => addSportsman(o));

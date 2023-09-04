@@ -137,7 +137,7 @@ namespace OlympiadWPF.Models
         public IEnumerable<Gender> Genders => genders ??= unitOW.Genders.Get().ToList();
 
         public IEnumerable<Olympiad_>? EditWindowComboBoxOlympiads => Olympiads?.Where(x => x.SeasonId == BSport?.Season.Id 
-                                                                                                    && !BAwardOlympiads.Any(y=>y.Olympiad.Id == x.Id)
+                                                                                                    && !BAwardOlympiads.Any(y=>y.Olympiad?.Id == x.Id)
                                                                                                     && x.Year - BBirthday.Year >= 16 
                                                                                                     && (x.Year - BBirthday.Year <= 39));
 
@@ -196,19 +196,9 @@ namespace OlympiadWPF.Models
         public Olympiad_? BOlympiad { get; set; }
 
         public Sportsman? BSportsmanForEdit { get; set; }
-
-        private Country? bCountry;
-
-        public Country? BCountry 
-        {
-            get => bCountry;
-            set 
-            {
-                bCountry = value;
-                OnPropertyChanged("EditAllSportsmans");
-            }
-        }
-
+      
+        public Country? BCountry { get; set; }
+    
         public Gender? BGender { get; set; }
 
         public ObservableCollection<SportsmanAwardOlympiad> BAwardOlympiads { get; set; } = new();
@@ -222,7 +212,6 @@ namespace OlympiadWPF.Models
                         BAwardOlympiads?.Clear();
                 bSport = value;
                 OnPropertyChanged("EditWindowComboBoxOlympiads");
-                OnPropertyChanged("EditAllSportsmans");
             }
         }
 
