@@ -77,6 +77,8 @@ namespace OlympiadWPF.Models
         private void editSportsman(object o)
         {
             isNew = false;
+            BSport = all_Sports;
+            BCountry = all_Countries;
             editSpotrsmanWindow = new() {DataContext = this };
             editSpotrsmanWindow.ShowDialog();
         }

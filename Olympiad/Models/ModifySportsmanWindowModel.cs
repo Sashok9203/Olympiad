@@ -122,6 +122,7 @@ namespace OlympiadWPF.Models
                 sptms = null;
                 spAwOl = null;
                 if (!newSportsman) OnPropertyChanged("AllSportsmans");
+                OnPropertyChanged("EditAllSportsmans");
                 OnPropertyChanged("Sportsmans");
                 OnPropertyChanged("CountryResult");
                 OnPropertyChanged("MedalTable");
@@ -196,7 +197,17 @@ namespace OlympiadWPF.Models
 
         public Sportsman? BSportsmanForEdit { get; set; }
 
-        public Country? BCountry { get; set; }
+        private Country? bCountry;
+
+        public Country? BCountry 
+        {
+            get => bCountry;
+            set 
+            {
+                bCountry = value;
+                OnPropertyChanged("EditAllSportsmans");
+            }
+        }
 
         public Gender? BGender { get; set; }
 
@@ -211,6 +222,7 @@ namespace OlympiadWPF.Models
                         BAwardOlympiads?.Clear();
                 bSport = value;
                 OnPropertyChanged("EditWindowComboBoxOlympiads");
+                OnPropertyChanged("EditAllSportsmans");
             }
         }
 

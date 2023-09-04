@@ -23,11 +23,17 @@ namespace OlympiadWPF.Models
             spAwOl = null;
             OnPropertyChanged("AllSportsmans");
             OnPropertyChanged("Sportsmans");
+            OnPropertyChanged("EditAllSportsmans");
             OnPropertyChanged("CountryResult");
             OnPropertyChanged("MedalTable");
         }
 
+
         private void editButton(object o) => ModifySportsman(false);
+
+
+        public IEnumerable<Sportsman> EditAllSportsmans => AllSportsmans.Where(x=> (BSport?.Id == -1 || x.SportId == BSport?.Id) && (BCountry?.Id == -1 || x.CountryId == BCountry?.Id));
+
         public RelayCommand DeleteButton => new((o)=> deleteButton(o));
         public RelayCommand EditButton => new((o) => editButton(o));
     }

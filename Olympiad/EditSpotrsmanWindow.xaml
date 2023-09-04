@@ -22,16 +22,23 @@
     <Grid>
          <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Margin="25,0,10,0" Text="Coutry" Style="{StaticResource txtStyle}"/>
+            <ComboBox Height="25" Width="150" ItemsSource="{Binding Countries}" DisplayMemberPath="Name" SelectedItem="{Binding BCountry}"/>
+            <TextBlock Margin="40,0,10,0" Text="Sport" Style="{StaticResource txtStyle}"/>
+            <ComboBox Height="25" Width="150" ItemsSource="{Binding Sports}" DisplayMemberPath="Name" SelectedItem="{Binding BSport}"/>
+        </StackPanel>
         <TextBlock Text="Edit sportsman" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="DemiBold" Foreground="White"/>
-        <StackPanel Grid.Row="2" Orientation ="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="3" Orientation ="Horizontal" HorizontalAlignment="Right">
             <Button Content="Edit"  Command="{Binding EditButton}"/>
             <Button Content="Delete" Command="{Binding DeleteButton}"/>
             <Button Content="Exit" IsCancel="True"/>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" Margin="10,5,10,5"  Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}" ColumnHeaderHeight="30">
+        <DataGrid AutoGenerateColumns="False" Margin="10,5,10,5"  Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{Binding EditAllSportsmans}" SelectedItem="{Binding BSportsmanForEdit}" ColumnHeaderHeight="30">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding FullName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Gender" Width="*" Binding="{Binding Gender.Name}" IsReadOnly="True"/>
